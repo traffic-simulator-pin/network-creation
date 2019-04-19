@@ -1,4 +1,4 @@
-# network-creation
+# Network Creation
 
 Network Creation
  using Java 

@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
-import br.udesc.ceavi.pin.modulo1.help.LineHelp;
+import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
@@ -42,8 +42,8 @@ public class Egde {
 
     private void initLinha() {
         this.linha = new Line2D.Double(x1(), y1(), x2(), y2());
-        this.conficienteAngula = LineHelp.getConficienteAngula(linha);
-        this.conficienteLiner = LineHelp.getConficienteLiner(conficienteAngula, linha);
+        this.conficienteAngula = HelpLine.getConficienteAngula(linha);
+        this.conficienteLiner = HelpLine.getConficienteLiner(conficienteAngula, linha);
     }
 
     public boolean havePointInLine(Point p) {

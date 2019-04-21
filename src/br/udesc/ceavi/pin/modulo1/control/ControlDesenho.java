@@ -3,6 +3,7 @@ package br.udesc.ceavi.pin.modulo1.control;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Random;
  */
 public class ControlDesenho implements IControlDesenho {
 
-    private Function ativa;
+    private Function function;
     private Thread thread;
     private Node de;
     private Node para;
@@ -26,7 +27,7 @@ public class ControlDesenho implements IControlDesenho {
     private List<Node> listNodeIntersects;
     private List<Observador> listObservador;
     private IControlEgde controlEgde;
-    private Node paraTest;
+    private Node auxSe;
 
     @Override
     public void addObservador(Observador obs) {
@@ -65,44 +66,32 @@ public class ControlDesenho implements IControlDesenho {
      */
     @Override
     public void criarNodo(Point mousePosition) {
-        if (paraTest != null) {
-            para = paraTest;
+        if (auxSe != null) {
+            if (de == null) {
+                de = auxSe;
+                auxSe = null;
+            } else if (para == null) {
+                para = auxSe;
+                auxSe = null;
+            }
         } else {
             Node t = new Node(mousePosition.x, mousePosition.y);
-
-            Node t2 = checkValideExistingPoint(t);
-
-            if (t2 != null) {
-                if (de == null) {
-                    de = t2;
-                } else {
-                    para = t2;
-                }
+            if (de == null) {
+                de = t;
+            } else {
+                para = t;
             }
         }
     }
 
-    /**
-     * Verifica A Validade Do Ponto, Interseção ou Novo Ponto para Igual Ao
-     * Ponto de
-     *
-     * @param nodoEmAnalise
-     * @return Se de == nodoEmAnalise retuna null, Se nodoEmAnalise igual a
-     * ponto do extremo de um trecho retorno ponto extreno trecho, Se não
-     * Renorna nodoEmAnalise;
-     */
-    private Node checkValideExistingPoint(Node nodoEmAnalise) {
-        if (de != null && de.getArea().intersects(nodoEmAnalise.getArea())) {
-            return null;
-        }
-
+    private Node checkExistingNode(Point point) {
+        Node n = new Node(point.x, point.y);
         for (Node node : controlEgde.getListExtremosNodesEgde()) {
-            if (node.inMyArea(nodoEmAnalise)) {
+            if (node.inMyArea(n)) {
                 return node;
             }
         }
-
-        return nodoEmAnalise;
+        return null;
     }
 
     /**
@@ -114,7 +103,7 @@ public class ControlDesenho implements IControlDesenho {
         controlEgde.addEgde(t);
         de = null;
         para = null;
-        paraTest = null;
+        auxSe = null;
         listObservador.forEach(obs -> obs.mousePositionResquest(0, 0, false));
     }
 
@@ -160,6 +149,7 @@ public class ControlDesenho implements IControlDesenho {
     public void deleteEgdeSelecionados() {
         controlEgde.removeEgde(egdeSelecionados);
         deleteSelection();
+        setFuncao(Function.CREATE);
     }
 
     @Override
@@ -182,22 +172,25 @@ public class ControlDesenho implements IControlDesenho {
                 criarEgde();
             }
             controlEgde.getListEgde().forEach((egde) -> {
-                if (ativa != Function.CREATE && egdeSelecionados.contains(egde)) {
-                    if (ativa == Function.REMOVE) {
+                if (function != Function.CREATE && egdeSelecionados.contains(egde)) {
+                    if (function == Function.REMOVE) {
                         paintLine(o, egde, Color.RED);
                     }
-                    if (ativa == Function.SELECT) {
+                    if (function == Function.SELECT) {
                         paintLine(o, egde, Color.BLUE);
                     }
                 } else {
                     paintLine(o, egde, Color.BLACK, Color.RED);
                 }
             });
-            if (ativa == Function.CREATE) {
+            if (function == Function.CREATE) {
+                if (de == null) {
+                    o.mousePositionResquest();
+                }
                 if (de != null) {
                     o.addPoint((int) de.getX(), (int) de.getY(), Color.BLUE);
                 }
-                if (de != null) {
+                if (de != null && para == null) {
                     o.mousePositionResquest(de.getX(), de.getY(), true);
                 }
                 if (para != null) {
@@ -207,16 +200,16 @@ public class ControlDesenho implements IControlDesenho {
         });
     }
 
-    private void paintLine(Observador o, Egde egde, Color cor) {
-        o.addLine(egde.x1(), egde.y1(), egde.x2(), egde.y2(), cor);
-        o.addPoint((int) egde.de().getX(), (int) egde.de().getY(), cor);
-        o.addPoint((int) egde.para().getX(), (int) egde.para().getY(), cor);
+    private void paintLine(Observador o, Egde egde, Color corTudo) {
+        o.addLine(egde.x1(), egde.y1(), egde.x2(), egde.y2(), corTudo);
+        o.addPoint((int) egde.de().getX(), (int) egde.de().getY(), corTudo);
+        o.addPoint((int) egde.para().getX(), (int) egde.para().getY(), corTudo);
     }
 
-    private void paintLine(Observador o, Egde egde, Color corL, Color corP) {
-        o.addLine(egde.x1(), egde.y1(), egde.x2(), egde.y2(), corL);
-        o.addPoint((int) egde.de().getX(), (int) egde.de().getY(), corP);
-        o.addPoint((int) egde.para().getX(), (int) egde.para().getY(), corP);
+    private void paintLine(Observador o, Egde egde, Color corLinha, Color corPonto) {
+        o.addLine(egde.x1(), egde.y1(), egde.x2(), egde.y2(), corLinha);
+        o.addPoint((int) egde.de().getX(), (int) egde.de().getY(), corPonto);
+        o.addPoint((int) egde.para().getX(), (int) egde.para().getY(), corPonto);
     }
 
     private synchronized void render() {
@@ -225,16 +218,24 @@ public class ControlDesenho implements IControlDesenho {
 
     @Override
     public void setFuncao(Function ativa) {
-        this.ativa = ativa;
         breakCreate();
-        if (this.ativa == Function.CREATE) {
+        if (ativa == Function.CREATE) {
             deleteSelection();
+            listObservador.forEach(obs -> obs.notifyChangeOfCursorCustomer("imagens/mouse/create.png", 0, 23));
         }
+        if (ativa == Function.SELECT) {
+            listObservador.forEach(obs -> obs.notifyChangeOfCursorNative(Cursor.DEFAULT_CURSOR));
+        }
+        if (this.function == Function.REMOVE && ativa == Function.SELECT) {
+            listObservador.forEach(obs -> obs.notifyChangeOfCursorCustomer("imagens/mouse/delete.png", 1, 29));
+        }
+        this.function = ativa;
     }
 
     private void breakCreate() {
         de = null;
         para = null;
+        auxSe = null;
     }
 
     @Override
@@ -243,18 +244,30 @@ public class ControlDesenho implements IControlDesenho {
     }
 
     @Override
-    public boolean isAExtremePointToEgde(int x2, int y2) {
-        if (!de.inMyArea(x2, y2)) {
-            for (Node node : controlEgde.getListExtremosNodesEgde()) {
-                if (node.inMyArea(x2, y2)) {
-                    listObservador.forEach(obs -> obs.addPoint((int) node.getX(), (int) node.getY(), Color.YELLOW));
-                    paraTest = node;
-                    return true;
+    public boolean isAExtremePointToEgde(int x, int y) {
+        if (de == null) {
+            if (encontraNodeJaExistente(x, y)) {
+                return true;
+            }
+        } else {
+            if (para == null) {
+                if (!de.inMyArea(x, y)) {
+                    if (encontraNodeJaExistente(x, y)) {
+                        return true;
+                    }
                 }
             }
         }
-        paraTest = null;
+        auxSe = null;
         return false;
     }
 
+    private boolean encontraNodeJaExistente(int x, int y) {
+        auxSe = checkExistingNode(new Point(x, y));
+        if (auxSe != null) {
+            listObservador.forEach(obs -> obs.addPoint((int) auxSe.getX(), (int) auxSe.getY(), Color.YELLOW));
+            return true;
+        }
+        return false;
+    }
 }

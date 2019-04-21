@@ -9,9 +9,10 @@ import java.awt.geom.Line2D;
  * @since 07/04/2019
  *
  */
-public class LineHelp {
+public class HelpLine {
 
-    private LineHelp() {
+    private HelpLine() {
+        //Não deve instanciar
     }
 
     public static float getSizeLine(float x1, float x2, float y1, float y2) {

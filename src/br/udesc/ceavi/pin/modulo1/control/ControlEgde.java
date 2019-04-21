@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
-import br.udesc.ceavi.pin.modulo1.help.LineHelp;
+import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ControlEgde implements IControlEgde {
         List<Node> lista = new ArrayList<>();
         listEgde.forEach(nEgde -> {
             if (nEgde.getLinha().intersectsLine(pEgde.getLinha())) {
-                Node intersectNode = LineHelp.getIntersectNodeLine(nEgde.getLinha(), pEgde.getLinha());
+                Node intersectNode = HelpLine.getIntersectNodeLine(nEgde.getLinha(), pEgde.getLinha());
                 if (!intersectNode.equals(nEgde.de())
                         && !intersectNode.equals(nEgde.para())
                         && !intersectNode.equals(pEgde.de())

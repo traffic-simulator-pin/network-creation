@@ -21,4 +21,10 @@ public interface Observador {
     public void apagarEgdes();
 
     public void mousePositionResquest(float x1, float y1, boolean ativo);
+
+    public void notifyChangeOfCursorCustomer(String imagensNodopng, int x, int y);
+
+    public void mousePositionResquest();
+
+    public void notifyChangeOfCursorNative(int cursorType);
 }

@@ -8,8 +8,6 @@ import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +33,7 @@ public class ControlDateNetwork {
         this.listDemanda = new ArrayList<>();
     }
 
-    public void StartByFile(List<Egde> listEgde, List<Demanda> listDemanda) {
+    public synchronized void StartByFile(List<Egde> listEgde, List<Demanda> listDemanda) {
         this.listDemanda.clear();
         this.listEgde.clear();
 
@@ -43,15 +41,13 @@ public class ControlDateNetwork {
         this.listEgde.addAll(listEgde);
     }
 
-    private void addEgde(Egde egde) {
+    private synchronized void addEgde(Egde egde) {
         this.listEgde.add(egde);
-        System.err.println("ControlDateNetwork" + "novo egde");
     }
 
-    private void addDemanda(Demanda newDemanda) throws DemandAlreadyExistException {
+    private synchronized void addDemanda(Demanda newDemanda) throws DemandAlreadyExistException {
         if (!listDemanda.contains(newDemanda)) {
             this.listDemanda.add(newDemanda);
-            System.err.println("ControlDateNetwork" + "nova demanda");
         } else {
             throw new DemandAlreadyExistException(newDemanda);
         }
@@ -59,19 +55,21 @@ public class ControlDateNetwork {
 
     public synchronized void offerEgde(List<Egde> lista) {
         lista.forEach(egdeADD -> addEgde(egdeADD));
+        System.err.println("ControlDateNetwork" + "novo egde");
     }
 
-    public void offerDemanda(List<Demanda> lista) throws DemandAlreadyExistException {
+    public synchronized void offerDemanda(List<Demanda> lista) throws DemandAlreadyExistException {
         for (Demanda newDemanda : lista) {
             addDemanda(newDemanda);
         }
+        System.err.println("ControlDateNetwork" + "nova demanda");
     }
 
-    public List<Egde> getAllEgde() {
+    public synchronized List<Egde> getAllEgde() {
         return listEgde;
     }
 
-    public List<Node> getAllNode() {
+    public synchronized List<Node> getAllNode() {
         List<Node> lista = new ArrayList<>();
         listEgde.forEach(t -> {
             if (!lista.contains(t.de())) {
@@ -84,7 +82,7 @@ public class ControlDateNetwork {
         return lista;
     }
 
-    public List<Type> getAllType() {
+    public synchronized List<Type> getAllType() {
         List<Type> lista = new ArrayList<>();
         listEgde.forEach(egde -> {
             if (egde.getType() != null && !lista.contains(egde.getType())) {
@@ -94,15 +92,15 @@ public class ControlDateNetwork {
         return lista;
     }
 
-    public List<Demanda> getAllDemanda() {
+    public synchronized List<Demanda> getAllDemanda() {
         return listDemanda.stream().collect(Collectors.toList());
     }
 
-    public void removeDemanda(List<Demanda> listDemandasARemove) {
+    public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
         listDemandasARemove.removeAll(listDemandasARemove);
     }
 
-    public void tryRemoveEgde(List<Egde> listEgdeRemove) throws RemovingNodeWithDemandAssociationException {
+    public synchronized void tryRemoveEgde(List<Egde> listEgdeRemove) throws RemovingNodeWithDemandAssociationException {
         List<Demanda> listException = new ArrayList<>();
         listEgdeRemove
                 .stream()
@@ -119,12 +117,12 @@ public class ControlDateNetwork {
         }
     }
 
-    public void forceRemoveEgde(List<Egde> lista, RemovingNodeWithDemandAssociationException ex) {
+    public synchronized void forceRemoveEgde(List<Egde> lista, RemovingNodeWithDemandAssociationException ex) {
         removeDemanda(ex.getListDemanda());
         this.listEgde.removeAll(lista);
     }
 
-    public void offerType(List<Egde> rua, int numLanes, boolean oneway,
+    public synchronized void offerType(List<Egde> rua, int numLanes, boolean oneway,
             float speed, float width, String nome) throws EgdeAlreadyHasAssociationWithTypeException {
         for (Egde egde : rua) {
             if (egde.getType() != null) {
@@ -134,18 +132,18 @@ public class ControlDateNetwork {
         atribuirTrype(rua, numLanes, oneway, speed, width, nome);
     }
 
-    private void atribuirTrype(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
+    private synchronized void atribuirTrype(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
         Type type = new Type(rua, numLanes, oneway, speed, width);
         rua.forEach((egde) -> {
             egde.setType(type, nome);
         });
     }
 
-    public void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
+    public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
         atribuirTrype(rua, numLanes, oneway, speed, width, nome);
     }
 
-    private Demanda nodeHaveLinkWithDemand(Node de, Node para) {
+    private synchronized Demanda nodeHaveLinkWithDemand(Node de, Node para) {
         for (Demanda demanda : listDemanda) {
             if (demanda.getA().equals(de) || demanda.getA().equals(para)
                     || demanda.getB().equals(de) || demanda.getB().equals(para)) {
@@ -155,11 +153,11 @@ public class ControlDateNetwork {
         return null;
     }
 
-    public void removeTypeAndName(List<Egde> listaRemover) {
+    public synchronized void removeTypeAndName(List<Egde> listaRemover) {
         listaRemover.forEach(egde -> egde.setType(null, ""));
     }
 
-    public void removeTypeOnly(List<Egde> listaRemover) {
+    public synchronized void removeTypeOnly(List<Egde> listaRemover) {
         listaRemover.forEach(egde -> egde.setType(null, egde.getNome()));
     }
 

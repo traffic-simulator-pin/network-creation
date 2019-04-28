@@ -10,8 +10,17 @@ public class HelpLocator {
 
     private static int GuiaX, GuiaY, ZOMM = 1;
     private static float[] scale;
+    private static int networkWidth, networkHeight;
 
     private HelpLocator() {
+    }
+
+    public static int getNetworkWidth() {
+        return new Integer(networkWidth);
+    }
+
+    public static int getNetworkHeight() {
+        return new Integer(networkHeight);
     }
 
     public static int getGuideX() {
@@ -52,6 +61,14 @@ public class HelpLocator {
 
     public static int getZOOM() {
         return ZOMM;
+    }
+
+    public static void setNetworkHeight(int networkHeight) {
+        HelpLocator.networkHeight = networkHeight;
+    }
+
+    public static void setNetworkWidth(int networkWidth) {
+        HelpLocator.networkWidth = networkWidth;
     }
 
 }

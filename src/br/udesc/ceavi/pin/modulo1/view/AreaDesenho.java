@@ -33,8 +33,10 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
-        listaSpriteDate.stream().forEach((sprite) -> sprite.draw(g));
-        listaSpriteContruction.stream().forEach((sprite) -> sprite.draw(g));
+        List<ISprite> desenha = new ArrayList<>();
+        desenha.addAll(listaSpriteContruction);
+        desenha.addAll(listaSpriteDate);
+        desenha.forEach((sprite) -> sprite.draw(g));
     }
 
     public void clearListSpriteDateNetwork() {

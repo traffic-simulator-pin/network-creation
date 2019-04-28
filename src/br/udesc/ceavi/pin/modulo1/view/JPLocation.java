@@ -37,17 +37,19 @@ public class JPLocation extends JPanel {
             }
         });
 
-        lbZoom.setText("Zoom :  " + HelpLocator.getZOOM());
+        lbZoom.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbZoom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbZoom.setText(renderZoomInfor());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(677, Short.MAX_VALUE)
+                .addContainerGap(609, Short.MAX_VALUE)
                 .addComponent(btnZoomOut)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbZoom, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbZoom, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnZoomIn)
                 .addGap(52, 52, 52))
@@ -69,15 +71,19 @@ public class JPLocation extends JPanel {
 
     private void btnZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomInActionPerformed
         HelpLocator.zoomIn();
-        lbZoom.setText("Zoom :  " + HelpLocator.getZOOM());
+        lbZoom.setText(renderZoomInfor());
         repaint();
     }//GEN-LAST:event_btnZoomInActionPerformed
 
     private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOutActionPerformed
         HelpLocator.zoomOut();
-        lbZoom.setText("Zoom :  " + HelpLocator.getZOOM());
+        lbZoom.setText(renderZoomInfor());
         repaint();
     }//GEN-LAST:event_btnZoomOutActionPerformed
+
+    private static String renderZoomInfor() {
+        return "Zoom :  " + HelpLocator.getZOOM() * 100 + "%";
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

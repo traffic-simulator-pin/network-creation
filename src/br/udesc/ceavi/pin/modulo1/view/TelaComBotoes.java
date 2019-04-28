@@ -21,7 +21,6 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ILoop;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.awt.Color;
 import java.util.EventListener;
 import javax.swing.BorderFactory;
@@ -35,7 +34,7 @@ public class TelaComBotoes extends JInternalFrame {
     private GridBagConstraints constraints;
     private GridBagLayout layout;
 
-    private JButton btnCreateEgdeTipo1, btnSelecionaEgde, btnApagaEgde, btnTest;
+    private JButton btnCreateEgdeTipo1, btnSelecionaEgde, btnApagaEgde, btnTest, btnMove;
     private JPanel jpButao;
     private final ListenersTelaComBotoes listeners;
     private JPanel jpLocation;
@@ -51,7 +50,8 @@ public class TelaComBotoes extends JInternalFrame {
                 Arrays.asList(btnCreateEgdeTipo1,
                         btnSelecionaEgde,
                         btnApagaEgde,
-                        btnTest));
+                        btnTest,
+                        btnMove));
         initLoop();
     }
 
@@ -72,6 +72,7 @@ public class TelaComBotoes extends JInternalFrame {
         btnApagaEgde.setIcon(new ImageIcon("imagens/Apagar.png"));
         btnTest = new JButton();
         btnTest.setIcon(new ImageIcon("imagens/CriarRua.png"));
+        btnMove = new JButton("MOVE");
 
         layout = new GridBagLayout();
         jpButao.setLayout(layout);
@@ -79,8 +80,13 @@ public class TelaComBotoes extends JInternalFrame {
         addBTNJPanel("as", "comp1", btnCreateEgdeTipo1, 0, 0);
         addBTNJPanel("aszzz", "comp2", btnSelecionaEgde, 1, 0);
         addBTNJPanel("aszz", "comp3", btnApagaEgde, 2, 0);
-        addBTNJPanel("asz", "comp4", btnTest, 3, 500);
-
+        addBTNJPanel("asz", "comp4", btnMove, 3, 0);
+        addBTNJPanel("asz", "comp4", btnTest, 4, 250);
+        Dimension d = new Dimension(25, 35);
+        btnMove.setSize(d);
+        btnMove.setPreferredSize(d);
+        btnMove.setMinimumSize(d);
+        btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
 
         jpLocation = new JPLocation();
@@ -164,39 +170,48 @@ public class TelaComBotoes extends JInternalFrame {
                 areaDesenho.clearListSpriteDateNetwork();
                 areaDesenho.clearListSpriteFuntion();
 
-                ControlDateNetwork.getInstance().getAllEgde().stream().forEach(element -> {
-                    //Render Node De
-                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
-                        (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                        (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
-                            Color.BLACK);
+                try {
+                    ControlDateNetwork.getInstance().getAllEgde().stream().forEach(element -> {
+                        //Render Node De
+                        areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
+                            (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                            (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                                Color.BLACK);
 
-                    //Render Egde
-                    areaDesenho.addSpriteDateNetwork("EgdeView", new float[]{
-                        (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                        (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
-                        (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                        (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
-                            Color.BLACK);
+                        //Render Egde
+                        areaDesenho.addSpriteDateNetwork("EgdeView", new float[]{
+                            (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                            (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
+                            (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                            (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                                Color.BLACK);
 
-                    //Render Node Para
-                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
-                        (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                        (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
-                            Color.BLACK);
-                });
-                if (funtion != null && isAFuntionRequiresSuportLoop()) {
-                    ((ILoop) funtion).render();
+                        //Render Node Para
+                        areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
+                            (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                            (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                                Color.BLACK);
+                    });
+                    if (funtion != null && isAFuntionRequiresSuportLoop()) {
+                        ((ILoop) funtion).render();
+                    }
+                    areaDesenho.repaint();
+                } catch (Exception e) {
                 }
-                areaDesenho.repaint();
+
             }
 
             private synchronized void update() {
+                if (HelpLocator.getNetworkHeight() == 0 || HelpLocator.getNetworkWidth() == 0) {
+                    HelpLocator.setNetworkWidth(areaDesenho.getWidth());
+                    HelpLocator.setNetworkHeight(areaDesenho.getHeight());
+                }
                 if (funtion != null && isAFuntionRequiresSuportLoop()) {
                     ((ILoop) funtion).update();
                 }
             }
         }.start();
+//        System.err.println("Loop Stop");
     }
 
     //Verifica se é uma funcao de render    

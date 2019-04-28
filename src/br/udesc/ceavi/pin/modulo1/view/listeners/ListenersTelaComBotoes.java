@@ -3,6 +3,7 @@ package br.udesc.ceavi.pin.modulo1.view.listeners;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionTest;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionRemoverEgde;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateEgdeTipo1;
+import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionMoveTela;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSelecionarEgde;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,20 @@ public class ListenersTelaComBotoes {
         btn.addActionListener(new EventRemoverEgde());
         btn = asList.get(3);
         btn.addActionListener(new EventFuntionTest());
+        btn = asList.get(4);
+        btn.addActionListener(new EventFuntionMove());
+    }
+
+    private class EventFuntionMove implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FuntionMoveTela funtion = new FuntionMoveTela();
+            view.setMouseListener(funtion.getMouseManeger());
+            view.setFuntion(funtion);
+
+        }
+
     }
 
     private class EventFuntionTest implements ActionListener {

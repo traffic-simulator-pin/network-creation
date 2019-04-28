@@ -1,5 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
+import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
 import java.awt.Point;
 
 /**
@@ -12,7 +13,7 @@ public interface IControlDesenho {
 
     public void criarNodo(Point mousePosition);
 
-    public void addObservador(Observador obs);
+    public void addObservador(ObservadorTelaDesenho obs);
 
     public void selecionarEgde(Point mousePosition);
 
@@ -22,8 +23,6 @@ public interface IControlDesenho {
     
     public void test();
     
-    public void setFuncao(Function f);
-
     public void deleteSelection();
 
     public boolean isAExtremePointToEgde(int x2, int y2);

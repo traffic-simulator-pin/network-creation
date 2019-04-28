@@ -1,9 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 public class Node {
 
@@ -14,8 +13,9 @@ public class Node {
     private final float y;
 
     private static int idNaoUsuado = 1;
-    private List<Egde> egdes = new LinkedList<>();
     private final Rectangle area;
+
+    private List<Egde> listDeEgdeQuePertenco = new ArrayList<>();
 
     public Node(float x, float y) {
         this.ID = "" + idNaoUsuado;
@@ -46,40 +46,6 @@ public class Node {
         return x + " : " + y;
     }
 
-    public void associarEgde(Egde egde) {
-        this.egdes.add(egde);
-    }
-
-    public Egde removerAssociaoEgde(Egde egde) {
-        if (this.egdes.remove(egde)) {
-            return egde;
-        }
-        return null;
-    }
-
-    /**
-     * Verifica Se o Node passado pelo parametro esta invadindo a area do nodo
-     * da chamada do metodos
-     *
-     * @param nodeAux nodo em anasise
-     * @param size tamanho da para a nova area de interseção
-     * @return true se houver subesposição, false se não
-     */
-    public boolean inMyArea(Node nodeAux, int size) {
-        return nodeAux.getArea().intersects(new Rectangle((int) x - (size / 2), (int) y - (size / 2), size, size));
-    }
-
-    /**
-     * Verifica Se o Node passado pelo parametro esta invadindo a area do nodo
-     * da chamada do metodos
-     *
-     * @param nodeAux nodo em anasise
-     * @return true se houver subesposição, false se não
-     */
-    public boolean inMyArea(Node nodeAux) {
-        return inMyArea(nodeAux, Node.SIZE);
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -98,7 +64,7 @@ public class Node {
         if (this.y != other.getY()) {
             return false;
         }
-        return true;
+        return this.ID == other.getID();
     }
 
     public float getX() {
@@ -113,16 +79,36 @@ public class Node {
         return ID;
     }
 
-    public List<Egde> getAllEgdes() {
-        return egdes.stream().collect(Collectors.toList());
-    }
-
     public Rectangle getArea() {
         return new Rectangle(area);
     }
 
-    public boolean inMyArea(int x2, int y2) {
-        return this.area.intersects(new Rectangle(x2 - (SIZE / 2), y2 - (SIZE / 2), SIZE, SIZE));
+    public boolean collideWithMyArea(float x2, float y2) {
+        x2 -= 3;
+        y2 -= 3;
+        for (int emX = 0; emX < 5; emX++) {
+            for (int emY = 0; emY < 5; emY++) {
+                if ((x2 + emX) == this.x && (y2 + emY) == this.y) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
+    public boolean IamInArea(int X, int Y, int W, int H) {
+        return new Rectangle(X, Y, W, H).intersects(area);
+    }
+
+    public void associarNodeEgde(Egde e) {
+        this.listDeEgdeQuePertenco.add(e);
+    }
+
+    public void quebrarAssociarNodeEgde(Egde e) {
+        this.listDeEgdeQuePertenco.remove(e);
+    }
+
+    public boolean haveLinkEgde() {
+        return !listDeEgdeQuePertenco.isEmpty();
+    }
 }

@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.view.Desktop;
+import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import javax.swing.JButton;
  */
 public class ViewListenersFrame {
     //CAMPOS
-	protected Desktop desktop; //Referência ao Desktop.
+	protected ControlDesktop desktop; //Referência ao Desktop.
 	protected ViewJanelaSistema view; // Tela de consulta dos listeners.
 	
 	public ViewListenersFrame() {
@@ -23,7 +23,7 @@ public class ViewListenersFrame {
 	 * @param view - tela de consulta para adicionar os listeners.
 	 */
 	public ViewListenersFrame(ViewJanelaSistema view) {
-            this.desktop = Desktop.getInstance();
+            this.desktop = ControlDesktop.getInstance();
             this.view = view;
             adicionaListenersPadroes();
 	}

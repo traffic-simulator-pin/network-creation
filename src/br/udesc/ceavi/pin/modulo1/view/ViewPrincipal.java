@@ -18,12 +18,12 @@ public class ViewPrincipal extends JFrame {
     public static final String TITULOLO_TELA_PRINCIPAL = "PIN2";//nome da tela
     public static final Dimension TAMANHO_PADRAO = new Dimension(1024, 720);//tamanho tela
 
-    private Desktop desktop; //  referencia ao desktop
+    private ControlDesktop desktop; //  referencia ao desktop
     private JDesktopPane areaDesktop;// area de  trabalho
     private ViewBarraMenus viewMenuPrincipal;
     private TelaComBotoes telaComBotoes;
 
-    public ViewPrincipal(Desktop desktop) {
+    public ViewPrincipal(ControlDesktop desktop) {
         this.desktop = desktop;
         this.setTitle(TITULOLO_TELA_PRINCIPAL);
         this.setSize(TAMANHO_PADRAO);
@@ -73,7 +73,7 @@ public class ViewPrincipal extends JFrame {
     }
 
     private void defineGerenciadorDesktop() {
-        this.getAreaDesktop().setDesktopManager(new DesktopImovel());
+        this.getAreaDesktop().setDesktopManager(new ManagerDesktop());
     }
 
     /**

@@ -23,10 +23,14 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        initLinha();
-        de.associarEgde(this);
-        para.associarEgde(this);
         this.tamanho = 0;
+        initLinha();
+        initAssociacao();
+    }
+
+    public void initAssociacao() {
+        de.associarNodeEgde(this);
+        para.associarNodeEgde(this);
     }
 
     public Egde(Node de, Node para, float tamanho) {
@@ -34,10 +38,9 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        initLinha();
         this.tamanho = tamanho;
-        de.associarEgde(this);
-        para.associarEgde(this);
+        initLinha();
+        initAssociacao();
     }
 
     private void initLinha() {
@@ -108,6 +111,19 @@ public class Egde {
 
         final Egde other = (Egde) obj;
         return other.getLinha().equals(this.getLinha());
+    }
+
+    public void setType(Type type, String nome) {
+        this.type = type;
+        this.nome = nome;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
 }

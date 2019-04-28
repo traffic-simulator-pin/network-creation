@@ -1,21 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
-import javax.swing.JTextArea;
 
 /**
  *

@@ -7,7 +7,7 @@ import javax.swing.JComponent;
  *
  * @author Drew
  */
-public class DesktopImovel extends DefaultDesktopManager {
+public class ManagerDesktop extends DefaultDesktopManager {
     
     public void dragFrame( JComponent f, int x, int y ) {
         if ( !( f instanceof TelaComBotoes ) ) {

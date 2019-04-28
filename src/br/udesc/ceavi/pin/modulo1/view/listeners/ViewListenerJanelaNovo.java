@@ -5,7 +5,7 @@
  */
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.view.Desktop;
+import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
@@ -44,7 +44,7 @@ public class ViewListenerJanelaNovo extends ViewListenersFrame {
     private class ViewActionListenerNovo implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JDesktopPane v = Desktop.getInstance().getViewPrincipal().getAreaDesktop();
+            JDesktopPane v = ControlDesktop.getInstance().getViewPrincipal().getAreaDesktop();
             v.add(new TelaComBotoes());
             view.fechaJanela();
         }

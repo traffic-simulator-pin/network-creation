@@ -25,16 +25,11 @@ public class EgdeView extends Sprite {
     @Override
     public void draw(Graphics g) {
         g.setColor(cor);
-        int x1Render = (int) ((x1 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        int y1Render = (int) ((y1 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-        int x2Render = (int) ((x2 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        int y2Render = (int) ((y2 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-//        System.out.println(x1Render == x1);
-//        System.out.println(x2Render == x2);
-//        System.out.println(y1Render == y1);
-//        System.out.println(y2Render == y2);
-        g.setColor(cor);
-        g.drawLine(x1Render, y1Render, x2Render, y2Render);
+//            int x1Render = (int) ((x1 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+//            int y1Render = (int) ((y1 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+//            int x2Render = (int) ((x2 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+//            int y2Render = (int) ((y2 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        g.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
     }
 
     @Override
@@ -60,5 +55,5 @@ public class EgdeView extends Sprite {
     public String toString() {
         return "EgdeView{" + "x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + '}';
     }
-    
+
 }

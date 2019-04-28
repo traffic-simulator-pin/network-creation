@@ -18,11 +18,8 @@ public class NodeView extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        int xRender = (x - HelpLocator.getGuideX()) * HelpLocator.getZOOM();
-        int yRender = (y - HelpLocator.getGuideY()) * HelpLocator.getZOOM();
-
         g.setColor(cor);
-        g.fillOval(xRender - (height / 2), yRender - (height / 2),
+        g.fillOval(x - ((super.width * HelpLocator.getZOOM()) / 2), y - ((super.height * HelpLocator.getZOOM()) / 2),
                 super.width * HelpLocator.getZOOM(), super.height * HelpLocator.getZOOM());
     }
 

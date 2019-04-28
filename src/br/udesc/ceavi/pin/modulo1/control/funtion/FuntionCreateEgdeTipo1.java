@@ -124,16 +124,35 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements Obser
     public void render() {
         listaObservado.forEach(obs -> {
             if (de != null) {
-                obs.addSpriteFuntion("NodeView", new float[]{de.getX(), de.getY()}, Color.red);
+                //certo
+                obs.addSpriteFuntion("NodeView", new float[]{(de.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                    (de.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                        Color.red);
+
                 if (mesmoNode != null) {
-                    obs.addSpriteFuntion("NodeView", new float[]{mesmoNode.getX(), mesmoNode.getY()}, Color.YELLOW);
+                    obs.addSpriteFuntion("NodeView",
+                            new float[]{(mesmoNode.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                                (mesmoNode.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                            Color.YELLOW);
+
                 } else {
-                    obs.addSpriteFuntion("NodeView", new float[]{xLoop, yLoop}, Color.red);
+                    obs.addSpriteFuntion("NodeView", new float[]{xLoop,
+                        yLoop},
+                            Color.red);
+
                 }
-                obs.addSpriteFuntion("EgdeView", new float[]{de.getX(), de.getY(), xLoop, yLoop}, Color.blue);
+                obs.addSpriteFuntion("EgdeView", new float[]{(de.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                    (de.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
+                    xLoop,
+                    yLoop},
+                        Color.blue);
+
             } else if (de == null) {
                 if (mesmoNode != null) {
-                    obs.addSpriteFuntion("NodeView", new float[]{mesmoNode.getX(), mesmoNode.getY()}, Color.YELLOW);
+                    obs.addSpriteFuntion("NodeView",
+                            new float[]{(mesmoNode.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                                (mesmoNode.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                            Color.YELLOW);
                 }
             }
         });

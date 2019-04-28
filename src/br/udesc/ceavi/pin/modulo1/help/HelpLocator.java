@@ -36,6 +36,9 @@ public class HelpLocator {
 
     public static void zoomOut() {
         ZOMM--;
+        if (ZOMM < 1) {
+            ZOMM = 1;
+        }
     }
 
     public static float[] getScale() {

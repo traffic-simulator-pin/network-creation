@@ -12,16 +12,15 @@ import java.awt.Rectangle;
  *
  */
 public abstract class Sprite implements ISprite {
-    
+
     protected int x, y;
     protected Color cor;
     protected int width, height;
 
-    public Sprite(int width,int height) {
+    public Sprite(int width, int height) {
         this.width = width;
         this.height = height;
     }
-
 
     @Override
     public void setColor(Color cor) {

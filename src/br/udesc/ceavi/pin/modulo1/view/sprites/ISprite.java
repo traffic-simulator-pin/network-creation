@@ -17,7 +17,6 @@ public interface ISprite {
     public void setDateLocation(float[] position);
 
     public void setColor(Color cor);
-    
-    public boolean inAreaRender(Dimension areaDaTelaDesenho);
 
+    public boolean inAreaRender(Dimension areaDaTelaDesenho);
 }

@@ -8,6 +8,8 @@ import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,12 +51,13 @@ public class ControlDateNetwork {
     private void addDemanda(Demanda newDemanda) throws DemandAlreadyExistException {
         if (!listDemanda.contains(newDemanda)) {
             this.listDemanda.add(newDemanda);
+            System.err.println("ControlDateNetwork" + "nova demanda");
         } else {
             throw new DemandAlreadyExistException(newDemanda);
         }
     }
 
-    public void offerEgde(List<Egde> lista) {
+    public synchronized void offerEgde(List<Egde> lista) {
         lista.forEach(egdeADD -> addEgde(egdeADD));
     }
 

@@ -20,8 +20,11 @@ import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ILoop;
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.awt.Color;
 import java.util.EventListener;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -33,11 +36,11 @@ public class TelaComBotoes extends JInternalFrame {
     private GridBagLayout layout;
 
     private JButton btnCreateEgdeTipo1, btnSelecionaEgde, btnApagaEgde, btnTest;
-    private JPanel panelBotao;
+    private JPanel jpButao;
     private final ListenersTelaComBotoes listeners;
-
+    private JPanel jpLocation;
     private AreaDesenho areaDesenho;
-    
+
     private IFuntion funtion;
 
     public TelaComBotoes() {
@@ -55,11 +58,11 @@ public class TelaComBotoes extends JInternalFrame {
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(new Dimension(1020, 670));
+        setSize(new Dimension(1017, 670));
     }
 
     private void initMyComponents() {
-        panelBotao = new JPanel();
+        jpButao = new JPanel();
 
         btnCreateEgdeTipo1 = new JButton();
         btnCreateEgdeTipo1.setIcon(new ImageIcon("imagens/CriarRua.png"));
@@ -71,33 +74,24 @@ public class TelaComBotoes extends JInternalFrame {
         btnTest.setIcon(new ImageIcon("imagens/CriarRua.png"));
 
         layout = new GridBagLayout();
-        constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
-        panelBotao.setLayout(new GridBagLayout());
+        jpButao.setLayout(layout);
 
-        adicionaComponente("as", "comp1", btnCreateEgdeTipo1, 0, 0);
-        adicionaComponente("aszzz", "comp2", btnSelecionaEgde, 1, 0);
-        adicionaComponente("aszz", "comp3", btnApagaEgde, 2, 0);
-        adicionaComponente("asz", "comp4", btnTest, 3, 500);
+        addBTNJPanel("as", "comp1", btnCreateEgdeTipo1, 0, 0);
+        addBTNJPanel("aszzz", "comp2", btnSelecionaEgde, 1, 0);
+        addBTNJPanel("aszz", "comp3", btnApagaEgde, 2, 0);
+        addBTNJPanel("asz", "comp4", btnTest, 3, 500);
 
         areaDesenho = new AreaDesenho();
 
-        Dimension d = new Dimension(800, 600);
-
-        areaDesenho.setSize(d);
-        areaDesenho.setPreferredSize(d);
-        areaDesenho.setMaximumSize(d);
-        areaDesenho.setMinimumSize(d);
+        jpLocation = new JPLocation();
 
         Container content = this.getContentPane();
         content.setLayout(new BorderLayout());
-
+        areaDesenho.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 1));
+        jpButao.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 1));
         content.add(areaDesenho, BorderLayout.CENTER);
-        content.add(panelBotao, BorderLayout.WEST);
+        content.add(jpButao, BorderLayout.WEST);
+        content.add(jpLocation, BorderLayout.SOUTH);
 
     }
 
@@ -107,8 +101,7 @@ public class TelaComBotoes extends JInternalFrame {
      * @param nome - nome a ser adicionado ao label.
      * @param componente - componente a ser adicionado.
      */
-    public void adicionaComponente(String nome, String titulo, JComponent componente, int position, int isset) {
-
+    public void addBTNJPanel(String nome, String titulo, JComponent componente, int position, int isset) {
         JLabel label = new JLabel(titulo);
         label.setName(nome);
         label.setPreferredSize(new Dimension(100, 20));
@@ -121,7 +114,7 @@ public class TelaComBotoes extends JInternalFrame {
         } else {
             cConstraints.insets = new Insets(2, 1, isset, 4);
         }
-        panelBotao.add(componente, cConstraints);
+        jpButao.add(componente, cConstraints);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setBorder(null);
     }
@@ -142,7 +135,6 @@ public class TelaComBotoes extends JInternalFrame {
         new Thread() {
             @Override
             public void run() {
-                // Game Loop: Nystrom, 2014
 
                 long MS_PER_FRAME = 16; //  16 ms/frame = 60 FPS
                 long last = System.currentTimeMillis();
@@ -171,15 +163,28 @@ public class TelaComBotoes extends JInternalFrame {
             private synchronized void render() {
                 areaDesenho.clearListSpriteDateNetwork();
                 areaDesenho.clearListSpriteFuntion();
+
                 ControlDateNetwork.getInstance().getAllEgde().stream().forEach(element -> {
-                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{element.de().getX(), element.de().getY()},
+                    //Render Node De
+                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
+                        (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                        (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
                             Color.BLACK);
-                    areaDesenho.addSpriteDateNetwork("EgdeView", new float[]{element.de().getX(), element.de().getY(),
-                        element.para().getX(), element.para().getY()}, Color.BLACK);
-                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{element.para().getX(), element.para().getY()},
+
+                    //Render Egde
+                    areaDesenho.addSpriteDateNetwork("EgdeView", new float[]{
+                        (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                        (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
+                        (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                        (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                            Color.BLACK);
+
+                    //Render Node Para
+                    areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
+                        (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
+                        (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
                             Color.BLACK);
                 });
-                //Verifica se é uma funcao de render
                 if (funtion != null && isAFuntionRequiresSuportLoop()) {
                     ((ILoop) funtion).render();
                 }
@@ -194,7 +199,8 @@ public class TelaComBotoes extends JInternalFrame {
         }.start();
     }
 
-    public boolean isAFuntionRequiresSuportLoop() {
+    //Verifica se é uma funcao de render    
+    private boolean isAFuntionRequiresSuportLoop() {
         Class<?>[] interfaces = funtion.getClass().getInterfaces();
         for (int i = 0; i < funtion.getClass().getInterfaces().length; i++) {
             if (interfaces[i].getName().equals(ILoop.class.getName())) {

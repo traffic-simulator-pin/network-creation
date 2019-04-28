@@ -18,11 +18,12 @@ public class DemandaView extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        int xRender = (x - HelpLocator.getGuideX()) * HelpLocator.getZOOM();
-        int yRender = (y - HelpLocator.getGuideY()) * HelpLocator.getZOOM();
-
         g.setColor(cor);
-        g.fillOval(xRender, yRender, super.width * HelpLocator.getZOOM(), super.height * HelpLocator.getZOOM());
+//            int xRender = (x - HelpLocator.getGuideX()) * HelpLocator.getZOOM();
+//            int yRender = (y - HelpLocator.getGuideY()) * HelpLocator.getZOOM();
+
+        g.fillOval(x - ((super.width * HelpLocator.getZOOM()) / 2), y - ((super.height * HelpLocator.getZOOM()) / 2),
+                super.width * HelpLocator.getZOOM(), super.height * HelpLocator.getZOOM());
     }
 
     @Override

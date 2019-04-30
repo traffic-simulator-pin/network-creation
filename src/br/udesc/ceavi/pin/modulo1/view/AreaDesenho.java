@@ -28,14 +28,18 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected synchronized void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
-        List<ISprite> desenha = new ArrayList<>();
-        desenha.addAll(listaSpriteDate);
-        desenha.addAll(listaSpriteContruction);
-        desenha.forEach((sprite) -> sprite.draw(g));
+        try {
+            List<ISprite> desenha = new ArrayList<>();
+            desenha.addAll(listaSpriteDate);
+            desenha.addAll(listaSpriteContruction);
+            desenha.forEach((sprite) -> sprite.draw(g));
+        } catch (Exception ex) {
+            new RuntimeException(ex.getMessage());
+        }
     }
 
     public void clearListSpriteDateNetwork() {
@@ -65,12 +69,14 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         newSprite(nome, position, cor, listaSpriteDate);
     }
 
-    private void newSprite(String nome, float[] position, Color cor, List<ISprite> list) {
+    private synchronized void newSprite(String nome, float[] position, Color cor, List<ISprite> list) {
         try {
             ISprite newSprite = (ISprite) Class.forName("br.udesc.ceavi.pin.modulo1.view.sprites." + nome).newInstance();
             newSprite.setDateLocation(position);
             newSprite.setColor(cor);
-            list.add(newSprite);
+            if (newSprite.inAreaRender(getSize())) {
+                list.add(newSprite);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             ex.printStackTrace();
         }

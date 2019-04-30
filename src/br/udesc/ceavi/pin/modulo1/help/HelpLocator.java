@@ -8,7 +8,8 @@ package br.udesc.ceavi.pin.modulo1.help;
  */
 public class HelpLocator {
 
-    private static int GuiaX, GuiaY, ZOMM = 1;
+    private static int GuiaX, GuiaY;
+    private static float ZOMM = 1;
     private static float[] scale;
     private static int networkWidth, networkHeight;
 
@@ -40,13 +41,18 @@ public class HelpLocator {
     }
 
     public static void zoomIn() {
-        ZOMM++;
+        if (ZOMM > 1) {
+            ZOMM++;
+        } else {
+            ZOMM *= 2;
+        }
     }
 
     public static void zoomOut() {
-        ZOMM--;
-        if (ZOMM < 1) {
-            ZOMM = 1;
+        if (ZOMM > 1) {
+            ZOMM--;
+        } else {
+            ZOMM /= 2;
         }
     }
 
@@ -59,7 +65,7 @@ public class HelpLocator {
         return new float[]{GuiaX + (x / ZOMM), GuiaY + (y / ZOMM)};
     }
 
-    public static int getZOOM() {
+    public static float getZOOM() {
         return ZOMM;
     }
 

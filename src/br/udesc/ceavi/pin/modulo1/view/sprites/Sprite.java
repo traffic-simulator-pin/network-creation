@@ -29,8 +29,10 @@ public abstract class Sprite implements ISprite {
 
     @Override
     public boolean inAreaRender(Dimension areaDaTelaDesenho) {
-        return new Rectangle(x, y, width, height).intersects(HelpLocator.getGuideX(), HelpLocator.getGuideY(),
-                areaDaTelaDesenho.height / HelpLocator.getZOOM(), areaDaTelaDesenho.height / HelpLocator.getZOOM());
+        return new Rectangle.Float(0, 0,
+                (areaDaTelaDesenho.width),
+                (areaDaTelaDesenho.height)
+        ).contains(x, y, width, height);
     }
 
 }

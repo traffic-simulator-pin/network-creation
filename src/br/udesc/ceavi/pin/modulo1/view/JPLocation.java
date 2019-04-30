@@ -82,7 +82,7 @@ public class JPLocation extends JPanel {
     }//GEN-LAST:event_btnZoomOutActionPerformed
 
     private static String renderZoomInfor() {
-        return "Zoom :  " + HelpLocator.getZOOM() * 100 + "%";
+        return "Zoom :  " + (int) (HelpLocator.getZOOM() * 100) + "%";
     }
 
 

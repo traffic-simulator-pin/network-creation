@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -15,11 +16,10 @@ import java.awt.geom.Line2D;
 public class EgdeView extends Sprite {
 
     private float x1, y1, x2, y2;
-    private final Line2D.Double linha;
+    private Line2D.Float linha;
 
     public EgdeView() {
         super(0, 0);
-        linha = new Line2D.Double(x1, y1, x2, y2);
     }
 
     @Override
@@ -34,16 +34,18 @@ public class EgdeView extends Sprite {
 
     @Override
     public void setDateLocation(float[] position) {
-        this.x1 = ((position[0]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y1 = ((position[1]- HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-        this.x2 = ((position[2]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y2 = ((position[3]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        this.x1 = ((position[0] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        this.y1 = ((position[1] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+
+        this.x2 = ((position[2] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        this.y2 = ((position[3] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        linha = new Line2D.Float(x1, y1, x2, y2);
     }
 
     @Override
     public boolean inAreaRender(Dimension areaDaTelaDesenho) {
-        return linha.intersects(HelpLocator.getGuideX(), HelpLocator.getGuideY(),
-                areaDaTelaDesenho.width, areaDaTelaDesenho.height);
+        return new Rectangle2D.Float(0, 0,
+                areaDaTelaDesenho.width, areaDaTelaDesenho.height).intersectsLine(linha);
     }
 
     @Override

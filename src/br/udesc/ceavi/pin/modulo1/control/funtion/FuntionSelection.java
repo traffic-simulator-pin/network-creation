@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import java.awt.event.MouseAdapter;
+import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class FuntionSelection<T> implements ISelectionFuntion<T> {
 
     private List<T> listaSelecionado = new ArrayList<>();
-    protected MouseAdapter mouse;
+    protected MouseManeger mouse;
 
     @Override
     public void addSelecionado(T t) {
@@ -41,7 +41,7 @@ public abstract class FuntionSelection<T> implements ISelectionFuntion<T> {
 
     protected abstract void initMouse();
 
-    public MouseAdapter getMouseListener() {
+    public MouseManeger getMouseListener() {
         return mouse;
     }
     

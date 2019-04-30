@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ListenersTelaComBotoes;
 import java.awt.BorderLayout;
@@ -125,7 +126,7 @@ public class TelaComBotoes extends JInternalFrame {
         this.setBorder(null);
     }
 
-    public void setMouseListener(EventListener mouse) {
+    public void setMouseListener(MouseManeger mouse) {
         areaDesenho.setMouseListener(mouse);
     }
 

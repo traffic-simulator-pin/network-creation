@@ -1,10 +1,10 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.exception.EgdeAlreadyHasAssociationWithTypeException;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
-import java.awt.event.MouseAdapter;
 import java.util.List;
 
 /**
@@ -41,7 +41,7 @@ public class FuntionCreateType extends FuntionCreate<Type> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public MouseAdapter getMouse() {
+    public MouseManeger getMouse() {
         return seletion.getMouseListener();
     }
 

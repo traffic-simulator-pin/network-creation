@@ -1,9 +1,9 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Node;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> {
 
     @Override
     protected void initMouse() {
-        mouse = new MouseAdapter() {
+        mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selecionar(e.getPoint().x, e.getPoint().y);

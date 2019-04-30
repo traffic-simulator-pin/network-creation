@@ -21,7 +21,6 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
 
     private final List<ISprite> listaSpriteDate;
     private final List<ISprite> listaSpriteContruction;
-    private Thread thread;
 
     public AreaDesenho() {
         listaSpriteDate = new ArrayList<>();
@@ -34,8 +33,8 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
         List<ISprite> desenha = new ArrayList<>();
-        desenha.addAll(listaSpriteContruction);
         desenha.addAll(listaSpriteDate);
+        desenha.addAll(listaSpriteContruction);
         desenha.forEach((sprite) -> sprite.draw(g));
     }
 

@@ -33,7 +33,6 @@ public class ViewPrincipal extends JFrame {
         this.viewMenuPrincipal = new ViewBarraMenus();
         this.telaComBotoes = new TelaComBotoes();
         this.criaAreaDesktop();
-        this.defineGerenciadorDesktop();
         this.addAreaDesenho();
         this.setLocationRelativeTo(null);
     }
@@ -70,10 +69,6 @@ public class ViewPrincipal extends JFrame {
 
     public TelaComBotoes getAreaDesenho() {
         return telaComBotoes;
-    }
-
-    private void defineGerenciadorDesktop() {
-        this.getAreaDesktop().setDesktopManager(new ManagerDesktop());
     }
 
     /**

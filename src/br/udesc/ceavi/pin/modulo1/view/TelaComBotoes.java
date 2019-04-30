@@ -172,25 +172,20 @@ public class TelaComBotoes extends JInternalFrame {
                 areaDesenho.clearListSpriteFuntion();
 
                 try {
-                    ControlDateNetwork.getInstance().getAllEgde().stream().forEach(element -> {
+                    ControlDateNetwork.getInstance().getAllEgde().stream().forEach(egde -> {
                         //Render Node De
-                        areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
-                            (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                            (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                        areaDesenho.addSpriteDateNetwork("NodeView",
+                                new float[]{egde.x1(), egde.y1()},
                                 Color.BLACK);
 
                         //Render Egde
-                        areaDesenho.addSpriteDateNetwork("EgdeView", new float[]{
-                            (element.de().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                            (element.de().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
-                            (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                            (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                        areaDesenho.addSpriteDateNetwork("EgdeView",
+                                new float[]{egde.x1(), egde.y1(), egde.x2(), egde.y2()},
                                 Color.BLACK);
 
                         //Render Node Para
-                        areaDesenho.addSpriteDateNetwork("NodeView", new float[]{
-                            (element.para().getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                            (element.para().getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                        areaDesenho.addSpriteDateNetwork("NodeView",
+                                new float[]{egde.x2(), egde.y2()},
                                 Color.BLACK);
                     });
                     if (funtion != null && isAFuntionRequiresSuportLoop()) {

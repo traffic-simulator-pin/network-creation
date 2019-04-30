@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
@@ -19,7 +18,7 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements Observado<ObservadorTelaDesenho>, ILoop {
+public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop {
 
     private Node de;
     private Node para;
@@ -56,6 +55,10 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements Obser
     }
 
     public void createNode(int x, int y) {
+        float[] realLocation = HelpLocator.getRealLocation(x, y);
+        if (de != null && de.collideWithMyArea(realLocation[0], realLocation[1])) {
+            return;
+        }
         if (mesmoNode != null) {
             if (de == null) {
                 de = mesmoNode;
@@ -65,7 +68,6 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements Obser
                 mesmoNode = null;
             }
         } else {
-            float[] realLocation = HelpLocator.getRealLocation(x, y);
             Node novo = new Node(realLocation[0], realLocation[1]);
             if (de == null) {
                 de = novo;
@@ -125,33 +127,30 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements Obser
         listaObservado.forEach(obs -> {
             if (de != null) {
                 //certo
-                obs.addSpriteFuntion("NodeView", new float[]{(de.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                    (de.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                obs.addSpriteFuntion("NodeView",
+                        new float[]{de.getX(), de.getY()},
                         Color.red);
 
                 if (mesmoNode != null) {
                     obs.addSpriteFuntion("NodeView",
-                            new float[]{(mesmoNode.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                                (mesmoNode.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                            new float[]{mesmoNode.getX(), mesmoNode.getY()},
                             Color.YELLOW);
-
                 } else {
-                    obs.addSpriteFuntion("NodeView", new float[]{xLoop,
-                        yLoop},
+                    obs.addSpriteFuntion("NodeView",
+                            HelpLocator.getRealLocation(xLoop, yLoop),
                             Color.red);
 
                 }
-                obs.addSpriteFuntion("EgdeView", new float[]{(de.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                    (de.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM(),
-                    xLoop,
-                    yLoop},
+                float x2 = HelpLocator.getRealLocation(xLoop, yLoop)[0];
+                float y2 = HelpLocator.getRealLocation(xLoop, yLoop)[1];
+                obs.addSpriteFuntion("EgdeView",
+                        new float[]{de.getX(), de.getY(), x2, y2},
                         Color.blue);
 
             } else if (de == null) {
                 if (mesmoNode != null) {
                     obs.addSpriteFuntion("NodeView",
-                            new float[]{(mesmoNode.getX() - HelpLocator.getGuideX()) * HelpLocator.getZOOM(),
-                                (mesmoNode.getY() - HelpLocator.getGuideY()) * HelpLocator.getZOOM()},
+                            new float[]{mesmoNode.getX(), mesmoNode.getY()},
                             Color.YELLOW);
                 }
             }

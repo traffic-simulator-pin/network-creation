@@ -34,10 +34,10 @@ public class EgdeView extends Sprite {
 
     @Override
     public void setDateLocation(float[] position) {
-        this.x1 = position[0];
-        this.y1 = position[1];
-        this.x2 = position[2];
-        this.y2 = position[3];
+        this.x1 = ((position[0]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        this.y1 = ((position[1]- HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        this.x2 = ((position[2]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        this.y2 = ((position[3]- HelpLocator.getGuideX()) * HelpLocator.getZOOM());
     }
 
     @Override

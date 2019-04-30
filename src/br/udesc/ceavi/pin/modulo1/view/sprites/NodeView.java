@@ -19,14 +19,14 @@ public class NodeView extends Sprite {
     @Override
     public void draw(Graphics g) {
         g.setColor(cor);
-        g.fillOval(x - ((super.width * HelpLocator.getZOOM()) / 2), y - ((super.height * HelpLocator.getZOOM()) / 2),
+        g.drawOval(x - ((super.width * HelpLocator.getZOOM()) / 2), y - ((super.height * HelpLocator.getZOOM()) / 2),
                 super.width * HelpLocator.getZOOM(), super.height * HelpLocator.getZOOM());
     }
 
     @Override
     public void setDateLocation(float[] position) {
-        x = (int) position[0];
-        y = (int) position[1];
+        x = (int) ((position[0] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        y = (int) ((position[1] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
     }
 
     @Override

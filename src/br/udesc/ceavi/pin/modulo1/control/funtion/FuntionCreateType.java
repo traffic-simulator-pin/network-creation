@@ -2,6 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.exception.EgdeAlreadyHasAssociationWithTypeException;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
@@ -18,6 +19,7 @@ public class FuntionCreateType extends FuntionCreate<Type> {
     private final FuntionSelecionarEgde seletion;
 
     public FuntionCreateType() {
+        System.out.println("FuntionCreateType");
         seletion = new FuntionSelecionarEgde();
     }
 
@@ -41,8 +43,22 @@ public class FuntionCreateType extends FuntionCreate<Type> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public MouseManeger getMouse() {
-        return seletion.getMouseListener();
+    @Override
+    public MouseManeger getMouseManeger() {
+        return seletion.getMouseManeger();
+    }
+
+    @Override
+    public void initMouse() {
+       
+    }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho obs) {
+    }
+
+    @Override
+    public void removeObservador(ObservadorTelaDesenho obs) {
     }
 
 }

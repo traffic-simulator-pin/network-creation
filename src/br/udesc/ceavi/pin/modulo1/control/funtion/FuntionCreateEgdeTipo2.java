@@ -30,7 +30,7 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
 
     public FuntionCreateEgdeTipo2() {
         this.listaObservado = new ArrayList<>();
-        intMouse();
+        initMouse();
         System.out.println("FuntionCreateEgdeTipo2");
     }
 
@@ -67,7 +67,8 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         update();
     }
 
-    private void intMouse() {
+    @Override
+    public void initMouse() {
         mouse = new MouseManeger() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -101,7 +102,8 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         };
     }
 
-    public MouseManeger getMouseListener() {
+    @Override
+    public MouseManeger getMouseManeger() {
         return mouse;
     }
 

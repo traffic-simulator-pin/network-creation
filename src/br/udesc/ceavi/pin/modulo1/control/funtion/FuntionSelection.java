@@ -39,9 +39,14 @@ public abstract class FuntionSelection<T> implements ISelectionFuntion<T> {
         return listaSelecionado;
     }
 
-    protected abstract void initMouse();
+    /**
+     *
+     */
+    @Override
+    public abstract void initMouse();
 
-    public MouseManeger getMouseListener() {
+    @Override
+    public MouseManeger getMouseManeger() {
         return mouse;
     }
     

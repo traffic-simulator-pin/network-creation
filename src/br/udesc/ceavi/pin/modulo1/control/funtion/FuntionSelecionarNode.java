@@ -2,6 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ import java.util.List;
 public class FuntionSelecionarNode extends FuntionSelection<Node> {
 
     public FuntionSelecionarNode() {
+        System.out.println("FuntionSelecionarNode");
         initMouse();
     }
 
@@ -42,7 +44,7 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> {
     }
 
     @Override
-    protected void initMouse() {
+    public void initMouse() {
         mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -50,4 +52,13 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> {
             }
         };
     }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho obs) {
+    }
+
+    @Override
+    public void removeObservador(ObservadorTelaDesenho obs) {
+    }
+
 }

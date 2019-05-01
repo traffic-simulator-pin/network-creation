@@ -2,6 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
 import br.udesc.ceavi.pin.modulo1.control.exception.OsDoisNodeSuportadosNaDemandaJaSelecionadosException;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
@@ -24,6 +25,7 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
     private MouseManeger mouse;
 
     public FuntionCreateDemanda() {
+        System.out.println("FuntionCreateDemanda");
         seletion = new FuntionSelecionarNode();
         initMouse();
     }
@@ -61,7 +63,8 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
         B = null;
     }
 
-    private void initMouse() {
+    @Override
+    public void initMouse() {
         mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,6 +80,19 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
             }
 
         };
+    }
+
+    @Override
+    public MouseManeger getMouseManeger() {
+        return mouse;
+    }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho obs) {
+    }
+
+    @Override
+    public void removeObservador(ObservadorTelaDesenho obs) {
     }
 
 }

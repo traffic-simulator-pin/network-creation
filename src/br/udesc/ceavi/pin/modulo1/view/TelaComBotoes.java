@@ -10,12 +10,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -23,7 +21,8 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ILoop;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
-import java.util.EventListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 
 /**
@@ -35,7 +34,16 @@ public class TelaComBotoes extends JInternalFrame {
     private GridBagConstraints constraints;
     private GridBagLayout layout;
 
-    private JButton btnCreateEgdeTipo1, btnSelecionaEgde, btnApagaEgde, btnTest, btnMove;
+    private JButton btnCreateEgdeTipo1;
+    private JButton btnCreateEgdeTipo2;
+    private JButton btnSelecionaEgde;
+    private JButton btnSelecionaNode;
+    private JButton btnApagaEgde;
+    private JButton btnAddDemanda;
+    private JButton btnSetTypeEgde;
+    private JButton btnCriarAletoriamenteEgde;
+    private JButton btnMove;
+
     private JPanel jpButao;
     private final ListenersTelaComBotoes listeners;
     private JPanel jpLocation;
@@ -47,12 +55,11 @@ public class TelaComBotoes extends JInternalFrame {
         initComponents();
         initMyComponents();
         this.setVisible(true);
-        listeners = new ListenersTelaComBotoes(this,
-                Arrays.asList(btnCreateEgdeTipo1,
-                        btnSelecionaEgde,
-                        btnApagaEgde,
-                        btnTest,
-                        btnMove));
+        List<JButton> listBtn = new ArrayList<>();
+        for (int i = 0; i < jpButao.getComponents().length; i++) {
+            listBtn.add((JButton) jpButao.getComponents()[i]);
+        }
+        listeners = new ListenersTelaComBotoes(this, listBtn);
         initLoop();
     }
 
@@ -67,22 +74,34 @@ public class TelaComBotoes extends JInternalFrame {
 
         btnCreateEgdeTipo1 = new JButton();
         btnCreateEgdeTipo1.setIcon(new ImageIcon("imagens/CriarRua.png"));
+
         btnSelecionaEgde = new JButton();
         btnSelecionaEgde.setIcon(new ImageIcon("imagens/SelecaoNodo.png"));
         btnApagaEgde = new JButton();
         btnApagaEgde.setIcon(new ImageIcon("imagens/Apagar.png"));
-        btnTest = new JButton();
-        btnTest.setIcon(new ImageIcon("imagens/CriarRua.png"));
+
+        btnCriarAletoriamenteEgde = new JButton();
+        btnCriarAletoriamenteEgde.setIcon(new ImageIcon("imagens/CriarRua.png"));
+
         btnMove = new JButton("MOVE");
+        btnCreateEgdeTipo2 = new JButton("Egde 2");
+        btnAddDemanda = new JButton("Demanda");
+        btnSetTypeEgde = new JButton("Set Type");
+        btnSelecionaNode = new JButton("Selecionar Node");
 
         layout = new GridBagLayout();
         jpButao.setLayout(layout);
 
-        addBTNJPanel("as", "comp1", btnCreateEgdeTipo1, 0, 0);
-        addBTNJPanel("aszzz", "comp2", btnSelecionaEgde, 1, 0);
-        addBTNJPanel("aszz", "comp3", btnApagaEgde, 2, 0);
-        addBTNJPanel("asz", "comp4", btnMove, 3, 0);
-        addBTNJPanel("asz", "comp4", btnTest, 4, 250);
+        addBTNJPanel("FuntionCreateEgdeTipo1", btnCreateEgdeTipo1, 0, 0);
+        addBTNJPanel("FuntionCreateEgdeTipo2", btnCreateEgdeTipo2, 1, 0);
+        addBTNJPanel("FuntionSelecionarEgde", btnSelecionaEgde, 2, 0);
+        addBTNJPanel("FuntionSelecionarNode", btnSelecionaNode, 3, 0);
+        addBTNJPanel("FuntionRemoverEgde", btnApagaEgde, 4, 0);
+        addBTNJPanel("FuntionMoveTela", btnMove, 5, 0);
+        addBTNJPanel("FuntionCreateDemanda", btnAddDemanda, 6, 0);
+        addBTNJPanel("FuntionCreateType", btnSetTypeEgde, 7, 0);
+        addBTNJPanel("FuntionCriarAletoriamenteEgde", btnCriarAletoriamenteEgde, 8, 250);
+
         Dimension d = new Dimension(25, 35);
         btnMove.setSize(d);
         btnMove.setPreferredSize(d);
@@ -108,14 +127,12 @@ public class TelaComBotoes extends JInternalFrame {
      * @param nome - nome a ser adicionado ao label.
      * @param componente - componente a ser adicionado.
      */
-    public void addBTNJPanel(String nome, String titulo, JComponent componente, int position, int isset) {
-        JLabel label = new JLabel(titulo);
-        label.setName(nome);
-        label.setPreferredSize(new Dimension(100, 20));
+    public void addBTNJPanel(String nome, JComponent componente, int position, int isset) {
         GridBagConstraints cConstraints = new GridBagConstraints();
         cConstraints.fill = GridBagConstraints.HORIZONTAL;
         cConstraints.gridy = position;
         cConstraints.weightx = 0.9f;
+        componente.setName(nome);
         if (isset <= 0) {
             cConstraints.insets = new Insets(2, 1, 2, 4);
         } else {

@@ -17,7 +17,7 @@ import java.util.List;
  * @since 26/04/2019
  *
  */
-public class FuntionRemoverEgde implements ILoop {
+public class FuntionRemoverEgde implements ILoop, IFuntion {
 
     private FuntionSelecionarEgde seletionEgde;
     private Egde egdeMousePassouPorCimaRemove;
@@ -25,6 +25,7 @@ public class FuntionRemoverEgde implements ILoop {
     private List<ObservadorTelaDesenho> listaDeObservador;
 
     public FuntionRemoverEgde() {
+        System.out.println("FuntionRemoverEgde");
         this.listaDeObservador = new ArrayList<>();
         initMouse();
     }
@@ -59,7 +60,8 @@ public class FuntionRemoverEgde implements ILoop {
         this.listaDeObservador.remove(obs);
     }
 
-    protected void initMouse() {
+    @Override
+    public void initMouse() {
         mouse = new MouseManeger() {
 
             @Override
@@ -77,9 +79,19 @@ public class FuntionRemoverEgde implements ILoop {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                egdeMousePassouPorCimaRemove = seletionEgde.selecionar(e.getX(), e.getY());
+                try {
+                    egdeMousePassouPorCimaRemove = seletionEgde.selecionar(e.getX(), e.getY());
+                } catch (Exception ex) {
+                    //Tratamento Visual Aqui
+                    ex.printStackTrace();
+                }
             }
         };
+    }
+
+    @Override
+    public MouseManeger getMouseManeger() {
+        return mouse;
     }
 
 }

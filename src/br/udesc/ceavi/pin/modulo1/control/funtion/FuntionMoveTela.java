@@ -1,9 +1,9 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.Clamp;
-import com.sun.javafx.util.Utils;
 import java.awt.event.MouseEvent;
 
 /**
@@ -54,6 +54,14 @@ public class FuntionMoveTela implements IMoveTelaFuntion {
             }
         };
 
+    }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho obs) {
+    }
+
+    @Override
+    public void removeObservador(ObservadorTelaDesenho obs) {
     }
 
 }

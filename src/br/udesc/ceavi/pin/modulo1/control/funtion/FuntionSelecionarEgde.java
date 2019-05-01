@@ -2,6 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import java.awt.Point;
@@ -44,7 +45,7 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
     }
 
     @Override
-    protected void initMouse() {
+    public void initMouse() {
         mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -52,6 +53,14 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
             }
 
         };
+    }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho obs) {
+    }
+
+    @Override
+    public void removeObservador(ObservadorTelaDesenho obs) {
     }
 
 }

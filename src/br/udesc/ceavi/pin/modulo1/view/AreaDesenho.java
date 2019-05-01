@@ -29,9 +29,6 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
 
     @Override
     protected synchronized void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, getWidth(), getHeight());
         try {
             List<ISprite> desenha = new ArrayList<>();
             desenha.addAll(listaSpriteDate);

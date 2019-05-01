@@ -41,23 +41,13 @@ public class FuntionMoveTela implements IMoveTelaFuntion {
                 int xMove = (int) (e.getX() - xAnterio);
                 int yMove = (int) (e.getY() - yAnterio);
 
-                /// (-tela.size / (2 * Zoom) <-> tela.size / (2 * Zoom))   
-                //Não Precisão Na Porção da Tela A ser motrado pelo sistema Como ZOOM Aplicado
-                int limiteWidth = (int) (HelpLocator.getNetworkWidth() / (2 * HelpLocator.getZOOM()));
-                boolean test1Width = (HelpLocator.getGuideX() + xMove * 0.2) > -limiteWidth;
-                boolean test2Width = (HelpLocator.getGuideX() + xMove * 0.2) < limiteWidth;
-                if (test1Width && test2Width) {
-                    HelpLocator.setGuiaX((int) (HelpLocator.getGuideX() + xMove * 0.2));
-                }
-
-                int limiteHeight = (int) (HelpLocator.getNetworkHeight() / (2 * HelpLocator.getZOOM()));
-                boolean test1Height = (HelpLocator.getGuideY() + yMove * 0.2) > -limiteHeight;
-                boolean test2Height = (HelpLocator.getGuideY() + yMove * 0.2) < limiteHeight;
-                if (test1Height && test2Height) {
-                    HelpLocator.setGuiaY((int) (HelpLocator.getGuideY() + yMove * 0.2));
-                }
+                int newX = (int) (HelpLocator.getGuideX() + xMove * 0.2);
+                int newY = (int) (HelpLocator.getGuideY() + yMove * 0.2);
+                HelpLocator.setGuiaX(HelpLocator.clamp(newX, 0, (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM())));
+                HelpLocator.setGuiaY(HelpLocator.clamp(newY, 0, (int) (HelpLocator.getNetworkHeight()- e.getComponent().getHeight()/ HelpLocator.getZOOM())));
             }
         };
+
     }
 
 }

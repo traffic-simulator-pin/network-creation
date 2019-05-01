@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FuntionCreateType extends FuntionCreate<Type> {
 
-    private FuntionSelecionarEgde seletion;
+    private final FuntionSelecionarEgde seletion;
 
     public FuntionCreateType() {
         seletion = new FuntionSelecionarEgde();

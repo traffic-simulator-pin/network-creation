@@ -1,9 +1,11 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
+import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -24,12 +26,22 @@ public class EgdeView extends Sprite {
 
     @Override
     public void draw(Graphics g) {
+        desenhaGrosso(g, 4, Color.GRAY);
+        desenhaGrosso(g, 0.5f, Color.yellow);
+    }
+
+    private void desenhaGrosso(Graphics g, float largura, Color cor) {
+        float size = HelpLine.getMag(x1, x2, y1, y2);
+        float zoom = HelpLocator.clamp((largura * HelpLocator.getZOOM()), 1, Integer.MAX_VALUE);
+        float xNormalizado = (x2 - x1) / size * zoom;
+        float yNormalizado = (y2 - y1) / size * zoom;
+        float xEsquerdo = -xNormalizado;
+        float yEsquerdo = -yNormalizado;
         g.setColor(cor);
-//            int x1Render = (int) ((x1 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-//            int y1Render = (int) ((y1 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-//            int x2Render = (int) ((x2 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-//            int y2Render = (int) ((y2 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-        g.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
+        g.fillPolygon(new Polygon(
+                new int[]{(int) (x1 + yEsquerdo), (int) (x1 + yNormalizado), (int) (x2 + yNormalizado), (int) (x2 + yEsquerdo)},
+                new int[]{(int) (y1 + xNormalizado), (int) (y1 + xEsquerdo), (int) (y2 + xEsquerdo), (int) (y2 + xNormalizado)},
+                4));
     }
 
     @Override

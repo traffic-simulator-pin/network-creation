@@ -11,8 +11,11 @@ import javax.swing.JPanel;
  */
 public class JPLocation extends JPanel {
 
-    public JPLocation() {
+    private final AreaDesenho areaDesenho;
+
+    public JPLocation(AreaDesenho areaDesenho) {
         initComponents();
+        this.areaDesenho = areaDesenho;
     }
 
     @SuppressWarnings("unchecked")
@@ -72,12 +75,16 @@ public class JPLocation extends JPanel {
     private void btnZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomInActionPerformed
         HelpLocator.zoomIn();
         lbZoom.setText(renderZoomInfor());
+        HelpLocator.setGuiaX(HelpLocator.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaY(HelpLocator.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
         repaint();
     }//GEN-LAST:event_btnZoomInActionPerformed
 
     private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOutActionPerformed
         HelpLocator.zoomOut();
         lbZoom.setText(renderZoomInfor());
+        HelpLocator.setGuiaX(HelpLocator.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaY(HelpLocator.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
         repaint();
     }//GEN-LAST:event_btnZoomOutActionPerformed
 

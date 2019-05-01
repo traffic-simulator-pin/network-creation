@@ -90,7 +90,7 @@ public class TelaComBotoes extends JInternalFrame {
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
 
-        jpLocation = new JPLocation();
+        jpLocation = new JPLocation(areaDesenho);
 
         Container content = this.getContentPane();
         content.setLayout(new BorderLayout());

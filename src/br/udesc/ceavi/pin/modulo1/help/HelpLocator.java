@@ -13,15 +13,29 @@ public class HelpLocator {
     private static float[] scale;
     private static int networkWidth, networkHeight;
 
+    public static int clamp(int x, int min, int max) {
+        if (x < min) {
+            return min;
+        }
+        return x > max ? max : x;
+    }
+
+    public static float clamp(float x, float min, float max) {
+        if (x < min) {
+            return min;
+        }
+        return x > max ? max : x;
+    }
+
     private HelpLocator() {
     }
 
     public static int getNetworkWidth() {
-        return new Integer(networkWidth);
+        return networkWidth;
     }
 
     public static int getNetworkHeight() {
-        return new Integer(networkHeight);
+        return networkHeight;
     }
 
     public static int getGuideX() {
@@ -41,23 +55,18 @@ public class HelpLocator {
     }
 
     public static void zoomIn() {
-        if (ZOMM > 1) {
-            ZOMM++;
-        } else {
-            ZOMM *= 2;
-        }
+        ZOMM++;
     }
 
     public static void zoomOut() {
-        if (ZOMM > 1) {
-            ZOMM--;
-        } else {
-            ZOMM /= 2;
+        ZOMM--;
+        if (ZOMM == 0) {
+            ZOMM = 1;
         }
     }
 
     public static float[] getScale() {
-        System.err.println("Não Há Suporte Ainda Para essa operação");
+
         return null;
     }
 

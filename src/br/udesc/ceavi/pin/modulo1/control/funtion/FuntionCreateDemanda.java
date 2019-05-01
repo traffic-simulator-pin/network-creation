@@ -44,16 +44,7 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
     }
 
     private void setNodeDemanda(Node nodeSelecionado) throws Exception {
-        if (A != null && B != null) {
-            throw new OsDoisNodeSuportadosNaDemandaJaSelecionadosException(A, B);
-        }
-        if (nodeSelecionado != null) {
-            if (A == null) {
-                A = nodeSelecionado;
-            } else if (B == null) {
-                B = nodeSelecionado;
-            }
-        }
+        
     }
 
     private void clearNode() {

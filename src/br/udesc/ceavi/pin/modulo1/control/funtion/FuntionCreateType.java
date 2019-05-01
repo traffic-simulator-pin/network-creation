@@ -31,14 +31,4 @@ public class FuntionCreateType extends FuntionCreate<Type> {
         ControlDateNetwork.getInstance().forceSetType(rua, numLanes, oneway, speed, width, nome);
     }
 
-    @Override
-    public void offer() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void force(List<Exception> listException) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -22,7 +22,7 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> {
 
     @Override
     public Node selecionar(int x, int y) {
-        float[] localizacaReal = HelpLocator.getRealLocation(x, y);
+        float[] localizacaReal = HelpLocator.getNetworkRealLocation(x, y);
         for (Node node : ControlDateNetwork.getInstance().getAllNode()) {
             if (node.collideWithMyArea(localizacaReal[0], localizacaReal[1])) {
                 if (super.getListaSelecionado().contains(node)) {

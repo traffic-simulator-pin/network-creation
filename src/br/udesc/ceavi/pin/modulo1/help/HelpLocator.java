@@ -57,8 +57,8 @@ public class HelpLocator {
         return null;
     }
 
-    public static float[] getRealLocation(float x, float y) {
-        return new float[]{GuiaX + (x / ZOMM), GuiaY + (y / ZOMM)};
+    public static float[] getNetworkRealLocation(float x, float y) {
+        return new float[]{GuiaX + (x / ZOMM), -(GuiaY + (y / ZOMM))};
     }
 
     public static float getZOOM() {

@@ -31,7 +31,7 @@ public class DemandaView extends Sprite {
     @Override
     public void setDateLocation(float[] position) {
         x = (int) ((position[0] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        y = (int) ((position[1] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        y = (int) -((position[1] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
     }
 
     @Override

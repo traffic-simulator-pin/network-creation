@@ -54,7 +54,7 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     }
 
     public void createNode(int x, int y) {
-        float[] realLocation = HelpLocator.getRealLocation(x, y);
+        float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         if (de != null && de.collideWithMyArea(realLocation[0], realLocation[1])) {
             return;
         }
@@ -78,7 +78,7 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     }
 
     private Node checkExistingNode(float x, float y) {
-        float[] realLocation = HelpLocator.getRealLocation(x, y);
+        float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         for (Node node : ControlDateNetwork.getInstance().getAllNode()) {
             if (node.collideWithMyArea(realLocation[0], realLocation[1])) {
                 return node;
@@ -122,8 +122,8 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     public void render() {
         listaObservado.forEach(obs -> {
             if (de != null) {
-                float x2 = HelpLocator.getRealLocation(xLoop, yLoop)[0];
-                float y2 = HelpLocator.getRealLocation(xLoop, yLoop)[1];
+                float x2 = HelpLocator.getNetworkRealLocation(xLoop, yLoop)[0];
+                float y2 = HelpLocator.getNetworkRealLocation(xLoop, yLoop)[1];
                 obs.addSpriteFuntion("EgdeView",
                         new float[]{de.getX(), de.getY(), x2, y2},
                         Color.BLUE);
@@ -138,7 +138,7 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
                             Color.YELLOW);
                 } else {
                     obs.addSpriteFuntion("NodeView",
-                            HelpLocator.getRealLocation(xLoop, yLoop),
+                            HelpLocator.getNetworkRealLocation(xLoop, yLoop),
                             Color.YELLOW);
                 }
 

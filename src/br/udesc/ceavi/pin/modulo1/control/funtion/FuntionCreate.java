@@ -15,10 +15,12 @@ public abstract class FuntionCreate<T> extends Funtion implements ICreateFuntion
     protected List<T> lista = new ArrayList<>();
 
     @Override
-    public abstract void offer() throws Exception;
+    public void offer() throws Exception {
+    }
 
     @Override
-    public abstract void force(List<Exception> listException);
-
+    public  void force(List<Exception> listException){
+        
+    }
 
 }

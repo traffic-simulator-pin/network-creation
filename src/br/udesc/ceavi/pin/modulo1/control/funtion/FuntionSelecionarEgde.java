@@ -24,7 +24,7 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
 
     @Override
     public Egde selecionar(int x, int y) {
-        float[] realLocation = HelpLocator.getRealLocation(x, y);
+        float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         for (Egde egde : ControlDateNetwork.getInstance().getAllEgde()) {
             if (egde.havePointInLine(new Point((int) realLocation[0], (int) realLocation[1]))) {
                 if (super.getListaSelecionado().contains(egde)) {

@@ -45,7 +45,7 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     }
 
     public void createNode(int x, int y) {
-        float[] realLocation = HelpLocator.getRealLocation(x, y);
+        float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         if (de != null && de.collideWithMyArea(realLocation[0], realLocation[1])) {
             return;
         }

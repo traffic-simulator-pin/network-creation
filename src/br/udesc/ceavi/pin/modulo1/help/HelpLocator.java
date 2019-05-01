@@ -13,21 +13,8 @@ public class HelpLocator {
     private static float[] scale;
     private static int networkWidth, networkHeight;
 
-    public static int clamp(int x, int min, int max) {
-        if (x < min) {
-            return min;
-        }
-        return x > max ? max : x;
-    }
-
-    public static float clamp(float x, float min, float max) {
-        if (x < min) {
-            return min;
-        }
-        return x > max ? max : x;
-    }
-
     private HelpLocator() {
+        //Não deve se instanceado
     }
 
     public static int getNetworkWidth() {

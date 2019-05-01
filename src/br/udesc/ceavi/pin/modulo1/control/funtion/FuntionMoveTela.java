@@ -2,6 +2,8 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.util.Clamp;
+import com.sun.javafx.util.Utils;
 import java.awt.event.MouseEvent;
 
 /**
@@ -43,8 +45,12 @@ public class FuntionMoveTela implements IMoveTelaFuntion {
 
                 int newX = (int) (HelpLocator.getGuideX() + xMove * 0.2);
                 int newY = (int) (HelpLocator.getGuideY() + yMove * 0.2);
-                HelpLocator.setGuiaX(HelpLocator.clamp(newX, 0, (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM())));
-                HelpLocator.setGuiaY(HelpLocator.clamp(newY, 0, (int) (HelpLocator.getNetworkHeight()- e.getComponent().getHeight()/ HelpLocator.getZOOM())));
+                if (HelpLocator.getZOOM() != 1) {
+                    HelpLocator.setGuiaX(Clamp.clamp(newX, 0,
+                            (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM())));
+                    HelpLocator.setGuiaY(Clamp.clamp(newY, 0,
+                            (int) (HelpLocator.getNetworkHeight() - e.getComponent().getHeight() / HelpLocator.getZOOM())));
+                }
             }
         };
 

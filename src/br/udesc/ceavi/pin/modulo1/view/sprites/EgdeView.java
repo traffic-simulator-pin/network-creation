@@ -2,6 +2,8 @@ package br.udesc.ceavi.pin.modulo1.view.sprites;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.util.Clamp;
+import com.sun.javafx.util.Utils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -26,18 +28,26 @@ public class EgdeView extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        desenhaGrosso(g, 4, Color.GRAY);
-        desenhaGrosso(g, 0.5f, Color.yellow);
+        desenhaRua(g, 4, cor);
+        desenhaLinha(g, 0.5f, Color.yellow);
     }
 
-    private void desenhaGrosso(Graphics g, float largura, Color cor) {
+    private void desenhaRua(Graphics g, float largura, Color cor) {
+        drawPoliginoGenerico(largura, g, cor);
+    }
+
+    private void desenhaLinha(Graphics g, float largura, Color cor) {
+        drawPoliginoGenerico(largura, g, cor);
+    }
+
+    private void drawPoliginoGenerico(float largura, Graphics g, Color cor1) {
         float size = HelpLine.getMag(x1, x2, y1, y2);
-        float zoom = HelpLocator.clamp((largura * HelpLocator.getZOOM()), 1, Integer.MAX_VALUE);
+        float zoom = Clamp.clamp((largura * HelpLocator.getZOOM()), 1, Integer.MAX_VALUE);
         float xNormalizado = (x2 - x1) / size * zoom;
         float yNormalizado = (y2 - y1) / size * zoom;
         float xEsquerdo = -xNormalizado;
         float yEsquerdo = -yNormalizado;
-        g.setColor(cor);
+        g.setColor(cor1);
         g.fillPolygon(new Polygon(
                 new int[]{(int) (x1 + yEsquerdo), (int) (x1 + yNormalizado), (int) (x2 + yNormalizado), (int) (x2 + yEsquerdo)},
                 new int[]{(int) (y1 + xNormalizado), (int) (y1 + xEsquerdo), (int) (y2 + xEsquerdo), (int) (y2 + xNormalizado)},

@@ -126,10 +126,15 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     public void render() {
         listaObservado.forEach(obs -> {
             if (de != null) {
+                float x2 = HelpLocator.getRealLocation(xLoop, yLoop)[0];
+                float y2 = HelpLocator.getRealLocation(xLoop, yLoop)[1];
+                obs.addSpriteFuntion("EgdeView",
+                        new float[]{de.getX(), de.getY(), x2, y2},
+                        Color.BLUE);
                 //certo
                 obs.addSpriteFuntion("NodeView",
                         new float[]{de.getX(), de.getY()},
-                        Color.red);
+                        Color.YELLOW);
 
                 if (mesmoNode != null) {
                     obs.addSpriteFuntion("NodeView",
@@ -138,14 +143,8 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
                 } else {
                     obs.addSpriteFuntion("NodeView",
                             HelpLocator.getRealLocation(xLoop, yLoop),
-                            Color.red);
-
+                            Color.YELLOW);
                 }
-                float x2 = HelpLocator.getRealLocation(xLoop, yLoop)[0];
-                float y2 = HelpLocator.getRealLocation(xLoop, yLoop)[1];
-                obs.addSpriteFuntion("EgdeView",
-                        new float[]{de.getX(), de.getY(), x2, y2},
-                        Color.blue);
 
             } else if (de == null) {
                 if (mesmoNode != null) {

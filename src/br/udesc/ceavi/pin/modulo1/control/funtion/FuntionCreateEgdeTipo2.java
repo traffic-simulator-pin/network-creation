@@ -86,7 +86,9 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e); //To change body of generated methods, choose Tools | Templates.
-                createNode(e.getComponent().getMousePosition().x, e.getComponent().getMousePosition().y);
+                if (de != null) {
+                    createNode(e.getComponent().getMousePosition().x, e.getComponent().getMousePosition().y);
+                }
                 offer();
             }
 
@@ -117,14 +119,21 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     public void render() {
         try {
             listaObservado.forEach(obs -> {
-                for (Egde egde : lista) {
-                    obs.addSpriteFuntion("NodeView",
-                            new float[]{egde.x1(), egde.y1()}, Color.red);
+                lista.forEach(egde -> {
                     obs.addSpriteFuntion("EgdeView",
                             new float[]{egde.x1(), egde.y1(), egde.x2(), egde.y2()},
-                            Color.BLACK);
+                            Color.BLUE);
                     obs.addSpriteFuntion("NodeView",
-                            new float[]{egde.x2(), egde.y2()}, Color.red);
+                            new float[]{egde.x2(), egde.y2()},
+                            Color.YELLOW);
+                    obs.addSpriteFuntion("NodeView",
+                            new float[]{egde.x1(), egde.y1()},
+                            Color.YELLOW);
+                });
+                if (lista.isEmpty()) {
+                    obs.addSpriteFuntion("NodeView",
+                            new float[]{de.getX(), de.getY()},
+                            Color.YELLOW);
                 }
             });
         } catch (Exception e) {

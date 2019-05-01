@@ -19,9 +19,12 @@ import java.util.stream.Collectors;
  */
 public class ControlDateNetwork {
 
-    private static final ControlDateNetwork instance = new ControlDateNetwork();
+    private static ControlDateNetwork instance;
 
-    public static ControlDateNetwork getInstance() {
+    public static synchronized ControlDateNetwork getInstance() {
+        if (instance == null) {
+            instance = new ControlDateNetwork();
+        }
         return instance;
     }
 
@@ -63,37 +66,6 @@ public class ControlDateNetwork {
             addDemanda(newDemanda);
         }
         System.err.println("ControlDateNetwork" + "nova demanda");
-    }
-
-    public synchronized List<Egde> getAllEgde() {
-        return listEgde;
-    }
-
-    public synchronized List<Node> getAllNode() {
-        List<Node> lista = new ArrayList<>();
-        listEgde.forEach(t -> {
-            if (!lista.contains(t.de())) {
-                lista.add(t.de());
-            }
-            if (!lista.contains(t.para())) {
-                lista.add(t.para());
-            }
-        });
-        return lista;
-    }
-
-    public synchronized List<Type> getAllType() {
-        List<Type> lista = new ArrayList<>();
-        listEgde.forEach(egde -> {
-            if (egde.getType() != null && !lista.contains(egde.getType())) {
-                lista.add(egde.getType());
-            }
-        });
-        return lista;
-    }
-
-    public synchronized List<Demanda> getAllDemanda() {
-        return listDemanda.stream().collect(Collectors.toList());
     }
 
     public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
@@ -159,6 +131,37 @@ public class ControlDateNetwork {
 
     public synchronized void removeTypeOnly(List<Egde> listaRemover) {
         listaRemover.forEach(egde -> egde.setType(null, egde.getNome()));
+    }
+
+    public synchronized List<Egde> getAllEgde() {
+        return listEgde.stream().collect(Collectors.toList());
+    }
+
+    public synchronized List<Node> getAllNode() {
+        List<Node> lista = new ArrayList<>();
+        listEgde.forEach(t -> {
+            if (!lista.contains(t.de())) {
+                lista.add(t.de());
+            }
+            if (!lista.contains(t.para())) {
+                lista.add(t.para());
+            }
+        });
+        return lista;
+    }
+
+    public synchronized List<Type> getAllType() {
+        List<Type> lista = new ArrayList<>();
+        listEgde.forEach(egde -> {
+            if (egde.getType() != null && !lista.contains(egde.getType())) {
+                lista.add(egde.getType());
+            }
+        });
+        return lista;
+    }
+
+    public synchronized List<Demanda> getAllDemanda() {
+        return listDemanda.stream().collect(Collectors.toList());
     }
 
 }

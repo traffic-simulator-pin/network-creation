@@ -170,23 +170,22 @@ public class TelaComBotoes extends JInternalFrame {
             private synchronized void render() {
                 areaDesenho.clearListSpriteDateNetwork();
                 areaDesenho.clearListSpriteFuntion();
-
                 try {
-                    ControlDateNetwork.getInstance().getAllEgde().stream().forEach(egde -> {
-                        //Render Node De
-                        areaDesenho.addSpriteDateNetwork("NodeView",
-                                new float[]{egde.x1(), egde.y1()},
-                                Color.BLACK);
-
+                    ControlDateNetwork.getInstance().getAllEgde().forEach(egde -> {
                         //Render Egde
                         areaDesenho.addSpriteDateNetwork("EgdeView",
                                 new float[]{egde.x1(), egde.y1(), egde.x2(), egde.y2()},
-                                Color.BLACK);
+                                Color.GRAY);
+
+                        //Render Node De
+                        areaDesenho.addSpriteDateNetwork("NodeView",
+                                new float[]{egde.x1(), egde.y1()},
+                                Color.RED);
 
                         //Render Node Para
                         areaDesenho.addSpriteDateNetwork("NodeView",
                                 new float[]{egde.x2(), egde.y2()},
-                                Color.BLACK);
+                                Color.RED);
                     });
                     if (funtion != null && isAFuntionRequiresSuportLoop()) {
                         ((ILoop) funtion).render();
@@ -207,7 +206,6 @@ public class TelaComBotoes extends JInternalFrame {
                 }
             }
         }.start();
-//        System.err.println("Loop Stop");
     }
 
     //Verifica se é uma funcao de render    

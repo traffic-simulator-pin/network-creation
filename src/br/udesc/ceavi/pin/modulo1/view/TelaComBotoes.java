@@ -21,6 +21,7 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ILoop;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -108,17 +109,34 @@ public class TelaComBotoes extends JInternalFrame {
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
-
+        d = new Dimension(800, 600);
+        areaDesenho.setSize(d);
+        areaDesenho.setPreferredSize(d);
+        areaDesenho.setMinimumSize(d);
+        areaDesenho.setMaximumSize(d);
         jpLocation = new JPLocation(areaDesenho);
 
         Container content = this.getContentPane();
         content.setLayout(new BorderLayout());
         areaDesenho.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 1));
-        jpButao.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0), 1));
-        content.add(areaDesenho, BorderLayout.CENTER);
-        content.add(jpButao, BorderLayout.WEST);
-        content.add(jpLocation, BorderLayout.SOUTH);
 
+        content.setLayout(layout);
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 0;
+        cons.insets = new Insets(5, 5, 5, 5);
+        content.add(jpButao, cons);
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 0;
+        cons.insets = new Insets(5, 5, 5, 5);
+        content.add(areaDesenho, cons);
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 1;
+        cons.insets = new Insets(5, 5, 5, 5);
+        cons.gridwidth = 2;
+        content.add(jpLocation, cons);
     }
 
     /**
@@ -127,18 +145,20 @@ public class TelaComBotoes extends JInternalFrame {
      * @param nome - nome a ser adicionado ao label.
      * @param componente - componente a ser adicionado.
      */
+    private GridBagConstraints cons;
+
     public void addBTNJPanel(String nome, JComponent componente, int position, int isset) {
-        GridBagConstraints cConstraints = new GridBagConstraints();
-        cConstraints.fill = GridBagConstraints.HORIZONTAL;
-        cConstraints.gridy = position;
-        cConstraints.weightx = 0.9f;
+        cons = new GridBagConstraints();
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.gridy = position;
+        cons.weightx = 0.9f;
         componente.setName(nome);
         if (isset <= 0) {
-            cConstraints.insets = new Insets(2, 1, 2, 4);
+            cons.insets = new Insets(2, 1, 2, 4);
         } else {
-            cConstraints.insets = new Insets(2, 1, isset, 4);
+            cons.insets = new Insets(2, 1, isset, 4);
         }
-        jpButao.add(componente, cConstraints);
+        jpButao.add(componente, cons);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setBorder(null);
     }
@@ -234,5 +254,11 @@ public class TelaComBotoes extends JInternalFrame {
             }
         }
         return false;
+    }
+
+    public void setAllJButtonAtivo() {
+        for (Component component : jpButao.getComponents()) {
+            component.setEnabled(true);
+        }
     }
 }

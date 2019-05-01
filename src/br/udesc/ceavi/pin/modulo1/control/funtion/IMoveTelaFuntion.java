@@ -1,7 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-
 /**
  *
  * @author GustavoSantos
@@ -9,8 +7,4 @@ import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
  *
  */
 public interface IMoveTelaFuntion extends IFuntion {
-
-    public MouseManeger getMouseManeger();
-
-    public void initMouse();
 }

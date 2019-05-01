@@ -1,8 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
-import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.List;
  * @since 26/04/2019
  *
  */
-public class FuntionCriarAletoriamenteEgde implements IFuntion {
+public class FuntionCriarAletoriamenteEgde extends Funtion implements IFuntion {
 
     public FuntionCriarAletoriamenteEgde() {
         System.out.println("FuntionTest");
@@ -24,23 +22,6 @@ public class FuntionCriarAletoriamenteEgde implements IFuntion {
                     new Node((float) Math.random() * 800, (float) Math.random() * 800)));
         }
         ControlDateNetwork.getInstance().offerEgde(lista);
-    }
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return null;
-    }
-
-    @Override
-    public void initMouse() {
-    }
-
-    @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
-    }
-
-    @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
     }
 
 }

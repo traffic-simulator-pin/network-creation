@@ -24,12 +24,14 @@ public class ListenersTelaComBotoes {
         asList.forEach((jButton)
                 -> jButton.addActionListener((e) -> {
                     try {
+                        view.setAllJButtonAtivo();
                         IFuntion funtion
                                 = (IFuntion) Class.forName("br.udesc.ceavi.pin.modulo1.control.funtion."
                                         + jButton.getName()).newInstance();
                         view.setMouseListener(funtion.getMouseManeger());
                         view.setFuntion(funtion);
                         funtion.addObservador(view.getObservadorTelaDesenho());
+                        jButton.setEnabled(false);
                     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                         ex.printStackTrace();
                     }

@@ -54,13 +54,4 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
 
         };
     }
-
-    @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
-    }
-
-    @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
-    }
-
 }

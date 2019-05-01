@@ -10,10 +10,9 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public abstract class FuntionSelection<T> implements ISelectionFuntion<T> {
+public abstract class FuntionSelection<T>  extends Funtion implements ISelectionFuntion<T> {
 
     private List<T> listaSelecionado = new ArrayList<>();
-    protected MouseManeger mouse;
 
     @Override
     public void addSelecionado(T t) {
@@ -38,16 +37,4 @@ public abstract class FuntionSelection<T> implements ISelectionFuntion<T> {
     public List<T> getSeletion() {
         return listaSelecionado;
     }
-
-    /**
-     *
-     */
-    @Override
-    public abstract void initMouse();
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return mouse;
-    }
-    
 }

@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.event.MouseMotionListener;
 import java.util.EventListener;
 import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
@@ -29,8 +30,34 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
 
     @Override
     protected synchronized void paintComponent(Graphics g) {
+        //Tudo Branco
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
+        g.setColor(Color.RED);
+
+        //Pita Limite na Esquerda
+        int sizeLimiteNetwork = (int) HelpLocator.getZOOM() + 1;
+        if (sizeLimiteNetwork > 10) {
+            sizeLimiteNetwork = 10;
+        }
+        if (HelpLocator.getGuideX() == 0) {
+            g.fillRect(0, 0, sizeLimiteNetwork, getHeight());
+        }
+        //Pita Limite na Direta
+        if (HelpLocator.getGuideX() + getWidth() / HelpLocator.getZOOM() + 1 >= HelpLocator.getNetworkWidth()) {
+            g.fillRect(getWidth() - sizeLimiteNetwork, 0, sizeLimiteNetwork, getHeight());
+        }
+        //Pita Limite em Cima
+        if (HelpLocator.getGuideY() == 0) {
+            g.fillRect(0, 0, getWidth(), sizeLimiteNetwork);
+        }
+
+        //Pita Limite em Baixo
+        if (HelpLocator.getGuideY() + getHeight() / HelpLocator.getZOOM() + 1 >= HelpLocator.getNetworkHeight()) {
+            g.fillRect(0, getHeight() - sizeLimiteNetwork, getWidth(), sizeLimiteNetwork);
+        }
+
+        //Desenho das Sprite
         try {
             List<ISprite> desenha = new ArrayList<>();
             desenha.addAll(listaSpriteDate);

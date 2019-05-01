@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.Clamp;
 import java.awt.event.MouseEvent;
@@ -12,18 +11,11 @@ import java.awt.event.MouseEvent;
  * @since 28/04/2019
  *
  */
-public class FuntionMoveTela implements IMoveTelaFuntion {
-
-    private MouseManeger mouse;
+public class FuntionMoveTela extends Funtion implements IMoveTelaFuntion {
 
     public FuntionMoveTela() {
         System.out.println("FuntionMoveTela");
         initMouse();
-    }
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return mouse;
     }
 
     @Override
@@ -46,22 +38,16 @@ public class FuntionMoveTela implements IMoveTelaFuntion {
                 int newX = (int) (HelpLocator.getGuideX() + xMove * 0.2);
                 int newY = (int) (HelpLocator.getGuideY() + yMove * 0.2);
                 if (HelpLocator.getZOOM() != 1) {
+                    
                     HelpLocator.setGuiaX(Clamp.clamp(newX, 0,
-                            (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM())));
+                            (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM()))
+                    );
                     HelpLocator.setGuiaY(Clamp.clamp(newY, 0,
-                            (int) (HelpLocator.getNetworkHeight() - e.getComponent().getHeight() / HelpLocator.getZOOM())));
+                            (int) (HelpLocator.getNetworkHeight() - e.getComponent().getHeight() / HelpLocator.getZOOM()))
+                    );
                 }
             }
         };
 
     }
-
-    @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
-    }
-
-    @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
-    }
-
 }

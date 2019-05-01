@@ -8,7 +8,7 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public interface ISelectionFuntion<T> extends IFuntion{
+public interface ISelectionFuntion<T>{
 
     public T selecionar(int x, int y);
 

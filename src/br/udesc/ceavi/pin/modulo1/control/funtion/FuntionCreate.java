@@ -10,7 +10,7 @@ import java.util.List;
  * @since 26/04/2019
  *
  */
-public abstract class FuntionCreate<T> implements ICreateFuntion<T> {
+public abstract class FuntionCreate<T> extends Funtion implements ICreateFuntion<T> {
 
     protected List<T> lista = new ArrayList<>();
 

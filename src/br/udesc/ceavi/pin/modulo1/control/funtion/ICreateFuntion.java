@@ -9,7 +9,7 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public interface ICreateFuntion<T> extends IFuntion {
+public interface ICreateFuntion<T>{
 
     public void offer() throws Exception;
 

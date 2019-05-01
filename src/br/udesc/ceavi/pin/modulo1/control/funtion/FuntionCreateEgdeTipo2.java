@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop {
 
-    private MouseManeger mouse;
     private List<ObservadorTelaDesenho> listaObservado;
     private Node de;
     private Node para;
@@ -100,11 +99,6 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
             }
 
         };
-    }
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return mouse;
     }
 
     @Override

@@ -23,7 +23,6 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     private Node de;
     private Node para;
     private Node mesmoNode;
-    private MouseManeger mouse;
     private List<ObservadorTelaDesenho> listaObservado;
     private int xLoop, yLoop;
 
@@ -165,11 +164,6 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
         } else {
             mesmoNode = checkExistingNode(xLoop, yLoop);
         }
-    }
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return mouse;
     }
 
 }

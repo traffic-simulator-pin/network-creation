@@ -17,11 +17,10 @@ import java.util.List;
  * @since 26/04/2019
  *
  */
-public class FuntionRemoverEgde implements ILoop, IFuntion {
+public class FuntionRemoverEgde extends Funtion implements ILoop {
 
     private FuntionSelecionarEgde seletionEgde;
     private Egde egdeMousePassouPorCimaRemove;
-    private MouseManeger mouse;
     private List<ObservadorTelaDesenho> listaDeObservador;
 
     public FuntionRemoverEgde() {
@@ -87,11 +86,6 @@ public class FuntionRemoverEgde implements ILoop, IFuntion {
                 }
             }
         };
-    }
-
-    @Override
-    public MouseManeger getMouseManeger() {
-        return mouse;
     }
 
 }

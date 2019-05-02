@@ -10,8 +10,12 @@ public class HelpLocator {
 
     private static int GuiaX, GuiaY;
     private static float ZOMM = 1;
-    private static float[] scale;
+    private static int[] scale;
     private static int networkWidth, networkHeight;
+
+    public static void setEscala(int escala) {
+        scale = new int[]{1, escala * 37};
+    }
 
     private HelpLocator() {
         //Não deve se instanceado
@@ -52,8 +56,8 @@ public class HelpLocator {
         }
     }
 
-    public static float[] getScale() {
-        return new float[]{100000,2000000000};
+    public static int[] getScale() {
+        return new int[]{1, scale[1] / (int) ZOMM};
     }
 
     public static float[] getNetworkRealLocation(float x, float y) {

@@ -13,7 +13,7 @@ import java.awt.Graphics;
 public class NodeView extends Sprite {
 
     public NodeView() {
-        super(7, 7);
+        super(8, 8);
     }
 
     @Override

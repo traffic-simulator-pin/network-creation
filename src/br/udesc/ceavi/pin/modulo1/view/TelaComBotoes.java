@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ListenersTelaComBotoes;
@@ -109,7 +110,9 @@ public class TelaComBotoes extends JInternalFrame {
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
-        d = new Dimension(800, 600);
+        ControlTelaDesenho achaSize = new ControlTelaDesenho(50000, 60000);
+        d = new Dimension(achaSize.getwSizeTela(), achaSize.gethSizeTela());
+        HelpLocator.setEscala(achaSize.getEscala());
         areaDesenho.setSize(d);
         areaDesenho.setPreferredSize(d);
         areaDesenho.setMinimumSize(d);

@@ -49,7 +49,7 @@ public class JPLocation extends JPanel {
         lbZoom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbZoom.setText(renderZoomInfor());
 
-        lbEscala.setText("Escala: ");
+        lbEscala.setText(renderEscalaInfor());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,6 +85,7 @@ public class JPLocation extends JPanel {
     private void btnZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomInActionPerformed
         HelpLocator.zoomIn();
         lbZoom.setText(renderZoomInfor());
+        lbEscala.setText(renderEscalaInfor());
         setLocalizaoDaTela();
         repaint();
     }//GEN-LAST:event_btnZoomInActionPerformed
@@ -92,6 +93,7 @@ public class JPLocation extends JPanel {
     private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOutActionPerformed
         HelpLocator.zoomOut();
         lbZoom.setText(renderZoomInfor());
+        lbEscala.setText(renderEscalaInfor());
         setLocalizaoDaTela();
         repaint();
     }//GEN-LAST:event_btnZoomOutActionPerformed
@@ -100,11 +102,14 @@ public class JPLocation extends JPanel {
     private void setLocalizaoDaTela() {
         HelpLocator.setGuiaX(Clamp.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
         HelpLocator.setGuiaY(Clamp.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
-        lbEscala.setText("Escala: " + HelpLocator.getScale()[0] + " : " + HelpLocator.getScale()[1]);
     }
     
     private static String renderZoomInfor() {
         return "Zoom :  " + (int) (HelpLocator.getZOOM() * 100) + "%";
+    }
+    
+    private static String renderEscalaInfor() {
+        return "Escala: " + HelpLocator.getScale()[0] + "cm : " + HelpLocator.getScale()[1] + " m";
     }
 
 

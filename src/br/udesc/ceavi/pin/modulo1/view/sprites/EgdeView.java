@@ -57,17 +57,19 @@ public class EgdeView extends Sprite {
     @Override
     public void setDateLocation(float[] position) {
         this.x1 = ((position[0] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y1 = -((position[1] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        this.y1 = -((position[1] + HelpLocator.getGuideY()) * HelpLocator.getZOOM());
 
         this.x2 = ((position[2] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y2 = -((position[3] - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        this.y2 = -((position[3] + HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+
         linha = new Line2D.Float(x1, y1, x2, y2);
     }
 
     @Override
     public boolean inAreaRender(Dimension areaDaTelaDesenho) {
         return new Rectangle2D.Float(0, 0,
-                areaDaTelaDesenho.width, areaDaTelaDesenho.height).intersectsLine(linha);
+                areaDaTelaDesenho.width, areaDaTelaDesenho.height)
+                .intersectsLine(linha);
     }
 
     @Override

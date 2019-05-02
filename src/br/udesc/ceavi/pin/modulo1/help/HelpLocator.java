@@ -53,12 +53,11 @@ public class HelpLocator {
     }
 
     public static float[] getScale() {
-
-        return null;
+        return new float[]{100000,2000000000};
     }
 
     public static float[] getNetworkRealLocation(float x, float y) {
-        return new float[]{GuiaX + (x / ZOMM), -(GuiaY + (y / ZOMM))};
+        return new float[]{GuiaX + x / ZOMM, -(GuiaY + y / ZOMM)};
     }
 
     public static float getZOOM() {

@@ -198,13 +198,13 @@ public class TelaComBotoes extends JInternalFrame {
                 }
             }
 
-            private synchronized void processInput() {
+            private void processInput() {
                 if (funtion != null && isAFuntionRequiresSuportLoop()) {
                     ((ILoop) funtion).processInput();
                 }
             }
 
-            private synchronized void render() {
+            private void render() {
                 areaDesenho.clearListSpriteDateNetwork();
                 areaDesenho.clearListSpriteFuntion();
                 try {
@@ -229,6 +229,7 @@ public class TelaComBotoes extends JInternalFrame {
                     }
                     areaDesenho.repaint();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -247,9 +248,8 @@ public class TelaComBotoes extends JInternalFrame {
 
     //Verifica se é uma funcao de render    
     private boolean isAFuntionRequiresSuportLoop() {
-        Class<?>[] interfaces = funtion.getClass().getInterfaces();
-        for (int i = 0; i < funtion.getClass().getInterfaces().length; i++) {
-            if (interfaces[i].getName().equals(ILoop.class.getName())) {
+        for (Class<?> isALoop : funtion.getClass().getInterfaces()) {
+            if (isALoop.getName().equals(ILoop.class.getName())) {
                 return true;
             }
         }

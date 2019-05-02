@@ -35,11 +35,11 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.RED);
 
-        //Pita Limite na Esquerda
         int sizeLimiteNetwork = (int) HelpLocator.getZOOM() + 1;
         if (sizeLimiteNetwork > 10) {
             sizeLimiteNetwork = 10;
         }
+        //Pita Limite na Esquerda
         if (HelpLocator.getGuideX() == 0) {
             g.fillRect(0, 0, sizeLimiteNetwork, getHeight());
         }

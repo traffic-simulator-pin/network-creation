@@ -11,14 +11,14 @@ import javax.swing.JPanel;
  *
  */
 public class JPLocation extends JPanel {
-
+    
     private final AreaDesenho areaDesenho;
-
+    
     public JPLocation(AreaDesenho areaDesenho) {
         initComponents();
         this.areaDesenho = areaDesenho;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,6 +26,10 @@ public class JPLocation extends JPanel {
         btnZoomIn = new javax.swing.JButton();
         btnZoomOut = new javax.swing.JButton();
         lbZoom = new javax.swing.JLabel();
+        lbEscala = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(900, 54));
+        setMinimumSize(new java.awt.Dimension(900, 54));
 
         btnZoomIn.setText("+");
         btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
@@ -45,12 +49,16 @@ public class JPLocation extends JPanel {
         lbZoom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbZoom.setText(renderZoomInfor());
 
+        lbEscala.setText("Escala: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(609, Short.MAX_VALUE)
+                .addGap(154, 154, 154)
+                .addComponent(lbEscala, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addComponent(btnZoomOut)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbZoom, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -64,7 +72,8 @@ public class JPLocation extends JPanel {
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnZoomIn)
-                    .addComponent(btnZoomOut))
+                    .addComponent(btnZoomOut)
+                    .addComponent(lbEscala))
                 .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -91,8 +100,9 @@ public class JPLocation extends JPanel {
     private void setLocalizaoDaTela() {
         HelpLocator.setGuiaX(Clamp.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
         HelpLocator.setGuiaY(Clamp.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
+        lbEscala.setText("Escala: " + HelpLocator.getScale()[0] + " : " + HelpLocator.getScale()[1]);
     }
-
+    
     private static String renderZoomInfor() {
         return "Zoom :  " + (int) (HelpLocator.getZOOM() * 100) + "%";
     }
@@ -101,6 +111,7 @@ public class JPLocation extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnZoomIn;
     private javax.swing.JButton btnZoomOut;
+    private javax.swing.JLabel lbEscala;
     private javax.swing.JLabel lbZoom;
     // End of variables declaration//GEN-END:variables
 

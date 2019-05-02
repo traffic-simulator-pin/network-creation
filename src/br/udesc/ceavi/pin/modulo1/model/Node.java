@@ -2,19 +2,19 @@ package br.udesc.ceavi.pin.modulo1.model;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
 
-    public static final int SIZE = 6;
+    public static final int SIZE = 8;
 
     private final String ID;
     private final float x;
     private final float y;
 
     private static int idNaoUsuado = 1;
-    private final Rectangle area;
 
     private List<Egde> listDeEgdeQuePertenco = new ArrayList<>();
 
@@ -23,7 +23,6 @@ public class Node {
         idNaoUsuado++;
         this.x = x;
         this.y = y;
-        this.area = new Rectangle((int) this.x - SIZE / 2, (int) this.y - SIZE / 2, SIZE, SIZE);
     }
 
     public Node(float x, float y, int sizeNodo) {
@@ -31,7 +30,6 @@ public class Node {
         idNaoUsuado++;
         this.x = x;
         this.y = y;
-        this.area = new Rectangle((int) this.x - SIZE / 2, (int) this.y - SIZE / 2, sizeNodo, sizeNodo);
     }
 
     @Override
@@ -72,21 +70,17 @@ public class Node {
         return ID;
     }
 
-    public Rectangle getArea() {
-        return new Rectangle(area);
-    }
-
     public boolean collideWithMyArea(float x2, float y2) {
-        int w = SIZE;
-        int h = SIZE;
-        return new Rectangle((int) x2 - (w / 2),
-                (int) y2 - (w / 2),
-                w, h)
-                .intersects(this.area);
+        float w = SIZE / HelpLocator.getZOOM();
+        float h = SIZE / HelpLocator.getZOOM();
+        return new Rectangle2D.Float(x2 - (w / 2), y2 - (w / 2), w, h)
+                .intersects(new Rectangle2D.Float(x - (w / 2), y - (w / 2), w, h));
     }
 
     public boolean IamInArea(int X, int Y, int W, int H) {
-        return new Rectangle(X, Y, W, H).intersects(area);
+        float w = SIZE / HelpLocator.getZOOM();
+        float h = SIZE / HelpLocator.getZOOM();
+        return new Rectangle(X, Y, W, H).intersects(new Rectangle2D.Float(x - (w / 2), y - (w / 2), w, h));
     }
 
     public void associarNodeEgde(Egde e) {

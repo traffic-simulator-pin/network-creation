@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -19,10 +20,10 @@ public class NodeView extends Sprite {
     @Override
     public void draw(Graphics g) {
         g.setColor(cor);
-        g.fillOval((int) (x - ((super.width * HelpLocator.getZOOM()) / 2)),
-                (int) (y - ((super.height * HelpLocator.getZOOM()) / 2)),
-                (int) (super.width * HelpLocator.getZOOM()),
-                (int) (super.height * HelpLocator.getZOOM()));
+        float size = super.width / HelpLocator.getEscala();
+        g.fillOval((int) (x - (size / 2)),
+                (int) (y - (size / 2)),
+                (int) size, (int) size);
     }
 
     @Override

@@ -24,25 +24,6 @@ public class HelpLine {
     }
 
     /**
-     * Encontra a Interseção da Linha e Retorna Um Node Nessa Possição
-     *
-     * @param linha1 linha do trecho
-     * @param linha2 linha do trecho
-     * @return o Node Na Possição correspondem a Interseção das Linhas
-     */
-    public static Node getIntersectNodeLine(Line2D linha1, Line2D linha2) {
-        double m1 = getConficienteAngula(linha1);
-        double n1 = getConficienteLiner(m1, linha1);
-
-        double m2 = getConficienteAngula(linha2);
-        double n2 = getConficienteLiner(m2, linha2);
-
-        double x = getXIntersectPorSubracao(n1, m1, n2, m2);
-        double y = getYIntersectSubracao(n1, m1, x);
-        return new Node((int) x - (Node.SIZE / 2), (int) y - (Node.SIZE / 2), Node.SIZE);
-    }
-
-    /**
      * Realiza a Subtração de Funçoes Para Obter O X Do Ponto de interseção
      *
      * @param n1 Conficiente Liner da linha 1

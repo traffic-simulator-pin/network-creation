@@ -1,7 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.util.Clamp;
+import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import javax.swing.JPanel;
 
 /**
@@ -11,14 +11,14 @@ import javax.swing.JPanel;
  *
  */
 public class JPLocation extends JPanel {
-    
+
     private final AreaDesenho areaDesenho;
-    
+
     public JPLocation(AreaDesenho areaDesenho) {
         initComponents();
         this.areaDesenho = areaDesenho;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,6 +32,11 @@ public class JPLocation extends JPanel {
         setMinimumSize(new java.awt.Dimension(900, 54));
 
         btnZoomIn.setText("+");
+        btnZoomIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnZoomInMousePressed(evt);
+            }
+        });
         btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZoomInActionPerformed(evt);
@@ -98,18 +103,21 @@ public class JPLocation extends JPanel {
         repaint();
     }//GEN-LAST:event_btnZoomOutActionPerformed
 
+    private void btnZoomInMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnZoomInMousePressed
+    }//GEN-LAST:event_btnZoomInMousePressed
+
     //Tem como objetivo reajustar a localização da Tela conforme o zomm é aplicado
     private void setLocalizaoDaTela() {
-        HelpLocator.setGuiaX(Clamp.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
-        HelpLocator.setGuiaY(Clamp.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaX(UtilNumeros.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaY(UtilNumeros.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
     }
-    
+
     private static String renderZoomInfor() {
         return "Zoom :  " + (int) (HelpLocator.getZOOM() * 100) + "%";
     }
-    
+
     private static String renderEscalaInfor() {
-        return "Escala: " + HelpLocator.getScale()[0] + "cm : " + HelpLocator.getScale()[1] + " m";
+        return "Escala: " + HelpLocator.getScaleInfor()[0] + "cm : " + HelpLocator.getScaleInfor()[1] + " m";
     }
 
 

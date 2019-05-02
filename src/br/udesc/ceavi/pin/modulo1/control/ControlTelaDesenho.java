@@ -1,5 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
+import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
+
 /**
  *
  * @author GustavoSantos
@@ -24,24 +26,18 @@ public class ControlTelaDesenho {
         return escala;
     }
 
-    
     public ControlTelaDesenho(int w, int h) {
         this.wPretendido = w;
         this.hPretendido = h;
 
-        escala = paso1();
-        System.out.println("Escala " + escala);
-
-        wSizeTela = paso3(escala, wPretendido, 800f);
-        hSizeTela = paso3(escala, hPretendido, 600f);
-
-        System.out.printf("Telas Medidas W : %s, H: %s\n", wSizeTela, hSizeTela);
-        System.out.printf("Pretendidos w %s , h %s\n", wPretendido, hPretendido);
+        escala = setEscala();
+        wSizeTela = definerTamanhoTelaDesenho(escala, wPretendido, 800f);
+        hSizeTela = definerTamanhoTelaDesenho(escala, hPretendido, 600f);
     }
 
-    private int paso1() {
-        float tH = paso2(hPretendido, 600f);
-        float tW = paso2(wPretendido, 800f);
+    private int setEscala() {
+        float tH = quantaTela(hPretendido, 600f);
+        float tW = quantaTela(wPretendido, 800f);
         if (tH > tW) {
             if (((int) tH) < tH) {
                 return (int) ++tH;
@@ -55,20 +51,16 @@ public class ControlTelaDesenho {
         }
     }
 
-    private float paso2(float test, float telaSize) {
+    private float quantaTela(float test, float telaSize) {
         return test / telaSize;
     }
 
-    private int paso3(int escalaInicial, int tamanhoP, float telaS) {
+    private int definerTamanhoTelaDesenho(int escalaInicial, int tamanhoP, float telaS) {
         float maxST = escalaInicial * telaS;
         if (maxST >= tamanhoP) {
-            return regraDeTres(maxST, tamanhoP, telaS);
+            return (int) RegraDeTres.regraDeTres(maxST, tamanhoP, telaS);
         }
         return (int) maxST;
-    }
-
-    private int regraDeTres(float maxST, int tamanhoP, float telaS) {
-        return (int) ((tamanhoP * telaS) / maxST);
     }
 
 }

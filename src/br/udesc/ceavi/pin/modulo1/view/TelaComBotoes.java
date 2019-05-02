@@ -110,7 +110,9 @@ public class TelaComBotoes extends JInternalFrame {
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
-        ControlTelaDesenho achaSize = new ControlTelaDesenho(50000, 60000);
+        int size = 17;
+        ControlTelaDesenho achaSize = new ControlTelaDesenho(size * 800, size * 600);
+        System.out.println("Escala : " + achaSize.getEscala());
         d = new Dimension(achaSize.getwSizeTela(), achaSize.gethSizeTela());
         HelpLocator.setEscala(achaSize.getEscala());
         areaDesenho.setSize(d);

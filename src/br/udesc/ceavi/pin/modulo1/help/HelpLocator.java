@@ -8,13 +8,13 @@ package br.udesc.ceavi.pin.modulo1.help;
  */
 public class HelpLocator {
 
-    private static int GuiaX, GuiaY;
-    private static float ZOMM = 1;
-    private static int[] scale;
+    private static int guiaX, guiaY;
+    private static float zoom = 1;
+    private static int[] scaleInicial;
     private static int networkWidth, networkHeight;
 
     public static void setEscala(int escala) {
-        scale = new int[]{1, escala * 37};
+        scaleInicial = new int[]{1, escala};
     }
 
     private HelpLocator() {
@@ -30,42 +30,47 @@ public class HelpLocator {
     }
 
     public static int getGuideX() {
-        return GuiaX;
+        return guiaX;
     }
 
     public static int getGuideY() {
-        return GuiaY;
+        return guiaY;
     }
 
     public static void setGuiaX(int GuiaX) {
-        HelpLocator.GuiaX = GuiaX;
+        HelpLocator.guiaX = GuiaX;
     }
 
     public static void setGuiaY(int GuiaY) {
-        HelpLocator.GuiaY = GuiaY;
+        HelpLocator.guiaY = GuiaY;
     }
 
     public static void zoomIn() {
-        ZOMM++;
-    }
-
-    public static void zoomOut() {
-        ZOMM--;
-        if (ZOMM == 0) {
-            ZOMM = 1;
+        if (((scaleInicial[1] * 37) / zoom) > 8) {
+            zoom++;
         }
     }
 
-    public static int[] getScale() {
-        return new int[]{1, scale[1] / (int) ZOMM};
+    public static float getEscala() {
+        return (scaleInicial[1] / zoom);
+    }
+
+    public static void zoomOut() {
+        if (zoom > 1) {
+            zoom--;
+        }
+    }
+
+    public static float[] getScaleInfor() {
+        return new float[]{1, (scaleInicial[1]) / zoom};
     }
 
     public static float[] getNetworkRealLocation(float x, float y) {
-        return new float[]{GuiaX + x / ZOMM, -(GuiaY + y / ZOMM)};
+        return new float[]{guiaX + x / zoom, -(guiaY + y / zoom)};
     }
 
     public static float getZOOM() {
-        return ZOMM;
+        return zoom;
     }
 
     public static void setNetworkHeight(int networkHeight) {

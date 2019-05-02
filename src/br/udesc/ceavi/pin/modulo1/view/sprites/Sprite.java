@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
-import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -15,9 +15,9 @@ public abstract class Sprite implements ISprite {
 
     protected int x, y;
     protected Color cor;
-    protected int width, height;
+    protected float width, height;
 
-    public Sprite(int width, int height) {
+    public Sprite(float width, float height) {
         this.width = width;
         this.height = height;
     }

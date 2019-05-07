@@ -2,7 +2,6 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import java.awt.Point;
@@ -24,9 +23,16 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
 
     @Override
     public Egde selecionar(int x, int y) {
+        //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
+        //Varendo a lista de Egde
         for (Egde egde : ControlDateNetwork.getInstance().getAllEgde()) {
-            if (egde.havePointInLine(new Point((int) realLocation[0], (int) realLocation[1]))) {
+            //Verificando se o egde tem a area a baixo
+            if (egde.havePointInLine(
+                    //Area criada apartir do ponto de clique
+                    new Point((int) realLocation[0], (int) realLocation[1]))) {
+                
+                //Logica de adicionar quando não tem e remover quando tem
                 if (super.getListaSelecionado().contains(egde)) {
                     removeSelecionado(egde);
                     return null;

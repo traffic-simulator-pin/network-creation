@@ -22,9 +22,14 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> {
 
     @Override
     public Node selecionar(int x, int y) {
+        //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] localizacaReal = HelpLocator.getNetworkRealLocation(x, y);
+        //Varendo a lista de Node
         for (Node node : ControlDateNetwork.getInstance().getAllNode()) {
+            //Verificando se o node tem a area a baixo
             if (node.collideWithMyArea(localizacaReal[0], localizacaReal[1])) {
+
+                //Logica de adicionar quando não tem e remover quando tem
                 if (super.getListaSelecionado().contains(node)) {
                     removeSelecionado(node);
                     return null;

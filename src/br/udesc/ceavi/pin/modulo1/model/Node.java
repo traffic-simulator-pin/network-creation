@@ -71,8 +71,10 @@ public class Node {
     }
 
     public boolean collideWithMyArea(float x2, float y2) {
+        //Transformaçoes necessarias para ajustar area 
         float w = (SIZE / HelpLocator.getZOOM()) * 2;
         float h = (SIZE / HelpLocator.getZOOM()) * 2;
+        //Verificação da Intersseção de areas
         return new Rectangle2D.Float(x2 - (w / 2), y2 - (w / 2), w, h)
                 .intersects(new Rectangle2D.Float(x - (w / 2), y - (w / 2), w, h));
     }

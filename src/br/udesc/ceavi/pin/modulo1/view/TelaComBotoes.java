@@ -107,7 +107,7 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
-        int size = 17;
+        int size = 1;
         ControlTelaDesenho achaSize = new ControlTelaDesenho(size * 800, size * 600);
         System.out.println("Escala : " + achaSize.getEscala());
         d = new Dimension(achaSize.getwSizeTela(), achaSize.gethSizeTela());

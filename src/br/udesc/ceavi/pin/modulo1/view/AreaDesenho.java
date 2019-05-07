@@ -19,22 +19,22 @@ import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
  *
  */
 public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
-
+    
     private final List<ISprite> listaSpriteDate;
     private final List<ISprite> listaSpriteContruction;
-
+    
     public AreaDesenho() {
         listaSpriteDate = new ArrayList<>();
         listaSpriteContruction = new ArrayList<>();
     }
-
+    
     @Override
     protected synchronized void paintComponent(Graphics g) {
         //Tudo Branco
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.RED);
-
+        
         int sizeLimiteNetwork = (int) HelpLocator.getZOOM() + 1;
         if (sizeLimiteNetwork > 10) {
             sizeLimiteNetwork = 10;
@@ -67,11 +67,11 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
             new RuntimeException(ex.getMessage());
         }
     }
-
+    
     public void clearListSpriteDateNetwork() {
         listaSpriteDate.clear();
     }
-
+    
     public void setMouseListener(EventListener mouse) {
         //Get
         MouseListener[] mouseListenrerLista = getMouseListeners();
@@ -89,30 +89,29 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         addMouseListener((MouseListener) mouse);
         addMouseMotionListener((MouseMotionListener) mouse);
     }
-
+    
     @Override
     public void addSpriteDateNetwork(String nome, float[] position, Color cor) {
         newSprite(nome, position, cor, listaSpriteDate);
     }
-
+    
     private synchronized void newSprite(String nome, float[] position, Color cor, List<ISprite> list) {
         try {
             ISprite newSprite = (ISprite) Class.forName("br.udesc.ceavi.pin.modulo1.view.sprites." + nome).newInstance();
             newSprite.setDateLocation(position);
             newSprite.setColor(cor);
-            if (newSprite.inAreaRender(getSize())) {
-                list.add(newSprite);
-            }
+            list.add(newSprite);
+            newSprite.setAreaDaTelaDesenho(getSize());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             ex.printStackTrace();
         }
     }
-
+    
     @Override
     public void addSpriteFuntion(String nome, float[] position, Color cor) {
         newSprite(nome, position, cor, listaSpriteContruction);
     }
-
+    
     public void clearListSpriteFuntion() {
         this.listaSpriteContruction.clear();
     }

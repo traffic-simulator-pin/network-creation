@@ -18,5 +18,7 @@ public interface ISprite {
 
     public void setColor(Color cor);
 
-    public boolean inAreaRender(Dimension areaDaTelaDesenho);
+    public boolean inAreaRender();
+
+    public void setAreaDaTelaDesenho(Dimension areaDaTelaDesenho);
 }

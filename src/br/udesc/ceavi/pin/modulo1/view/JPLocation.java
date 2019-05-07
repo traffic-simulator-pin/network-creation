@@ -32,11 +32,6 @@ public class JPLocation extends JPanel {
         setMinimumSize(new java.awt.Dimension(900, 54));
 
         btnZoomIn.setText("+");
-        btnZoomIn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnZoomInMousePressed(evt);
-            }
-        });
         btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZoomInActionPerformed(evt);
@@ -73,17 +68,14 @@ public class JPLocation extends JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnZoomIn)
-                    .addComponent(btnZoomOut)
-                    .addComponent(lbEscala))
-                .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbZoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lbEscala)
+                    .addComponent(btnZoomOut)
+                    .addComponent(lbZoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnZoomIn))
+                .addGap(10, 10, 10))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,9 +94,6 @@ public class JPLocation extends JPanel {
         setLocalizaoDaTela();
         repaint();
     }//GEN-LAST:event_btnZoomOutActionPerformed
-
-    private void btnZoomInMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnZoomInMousePressed
-    }//GEN-LAST:event_btnZoomInMousePressed
 
     //Tem como objetivo reajustar a localização da Tela conforme o zomm é aplicado
     private void setLocalizaoDaTela() {

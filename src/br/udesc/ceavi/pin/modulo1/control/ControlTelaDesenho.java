@@ -31,13 +31,15 @@ public class ControlTelaDesenho {
         this.hPretendido = h;
 
         escala = setEscala();
-        wSizeTela = definerTamanhoTelaDesenho(escala, wPretendido, 800f);
-        hSizeTela = definerTamanhoTelaDesenho(escala, hPretendido, 600f);
+        wSizeTela = definerTamanhoTelaDesenho(escala, wPretendido, wGuia);
+        hSizeTela = definerTamanhoTelaDesenho(escala, hPretendido, hGuia);
     }
 
+        final float wGuia = 800f;
+        final float hGuia = 600f;
     private int setEscala() {
-        float tH = quantaTela(hPretendido, 600f);
-        float tW = quantaTela(wPretendido, 800f);
+        float tW = quantaTela(wPretendido, wGuia);
+        float tH = quantaTela(hPretendido, hGuia);
         if (tH > tW) {
             if (((int) tH) < tH) {
                 return (int) ++tH;

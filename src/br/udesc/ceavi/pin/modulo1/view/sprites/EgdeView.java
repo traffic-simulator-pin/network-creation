@@ -2,9 +2,7 @@ package br.udesc.ceavi.pin.modulo1.view.sprites;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.geom.Line2D;
@@ -27,46 +25,55 @@ public class EgdeView extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        desenhaRua(g, super.width / HelpLocator.getEscala(), cor);
-        desenhaLinha(g, ((super.width / HelpLocator.getEscala()) * 0.2f), Color.red);
-        g.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
+        float x1R = ((x1 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        float y1R = ((y1 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+
+        float x2R = ((x2 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
+        float y2R = ((y2 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+
+        linha = new Line2D.Float(x1R, y1R, x2R, y2R);
+
+        if (inAreaRender()) {
+            g.setColor(Color.YELLOW);
+            g.drawLine((int) x1R, (int) y1R, (int) x2R, (int) y2R);
+            //Rua
+            drawPoliginoGenerico(((super.width / HelpLocator.getEscala()) / 2),
+                    g, cor, x1R, y1R, x2R, y2R);
+            //Trasejado
+            drawPoliginoGenerico(((super.width / HelpLocator.getEscala()) * 0.2f) / 2,
+                    g, Color.YELLOW, x1R, y1R, x2R, y2R);
+        }
     }
 
-    private void desenhaRua(Graphics g, float largura, Color cor) {
-        drawPoliginoGenerico(largura / 2, g, cor);
-    }
-
-    private void desenhaLinha(Graphics g, float largura, Color cor) {
-        drawPoliginoGenerico(largura / 2, g, cor);
-    }
-
-    private void drawPoliginoGenerico(float largura, Graphics g, Color cor1) {
-        float size = HelpLine.getMag(x1, x2, y1, y2);
+    private void drawPoliginoGenerico(float largura, Graphics g, Color cor1,
+            float x1R, float y1R, float x2R, float y2R) {
+        float size = HelpLine.getMag(x1R, x2R, y1R, y2R);
         float zoom = largura;
-        float xNormalizado = (x2 - x1) / size * zoom;
-        float yNormalizado = (y2 - y1) / size * zoom;
+        float xNormalizado = (x2R - x1R) / size * zoom;
+        float yNormalizado = (y2R - y1R) / size * zoom;
         float xEsquerdo = -xNormalizado;
         float yEsquerdo = -yNormalizado;
         g.setColor(cor1);
         g.fillPolygon(new Polygon(
-                new int[]{(int) (x1 + yEsquerdo), (int) (x1 + yNormalizado), (int) (x2 + yNormalizado), (int) (x2 + yEsquerdo)},
-                new int[]{(int) (y1 + xNormalizado), (int) (y1 + xEsquerdo), (int) (y2 + xEsquerdo), (int) (y2 + xNormalizado)},
+                new int[]{(int) (x1R + yEsquerdo), (int) (x1R + yNormalizado), 
+                    (int) (x2R + yNormalizado), (int) (x2R + yEsquerdo)},
+                
+                new int[]{(int) (y1R + xNormalizado), (int) (y1R + xEsquerdo), 
+                    (int) (y2R + xEsquerdo), (int) (y2R + xNormalizado)},
                 4));
     }
 
     @Override
     public void setDateLocation(float[] position) {
-        this.x1 = ((position[0] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y1 = -((position[1] + HelpLocator.getGuideY()) * HelpLocator.getZOOM());
+        this.x1 = position[0];
+        this.y1 = -position[1];
 
-        this.x2 = ((position[2] - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
-        this.y2 = -((position[3] + HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-
-        linha = new Line2D.Float(x1, y1, x2, y2);
+        this.x2 = position[2];
+        this.y2 = -position[3];
     }
 
     @Override
-    public boolean inAreaRender(Dimension areaDaTelaDesenho) {
+    public boolean inAreaRender() {
         return new Rectangle2D.Float(0, 0,
                 areaDaTelaDesenho.width, areaDaTelaDesenho.height)
                 .intersectsLine(linha);

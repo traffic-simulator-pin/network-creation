@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @since 24/04/2019
  *
  */
-public class ControlDateNetwork {
+public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
 
     private static ControlDateNetwork instance;
 
@@ -30,6 +30,7 @@ public class ControlDateNetwork {
 
     private final List<Egde> listEgde;
     private final List<Demanda> listDemanda;
+    private List<ObservadorDateNetwork> listaObservador = new ArrayList<>();
 
     private ControlDateNetwork() {
         this.listEgde = new ArrayList<>();
@@ -42,6 +43,11 @@ public class ControlDateNetwork {
 
         this.listDemanda.addAll(listDemanda);
         this.listEgde.addAll(listEgde);
+        notificarAlteracaoNaEstruturaDeDados();
+    }
+
+    private void notificarAlteracaoNaEstruturaDeDados() {
+        listaObservador.forEach(obs -> obs.notifyAlteracao());
     }
 
     private synchronized void addEgde(Egde egde) {
@@ -51,14 +57,16 @@ public class ControlDateNetwork {
     private synchronized void addDemanda(Demanda newDemanda) throws DemandAlreadyExistException {
         if (!listDemanda.contains(newDemanda)) {
             this.listDemanda.add(newDemanda);
+            notificarAlteracaoNaEstruturaDeDados();
         } else {
             throw new DemandAlreadyExistException(newDemanda);
         }
+
     }
 
     public synchronized void offerEgde(List<Egde> lista) {
         lista.forEach(egdeADD -> addEgde(egdeADD));
-        System.err.println("ControlDateNetwork" + "novo egde");
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void offerDemanda(List<Demanda> lista) throws DemandAlreadyExistException {
@@ -101,18 +109,19 @@ public class ControlDateNetwork {
                 throw new EgdeAlreadyHasAssociationWithTypeException();
             }
         }
-        atribuirTrype(rua, numLanes, oneway, speed, width, nome);
+        atribuirType(rua, numLanes, oneway, speed, width, nome);
     }
 
-    private synchronized void atribuirTrype(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
+    private synchronized void atribuirType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
         Type type = new Type(rua, numLanes, oneway, speed, width);
         rua.forEach((egde) -> {
             egde.setType(type, nome);
         });
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
-        atribuirTrype(rua, numLanes, oneway, speed, width, nome);
+        atribuirType(rua, numLanes, oneway, speed, width, nome);
     }
 
     private synchronized Demanda nodeHaveLinkWithDemand(Node de, Node para) {
@@ -162,6 +171,16 @@ public class ControlDateNetwork {
 
     public synchronized List<Demanda> getAllDemanda() {
         return listDemanda.stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public void addObservador(ObservadorDateNetwork obs) {
+        this.listaObservador.add(obs);
+    }
+
+    @Override
+    public void removeObservador(ObservadorDateNetwork obs) {
+        this.listaObservador.remove(obs);
     }
 
 }

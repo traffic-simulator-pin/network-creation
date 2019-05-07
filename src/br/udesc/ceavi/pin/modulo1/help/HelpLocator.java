@@ -62,7 +62,7 @@ public class HelpLocator {
     }
 
     public static float[] getScaleInfor() {
-        return new float[]{1, (scaleInicial[1]) / zoom};
+        return new float[]{1, (scaleInicial[1] * 37) / zoom};
     }
 
     public static float[] getNetworkRealLocation(float x, float y) {

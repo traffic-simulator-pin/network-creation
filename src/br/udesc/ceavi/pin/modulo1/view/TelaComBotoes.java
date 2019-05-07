@@ -3,6 +3,7 @@ package br.udesc.ceavi.pin.modulo1.view;
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ListenersTelaComBotoes;
 import java.awt.BorderLayout;
@@ -31,7 +32,7 @@ import javax.swing.BorderFactory;
  *
  * @author Gustavo de Carvalho Santos
  */
-public class TelaComBotoes extends JInternalFrame {
+public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwork{
 
     private GridBagConstraints constraints;
     private GridBagLayout layout;
@@ -52,11 +53,14 @@ public class TelaComBotoes extends JInternalFrame {
     private AreaDesenho areaDesenho;
 
     private IFuntion funtion;
+    private ControlDateNetwork dateNetwork;
 
     public TelaComBotoes() {
         initComponents();
         initMyComponents();
         this.setVisible(true);
+        dateNetwork = ControlDateNetwork.getInstance();
+        dateNetwork.addObservador(this);
         List<JButton> listBtn = new ArrayList<>();
         for (int i = 0; i < jpButao.getComponents().length; i++) {
             listBtn.add((JButton) jpButao.getComponents()[i]);
@@ -69,27 +73,20 @@ public class TelaComBotoes extends JInternalFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new Dimension(1017, 670));
+
     }
 
     private void initMyComponents() {
         jpButao = new JPanel();
-
-        btnCreateEgdeTipo1 = new JButton();
-        btnCreateEgdeTipo1.setIcon(new ImageIcon("imagens/CriarRua.png"));
-
-        btnSelecionaEgde = new JButton();
-        btnSelecionaEgde.setIcon(new ImageIcon("imagens/SelecaoNodo.png"));
-        btnApagaEgde = new JButton();
-        btnApagaEgde.setIcon(new ImageIcon("imagens/Apagar.png"));
-
-        btnCriarAletoriamenteEgde = new JButton();
-        btnCriarAletoriamenteEgde.setIcon(new ImageIcon("imagens/CriarRua.png"));
-
-        btnMove = new JButton("MOVE");
-        btnCreateEgdeTipo2 = new JButton("Egde 2");
-        btnAddDemanda = new JButton("Demanda");
-        btnSetTypeEgde = new JButton("Set Type");
+        btnCreateEgdeTipo1 = new JButton("Create Egde 1");
+        btnCreateEgdeTipo2 = new JButton("Create Egde 2");
+        btnSelecionaEgde = new JButton("Selecionar Egde");
         btnSelecionaNode = new JButton("Selecionar Node");
+        btnApagaEgde = new JButton("Deletar Egde");
+        btnMove = new JButton("Mover Tela");
+        btnAddDemanda = new JButton("Create Demanda");
+        btnSetTypeEgde = new JButton("Set Egde Type");
+        btnCriarAletoriamenteEgde = new JButton("Teste");
 
         layout = new GridBagLayout();
         jpButao.setLayout(layout);
@@ -210,25 +207,9 @@ public class TelaComBotoes extends JInternalFrame {
             }
 
             private void render() {
-                areaDesenho.clearListSpriteDateNetwork();
                 areaDesenho.clearListSpriteFuntion();
                 try {
-                    ControlDateNetwork.getInstance().getAllEgde().forEach(egde -> {
-                        //Render Egde
-                        areaDesenho.addSpriteDateNetwork("EgdeView",
-                                new float[]{egde.x1(), egde.y1(), egde.x2(), egde.y2()},
-                                Color.GRAY);
 
-                        //Render Node De
-                        areaDesenho.addSpriteDateNetwork("NodeView",
-                                new float[]{egde.x1(), egde.y1()},
-                                Color.RED);
-
-                        //Render Node Para
-                        areaDesenho.addSpriteDateNetwork("NodeView",
-                                new float[]{egde.x2(), egde.y2()},
-                                Color.RED);
-                    });
                     if (funtion != null && isAFuntionRequiresSuportLoop()) {
                         ((ILoop) funtion).render();
                     }
@@ -240,9 +221,9 @@ public class TelaComBotoes extends JInternalFrame {
             }
 
             private synchronized void update() {
-                if (HelpLocator.getNetworkHeight() == 0 || HelpLocator.getNetworkWidth() == 0) {
-                    HelpLocator.setNetworkWidth(areaDesenho.getWidth());
+                if(HelpLocator.getNetworkHeight() == 0){
                     HelpLocator.setNetworkHeight(areaDesenho.getHeight());
+                    HelpLocator.setNetworkWidth(areaDesenho.getWidth());
                 }
                 if (funtion != null && isAFuntionRequiresSuportLoop()) {
                     ((ILoop) funtion).update();
@@ -265,5 +246,26 @@ public class TelaComBotoes extends JInternalFrame {
         for (Component component : jpButao.getComponents()) {
             component.setEnabled(true);
         }
+    }
+
+    @Override
+    public void notifyAlteracao() {
+        areaDesenho.clearListSpriteDateNetwork();
+        dateNetwork.getAllEgde().forEach(egde -> {
+            //Render Egde
+            areaDesenho.addSpriteDateNetwork("EgdeView",
+                    new float[]{egde.x1(), egde.y1(), egde.x2(), egde.y2()},
+                    Color.GRAY);
+
+            //Render Node De
+            areaDesenho.addSpriteDateNetwork("NodeView",
+                    new float[]{egde.x1(), egde.y1()},
+                    Color.RED);
+
+            //Render Node Para
+            areaDesenho.addSpriteDateNetwork("NodeView",
+                    new float[]{egde.x2(), egde.y2()},
+                    Color.RED);
+        });
     }
 }

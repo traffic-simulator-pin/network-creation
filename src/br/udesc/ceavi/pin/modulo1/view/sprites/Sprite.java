@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
-import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -13,13 +12,19 @@ import java.awt.Rectangle;
  */
 public abstract class Sprite implements ISprite {
 
-    protected int x, y;
+    protected float x, y;
     protected Color cor;
     protected float width, height;
+    protected Dimension areaDaTelaDesenho;
 
     public Sprite(float width, float height) {
         this.width = width;
         this.height = height;
+    }
+
+    @Override
+    public void setAreaDaTelaDesenho(Dimension areaDaTelaDesenho) {
+        this.areaDaTelaDesenho = areaDaTelaDesenho;
     }
 
     @Override
@@ -28,7 +33,7 @@ public abstract class Sprite implements ISprite {
     }
 
     @Override
-    public boolean inAreaRender(Dimension areaDaTelaDesenho) {
+    public boolean inAreaRender() {
         return new Rectangle.Float(0, 0,
                 (areaDaTelaDesenho.width),
                 (areaDaTelaDesenho.height)

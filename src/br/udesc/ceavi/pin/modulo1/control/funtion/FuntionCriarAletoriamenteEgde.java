@@ -18,8 +18,8 @@ public class FuntionCriarAletoriamenteEgde extends Funtion implements IFuntion {
         System.out.println("FuntionTest");
         List<Egde> lista = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            lista.add(new Egde(new Node((float) Math.random() * 600, (float) Math.random() * 500),
-                    new Node((float) Math.random() * 800, (float) Math.random() * 800)));
+            lista.add(new Egde(new Node((float) Math.random() * 600, -(float) Math.random() * 500),
+                    new Node((float) Math.random() * 800, -(float) Math.random() * 800)));
         }
         ControlDateNetwork.getInstance().offerEgde(lista);
     }

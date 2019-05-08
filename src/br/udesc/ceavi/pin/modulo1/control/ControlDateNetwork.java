@@ -7,6 +7,7 @@ import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.model.Type;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     private final List<Egde> listEgde;
     private final List<Demanda> listDemanda;
     private List<ObservadorDateNetwork> listaObservador = new ArrayList<>();
+    private File localDeSalvamento;
 
     private ControlDateNetwork() {
         this.listEgde = new ArrayList<>();
@@ -183,4 +185,11 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         this.listaObservador.remove(obs);
     }
 
+    public void setLocalDeSalvamento(File localDeSalvamento) {
+        this.localDeSalvamento = localDeSalvamento;
+    }
+
+    public File getLocalDeSalvamento() {
+        return localDeSalvamento;
+    }
 }

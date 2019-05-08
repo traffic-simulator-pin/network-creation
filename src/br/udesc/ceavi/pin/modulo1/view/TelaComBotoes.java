@@ -32,7 +32,7 @@ import javax.swing.BorderFactory;
  *
  * @author Gustavo de Carvalho Santos
  */
-public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwork{
+public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwork {
 
     private GridBagConstraints constraints;
     private GridBagLayout layout;
@@ -107,11 +107,12 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
         areaDesenho = new AreaDesenho();
-        int size = 1;
-        ControlTelaDesenho achaSize = new ControlTelaDesenho(size * 800, size * 600);
-        System.out.println("Escala : " + achaSize.getEscala());
+        ControlTelaDesenho achaSize = new ControlTelaDesenho(1200, 600, 800, 600);
+        System.out.printf("Escala : %s\n", achaSize.getEscala());
+        System.out.printf("Tamanho Setado Pelo Usuario %s : %s\n", achaSize.getwPretendido(), achaSize.gethPretendido());
+        System.out.printf("Tamanho Renderizado %s : %s\n", achaSize.getwSizeTela(), achaSize.gethSizeTela());
+
         d = new Dimension(achaSize.getwSizeTela(), achaSize.gethSizeTela());
-        HelpLocator.setEscala(achaSize.getEscala());
         areaDesenho.setSize(d);
         areaDesenho.setPreferredSize(d);
         areaDesenho.setMinimumSize(d);
@@ -221,9 +222,9 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
             }
 
             private synchronized void update() {
-                if(HelpLocator.getNetworkHeight() == 0){
-                    HelpLocator.setNetworkHeight(areaDesenho.getHeight());
-                    HelpLocator.setNetworkWidth(areaDesenho.getWidth());
+                if (HelpLocator.getTelaDesenhoHeight() == 0) {
+                    HelpLocator.setSizeTelaDesenhoHeight(areaDesenho.getHeight());
+                    HelpLocator.setSizeTelaDesenhoWidth(areaDesenho.getWidth());
                 }
                 if (funtion != null && isAFuntionRequiresSuportLoop()) {
                     ((ILoop) funtion).update();

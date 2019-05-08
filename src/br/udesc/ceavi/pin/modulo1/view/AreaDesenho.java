@@ -19,45 +19,23 @@ import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
  *
  */
 public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
-    
+
     private final List<ISprite> listaSpriteDate;
     private final List<ISprite> listaSpriteContruction;
-    
+
     public AreaDesenho() {
         listaSpriteDate = new ArrayList<>();
         listaSpriteContruction = new ArrayList<>();
     }
-    
+
     @Override
     protected synchronized void paintComponent(Graphics g) {
-        //Tudo Branco
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        g.setColor(Color.RED);
-        
-        int sizeLimiteNetwork = (int) HelpLocator.getZOOM() + 1;
-        if (sizeLimiteNetwork > 10) {
-            sizeLimiteNetwork = 10;
-        }
-        //Pita Limite na Esquerda
-        if (HelpLocator.getGuideX() == 0) {
-            g.fillRect(0, 0, sizeLimiteNetwork, getHeight());
-        }
-        //Pita Limite na Direta
-        if (HelpLocator.getGuideX() + getWidth() / HelpLocator.getZOOM() + 1 >= HelpLocator.getNetworkWidth()) {
-            g.fillRect(getWidth() - sizeLimiteNetwork, 0, sizeLimiteNetwork, getHeight());
-        }
-        //Pita Limite em Cima
-        if (HelpLocator.getGuideY() == 0) {
-            g.fillRect(0, 0, getWidth(), sizeLimiteNetwork);
-        }
+        apagarTela(g);
+        pintarLimites(g);
+        desenharSprites(g);
+    }
 
-        //Pita Limite em Baixo
-        if (HelpLocator.getGuideY() + getHeight() / HelpLocator.getZOOM() + 1 >= HelpLocator.getNetworkHeight()) {
-            g.fillRect(0, getHeight() - sizeLimiteNetwork, getWidth(), sizeLimiteNetwork);
-        }
-
-        //Desenho das Sprite
+    private void desenharSprites(Graphics g) {
         try {
             List<ISprite> desenha = new ArrayList<>();
             desenha.addAll(listaSpriteDate);
@@ -67,11 +45,41 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
             new RuntimeException(ex.getMessage());
         }
     }
-    
+
+    private void pintarLimites(Graphics g) {
+        int sizeLimiteNetwork = (int) HelpLocator.getZOOM() + 1;
+        if (sizeLimiteNetwork > 10) {
+            sizeLimiteNetwork = 10;
+        }
+        //Pita Limite na Esquerda
+        if (HelpLocator.getGuideX() == 0) {
+            g.fillRect(0, 0, sizeLimiteNetwork, getHeight());
+        }
+        //Pita Limite na Direta
+        if (HelpLocator.getGuideX() + getWidth() / HelpLocator.getZOOM() + 1 >= HelpLocator.getTelaDesenhoWidth()) {
+            g.fillRect(getWidth() - sizeLimiteNetwork, 0, sizeLimiteNetwork, getHeight());
+        }
+        //Pita Limite em Cima
+        if (HelpLocator.getGuideY() == 0) {
+            g.fillRect(0, 0, getWidth(), sizeLimiteNetwork);
+        }
+
+        //Pita Limite em Baixo
+        if (HelpLocator.getGuideY() + getHeight() / HelpLocator.getZOOM() + 1 >= HelpLocator.getTelaDesenhoHeight()) {
+            g.fillRect(0, getHeight() - sizeLimiteNetwork, getWidth(), sizeLimiteNetwork);
+        }
+    }
+
+    private void apagarTela(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        g.setColor(Color.RED);
+    }
+
     public void clearListSpriteDateNetwork() {
         listaSpriteDate.clear();
     }
-    
+
     public void setMouseListener(EventListener mouse) {
         //Get
         MouseListener[] mouseListenrerLista = getMouseListeners();
@@ -89,12 +97,12 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
         addMouseListener((MouseListener) mouse);
         addMouseMotionListener((MouseMotionListener) mouse);
     }
-    
+
     @Override
     public void addSpriteDateNetwork(String nome, float[] position, Color cor) {
         newSprite(nome, position, cor, listaSpriteDate);
     }
-    
+
     private synchronized void newSprite(String nome, float[] position, Color cor, List<ISprite> list) {
         try {
             ISprite newSprite = (ISprite) Class.forName("br.udesc.ceavi.pin.modulo1.view.sprites." + nome).newInstance();
@@ -106,12 +114,12 @@ public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
             ex.printStackTrace();
         }
     }
-    
+
     @Override
     public void addSpriteFuntion(String nome, float[] position, Color cor) {
         newSprite(nome, position, cor, listaSpriteContruction);
     }
-    
+
     public void clearListSpriteFuntion() {
         this.listaSpriteContruction.clear();
     }

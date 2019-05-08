@@ -1,5 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
 
 /**
@@ -10,33 +11,24 @@ import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
  */
 public class ControlTelaDesenho {
 
-    final int wPretendido, hPretendido;
-    int wSizeTela, hSizeTela;
+    private final int wPretendido, hPretendido;
+    private int wSizeTela, hSizeTela;
+    final float wGuia, hGuia;
     private final int escala;
 
-    public int gethSizeTela() {
-        return hSizeTela;
-    }
-
-    public int getwSizeTela() {
-        return wSizeTela;
-    }
-
-    public int getEscala() {
-        return escala;
-    }
-
-    public ControlTelaDesenho(int w, int h) {
+    public ControlTelaDesenho(int w, int h, int wGuia, int hGuia) {
         this.wPretendido = w;
         this.hPretendido = h;
-
+        this.wGuia = wGuia;
+        this.hGuia = hGuia;
         escala = setEscala();
         wSizeTela = definerTamanhoTelaDesenho(escala, wPretendido, wGuia);
         hSizeTela = definerTamanhoTelaDesenho(escala, hPretendido, hGuia);
+        HelpLocator.setSizeTelaDesenhoWidth(wSizeTela);
+        HelpLocator.setSizeTelaDesenhoHeight(hSizeTela);
+        HelpLocator.setEscala(escala);
     }
 
-        final float wGuia = 800f;
-        final float hGuia = 600f;
     private int setEscala() {
         float tW = quantaTela(wPretendido, wGuia);
         float tH = quantaTela(hPretendido, hGuia);
@@ -63,6 +55,34 @@ public class ControlTelaDesenho {
             return (int) RegraDeTres.regraDeTres(maxST, tamanhoP, telaS);
         }
         return (int) maxST;
+    }
+
+    public int gethSizeTela() {
+        return hSizeTela;
+    }
+
+    public int getwSizeTela() {
+        return wSizeTela;
+    }
+
+    public int getEscala() {
+        return escala;
+    }
+
+    public int getwPretendido() {
+        return wPretendido;
+    }
+
+    public int gethPretendido() {
+        return hPretendido;
+    }
+
+    public float getwGuia() {
+        return wGuia;
+    }
+
+    public float gethGuia() {
+        return hGuia;
     }
 
 }

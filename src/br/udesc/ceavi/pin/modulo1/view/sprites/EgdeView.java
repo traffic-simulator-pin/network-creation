@@ -27,10 +27,8 @@ public class EgdeView extends Sprite {
     public void draw(Graphics g) {
         float x1R = ((x1 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
         float y1R = ((y1 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-
         float x2R = ((x2 - HelpLocator.getGuideX()) * HelpLocator.getZOOM());
         float y2R = ((y2 - HelpLocator.getGuideY()) * HelpLocator.getZOOM());
-
         linha = new Line2D.Float(x1R, y1R, x2R, y2R);
 
         if (inAreaRender()) {
@@ -55,10 +53,9 @@ public class EgdeView extends Sprite {
         float yEsquerdo = -yNormalizado;
         g.setColor(cor1);
         g.fillPolygon(new Polygon(
-                new int[]{(int) (x1R + yEsquerdo), (int) (x1R + yNormalizado), 
+                new int[]{(int) (x1R + yEsquerdo), (int) (x1R + yNormalizado),
                     (int) (x2R + yNormalizado), (int) (x2R + yEsquerdo)},
-                
-                new int[]{(int) (y1R + xNormalizado), (int) (y1R + xEsquerdo), 
+                new int[]{(int) (y1R + xNormalizado), (int) (y1R + xEsquerdo),
                     (int) (y2R + xEsquerdo), (int) (y2R + xNormalizado)},
                 4));
     }
@@ -70,6 +67,10 @@ public class EgdeView extends Sprite {
 
         this.x2 = position[2];
         this.y2 = -position[3];
+        x1 /= HelpLocator.getScaleInicial()[1];
+        y1 /= HelpLocator.getScaleInicial()[1];
+        x2 /= HelpLocator.getScaleInicial()[1];
+        y2 /= HelpLocator.getScaleInicial()[1];
     }
 
     @Override

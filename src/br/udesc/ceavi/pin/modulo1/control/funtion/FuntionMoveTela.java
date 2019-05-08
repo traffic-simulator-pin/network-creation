@@ -39,10 +39,10 @@ public class FuntionMoveTela extends Funtion implements IMoveTelaFuntion {
                 int newY = (int) (HelpLocator.getGuideY() + yMove * 0.2);
 
                 HelpLocator.setGuiaX(UtilNumeros.clamp(newX, 0,
-                        (int) (HelpLocator.getNetworkWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM()))
+                        (int) (HelpLocator.getTelaDesenhoWidth() - e.getComponent().getWidth() / HelpLocator.getZOOM()))
                 );
                 HelpLocator.setGuiaY(UtilNumeros.clamp(newY, 0,
-                        (int) (HelpLocator.getNetworkHeight() - e.getComponent().getHeight() / HelpLocator.getZOOM()))
+                        (int) (HelpLocator.getTelaDesenhoHeight() - e.getComponent().getHeight() / HelpLocator.getZOOM()))
                 );
             }
         };

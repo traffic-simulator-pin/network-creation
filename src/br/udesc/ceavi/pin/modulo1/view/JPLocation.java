@@ -97,8 +97,8 @@ public class JPLocation extends JPanel {
 
     //Tem como objetivo reajustar a localização da Tela conforme o zomm é aplicado
     private void setLocalizaoDaTela() {
-        HelpLocator.setGuiaX(UtilNumeros.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getNetworkWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
-        HelpLocator.setGuiaY(UtilNumeros.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getNetworkHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaX(UtilNumeros.clamp(HelpLocator.getGuideX(), 0, (int) (HelpLocator.getTelaDesenhoWidth() - areaDesenho.getWidth() / HelpLocator.getZOOM())));
+        HelpLocator.setGuiaY(UtilNumeros.clamp(HelpLocator.getGuideY(), 0, (int) (HelpLocator.getTelaDesenhoHeight() - areaDesenho.getHeight() / HelpLocator.getZOOM())));
     }
 
     private static String renderZoomInfor() {

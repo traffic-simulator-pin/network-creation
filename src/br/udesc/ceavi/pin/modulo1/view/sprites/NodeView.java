@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -16,6 +15,7 @@ public class NodeView extends Sprite {
     public NodeView() {
         super(8, 8);
     }
+//(guiaX + x / zoom) * scaleInicial[1], -(guiaY + y / zoom)* scaleInicial[1]
 
     @Override
     public void draw(Graphics g) {
@@ -34,6 +34,8 @@ public class NodeView extends Sprite {
     public void setDateLocation(float[] position) {
         x = position[0];
         y = -position[1];
+        x /= HelpLocator.getScaleInicial()[1];
+        y /= HelpLocator.getScaleInicial()[1];
     }
 
     @Override

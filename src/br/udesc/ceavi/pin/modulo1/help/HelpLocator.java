@@ -11,7 +11,7 @@ public class HelpLocator {
     private static int guiaX, guiaY;
     private static float zoom = 1;
     private static int[] scaleInicial;
-    private static int networkWidth, networkHeight;
+    private static int widthTelaDesenho, heightTelaDesenho;
 
     public static void setEscala(int escala) {
         scaleInicial = new int[]{1, escala};
@@ -21,12 +21,16 @@ public class HelpLocator {
         //Não deve se instanceado
     }
 
-    public static int getNetworkWidth() {
-        return networkWidth;
+    public static int[] getNetworkSize() {
+        return new int[]{widthTelaDesenho * scaleInicial[1], heightTelaDesenho * scaleInicial[1]};
     }
 
-    public static int getNetworkHeight() {
-        return networkHeight;
+    public static int getTelaDesenhoWidth() {
+        return widthTelaDesenho;
+    }
+
+    public static int getTelaDesenhoHeight() {
+        return heightTelaDesenho;
     }
 
     public static int getGuideX() {
@@ -66,19 +70,23 @@ public class HelpLocator {
     }
 
     public static float[] getNetworkRealLocation(float x, float y) {
-        return new float[]{guiaX + x / zoom, -(guiaY + y / zoom)};
+        return new float[]{(guiaX + x / zoom) * scaleInicial[1], -(guiaY + y / zoom) * scaleInicial[1]};
     }
 
     public static float getZOOM() {
         return zoom;
     }
 
-    public static void setNetworkHeight(int networkHeight) {
-        HelpLocator.networkHeight = networkHeight;
+    public static void setSizeTelaDesenhoHeight(int networkHeight) {
+        HelpLocator.heightTelaDesenho = networkHeight;
     }
 
-    public static void setNetworkWidth(int networkWidth) {
-        HelpLocator.networkWidth = networkWidth;
+    public static void setSizeTelaDesenhoWidth(int networkWidth) {
+        HelpLocator.widthTelaDesenho = networkWidth;
+    }
+
+    public static int[] getScaleInicial() {
+        return scaleInicial;
     }
 
 }

@@ -57,7 +57,7 @@ public class Egde {
 
     @Override
     public String toString() {
-        return "id: " + ID + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    }";
+        return "id: " + ID + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + tamanho + "\n";
     }
 
     public float x1() {

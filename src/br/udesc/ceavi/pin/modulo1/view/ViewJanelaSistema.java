@@ -19,6 +19,7 @@ public abstract class ViewJanelaSistema extends JInternalFrame {
 
     public abstract void abreJanela();
     public abstract void fechaJanela();
+    public abstract void destruirInstanciaJanela();
     
     
     public String getNome() {

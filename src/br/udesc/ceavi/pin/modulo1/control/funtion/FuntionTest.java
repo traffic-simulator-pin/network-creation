@@ -13,15 +13,14 @@ import java.util.List;
  * @since 26/04/2019
  *
  */
-public class FuntionCriarAletoriamenteEgde extends Funtion implements IFuntion {
+public class FuntionTest extends Funtion implements IFuntion {
 
     private ControlDateNetwork date = ControlDateNetwork.getInstance();
     private List<Egde> lista = new ArrayList<>();
 
-    public FuntionCriarAletoriamenteEgde() {
-        System.out.println("Test");
-        imprimirEgde();
-        getTamanhoDaEstrutura();
+    public FuntionTest() {
+        System.out.println("FuntionTest");
+        criarEgdeAletorios();
     }
 
     private void criarEgdeAletorios() {

@@ -12,7 +12,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
@@ -32,7 +31,7 @@ import javax.swing.BorderFactory;
  *
  * @author Gustavo de Carvalho Santos
  */
-public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwork {
+public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNetwork {
 
     private GridBagConstraints constraints;
     private GridBagLayout layout;
@@ -48,32 +47,37 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
     private JButton btnMove;
 
     private JPanel jpButao;
-    private final ListenersTelaComBotoes listeners;
+    private ListenersTelaComBotoes listeners;
     private JPanel jpLocation;
     private AreaDesenho areaDesenho;
 
     private IFuntion funtion;
     private ControlDateNetwork dateNetwork;
 
-    public TelaComBotoes() {
+    public TelaComBotoes(int largura, int altura) {
+        super("TelaComBotoes");
+        initAreaDesenho(largura, altura);
         initComponents();
         initMyComponents();
-        this.setVisible(true);
+        initListener();
         dateNetwork = ControlDateNetwork.getInstance();
         dateNetwork.addObservador(this);
+        abreJanela();
+        initLoop();
+    }
+
+    private void initListener() {
         List<JButton> listBtn = new ArrayList<>();
         for (int i = 0; i < jpButao.getComponents().length; i++) {
             listBtn.add((JButton) jpButao.getComponents()[i]);
         }
         listeners = new ListenersTelaComBotoes(this, listBtn);
-        initLoop();
     }
 
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(new Dimension(1017, 670));
-
+        setSize(ViewPrincipal.TAMANHO_PADRAO);
     }
 
     private void initMyComponents() {
@@ -99,25 +103,13 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
         addBTNJPanel("FuntionMoveTela", btnMove, 5, 0);
         addBTNJPanel("FuntionCreateDemanda", btnAddDemanda, 6, 0);
         addBTNJPanel("FuntionCreateType", btnSetTypeEgde, 7, 0);
-        addBTNJPanel("FuntionCriarAletoriamenteEgde", btnCriarAletoriamenteEgde, 8, 250);
+        addBTNJPanel("FuntionTest", btnCriarAletoriamenteEgde, 8, 250);
 
         Dimension d = new Dimension(25, 35);
         btnMove.setSize(d);
         btnMove.setPreferredSize(d);
         btnMove.setMinimumSize(d);
         btnMove.setMaximumSize(d);
-        areaDesenho = new AreaDesenho();
-        ControlTelaDesenho achaSize = new ControlTelaDesenho(1200, 600, 800, 600);
-        System.out.printf("Escala : %s\n", achaSize.getEscala());
-        System.out.printf("Tamanho Setado Pelo Usuario %s : %s\n", achaSize.getwPretendido(), achaSize.gethPretendido());
-        System.out.printf("Tamanho Renderizado %s : %s\n", achaSize.getwSizeTela(), achaSize.gethSizeTela());
-
-        d = new Dimension(achaSize.getwSizeTela(), achaSize.gethSizeTela());
-        areaDesenho.setSize(d);
-        areaDesenho.setPreferredSize(d);
-        areaDesenho.setMinimumSize(d);
-        areaDesenho.setMaximumSize(d);
-        jpLocation = new JPLocation(areaDesenho);
 
         Container content = this.getContentPane();
         content.setLayout(new BorderLayout());
@@ -140,6 +132,17 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
         cons.insets = new Insets(5, 5, 5, 5);
         cons.gridwidth = 2;
         content.add(jpLocation, cons);
+    }
+
+    private void initAreaDesenho(int largura, int alura) {
+        Dimension d;
+        areaDesenho = new AreaDesenho();
+        d = new Dimension(largura, alura);
+        areaDesenho.setSize(d);
+        areaDesenho.setPreferredSize(d);
+        areaDesenho.setMinimumSize(d);
+        areaDesenho.setMaximumSize(d);
+        jpLocation = new JPLocation(areaDesenho);
     }
 
     /**
@@ -268,5 +271,21 @@ public class TelaComBotoes extends JInternalFrame implements ObservadorDateNetwo
                     new float[]{egde.x2(), egde.y2()},
                     Color.RED);
         });
+    }
+
+    @Override
+    public void abreJanela() {
+        setVisible(true);
+    }
+
+    @Override
+    public void fechaJanela() {
+        setVisible(false);
+    }
+
+    @Override
+    public void destruirInstanciaJanela() {
+        ControlDesktop.getInstance().removerInstanciaJanela(this);
+        this.dispose();
     }
 }

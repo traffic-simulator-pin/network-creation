@@ -19,10 +19,6 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
         super();
     }
 
-    public ViewListenersMenuJanelaSalvar(ViewJanelaSistema janela, ViewListenersFrame listeners) {
-        super(janela, listeners);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ControlDateNetwork.getInstance().getLocalDeSalvamento() == null) {

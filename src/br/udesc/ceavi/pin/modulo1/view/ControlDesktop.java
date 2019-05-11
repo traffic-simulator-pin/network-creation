@@ -1,5 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class ControlDesktop {
         return desktop;
     }
     private ViewPrincipal viewPrincipal; // Tela do Desktop.
-    
+
     private List<ViewJanelaSistema> janelas; // Janelas do Sistema.
+
     /**
      * Cria um novo desktop.
      */
@@ -49,10 +51,12 @@ public class ControlDesktop {
      * Adiciona uma janela ao Desktop.
      *
      * @param janela - janela a ser adicionada.
+     * @return Retorna a janela adicionada
      */
-    public void adicionaJanela(ViewJanelaSistema janela) {
+    public ViewJanelaSistema adicionaJanela(ViewJanelaSistema janela) {
         viewPrincipal.getAreaDesktop().add(janela);
         this.janelas.add(janela);
+        return janela;
     }
 
     /**
@@ -74,4 +78,17 @@ public class ControlDesktop {
         return this.viewPrincipal;
     }
 
+    public Dimension getSizeTela() {
+        return ViewPrincipal.TAMANHO_PADRAO;
+    }
+
+    public boolean removerInstanciaJanela(ViewJanelaSistema destruir) {
+        for (ViewJanelaSistema janela : janelas) {
+            if (janela.getClass().equals(destruir.getClass())) {
+                janelas.remove(destruir);
+                return true;
+            }
+        }
+        return false;
+    }
 }

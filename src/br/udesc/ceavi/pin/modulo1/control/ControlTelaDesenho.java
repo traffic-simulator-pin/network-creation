@@ -2,6 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
+import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
 
 /**
  *
@@ -11,22 +12,14 @@ import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
  */
 public class ControlTelaDesenho {
 
-    private final int wPretendido, hPretendido;
-    private int wSizeTela, hSizeTela;
-    final float wGuia, hGuia;
-    private final int escala;
+    private int wPretendido, hPretendido;
+    private int wRenderTela, hRenderTela;
+    float wGuia, hGuia;
+    private int escala;
 
-    public ControlTelaDesenho(int w, int h, int wGuia, int hGuia) {
-        this.wPretendido = w;
-        this.hPretendido = h;
-        this.wGuia = wGuia;
-        this.hGuia = hGuia;
-        escala = setEscala();
-        wSizeTela = definerTamanhoTelaDesenho(escala, wPretendido, wGuia);
-        hSizeTela = definerTamanhoTelaDesenho(escala, hPretendido, hGuia);
-        HelpLocator.setSizeTelaDesenhoWidth(wSizeTela);
-        HelpLocator.setSizeTelaDesenhoHeight(hSizeTela);
-        HelpLocator.setEscala(escala);
+    public ControlTelaDesenho() {
+        this.wGuia = 800;
+        this.hGuia = 600;
     }
 
     private int setEscala() {
@@ -58,11 +51,11 @@ public class ControlTelaDesenho {
     }
 
     public int gethSizeTela() {
-        return hSizeTela;
+        return hRenderTela;
     }
 
     public int getwSizeTela() {
-        return wSizeTela;
+        return wRenderTela;
     }
 
     public int getEscala() {
@@ -83,6 +76,25 @@ public class ControlTelaDesenho {
 
     public float gethGuia() {
         return hGuia;
+    }
+
+    public void setParametroToTelaDesenho(String largura, String altura) throws Exception {
+        try {
+            this.wPretendido = Integer.parseInt(largura);
+            this.hPretendido = Integer.parseInt(altura);
+            escala = setEscala();
+            wRenderTela = definerTamanhoTelaDesenho(escala, wPretendido, wGuia);
+            hRenderTela = definerTamanhoTelaDesenho(escala, hPretendido, hGuia);
+            HelpLocator.setSizeTelaDesenhoWidth(wRenderTela);
+            HelpLocator.setSizeTelaDesenhoHeight(hRenderTela);
+            System.out.println("Escala " + escala);
+            System.out.println("Guias " + wGuia + " " + hGuia);
+            System.out.println("Tamanho pretendido: " + wPretendido + " " + hPretendido);
+            System.out.println("Tamanho Render: " + wRenderTela + " " + hRenderTela);
+            HelpLocator.setEscala(escala);
+        } catch (Exception e) {
+            throw new Exception("Insira Nos Respetivos Campos Largura e Altura Valores Validos");
+        }
     }
 
 }

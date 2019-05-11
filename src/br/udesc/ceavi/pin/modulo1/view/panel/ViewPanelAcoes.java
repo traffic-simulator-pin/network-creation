@@ -13,10 +13,11 @@ public class ViewPanelAcoes extends JPanel {
     * Adiciona uma ação ao painel.
     * @param nome - nome da ação.
     */
-   public void adicionaAcao(String nome) {
+   public JButton adicionaAcao(String nome) {
         JButton botaoAcao = new JButton(nome);
         botaoAcao.setName(nome);
         this.add(botaoAcao);
+        return botaoAcao;
    }
 
    /**

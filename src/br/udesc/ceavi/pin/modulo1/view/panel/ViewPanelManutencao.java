@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.udesc.ceavi.pin.modulo1.view.panel;
 
 import java.awt.Color;
@@ -16,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -61,7 +55,7 @@ public class ViewPanelManutencao extends JPanel {
 	 * Adiciona um campo padrão com o nome especificado na tela.
 	 * @param nome - nome do campo.
 	 */
-	public void adicionaCampo(String nome, String titulo) {
+	public JTextField adicionaCampo(String nome, String titulo) {
 		JLabel label = new JLabel(titulo);
 		label.setName(nome);
 //		label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
@@ -82,7 +76,7 @@ public class ViewPanelManutencao extends JPanel {
 		this.add(label, lConstraints);
 		this.add(campo, cConstraints);
 		campos.add(new JComponent[] {label, campo});
-		
+		return campo;
 	}
         
         	/**

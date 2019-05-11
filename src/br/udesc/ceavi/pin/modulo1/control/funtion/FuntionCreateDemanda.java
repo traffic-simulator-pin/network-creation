@@ -44,7 +44,6 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
     }
 
     private void setNodeDemanda(Node nodeSelecionado) throws Exception {
-        
     }
 
     private void clearNode() {

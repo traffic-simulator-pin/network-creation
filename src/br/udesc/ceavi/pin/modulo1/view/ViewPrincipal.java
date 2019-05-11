@@ -4,7 +4,6 @@ import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameJanelaNovo;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaAbrir;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaNovo;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaSalvar;
-import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenerJanelaNovo;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -21,7 +20,6 @@ public class ViewPrincipal extends JFrame {
     private ControlDesktop desktop; //  referencia ao desktop
     private JDesktopPane areaDesktop;// area de  trabalho
     private ViewBarraMenus viewMenuPrincipal;
-    private TelaComBotoes telaComBotoes;
 
     public ViewPrincipal(ControlDesktop desktop) {
         this.desktop = desktop;
@@ -31,9 +29,7 @@ public class ViewPrincipal extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.areaDesktop = new JDesktopPane();
         this.viewMenuPrincipal = new ViewBarraMenus();
-        this.telaComBotoes = new TelaComBotoes();
         this.criaAreaDesktop();
-        this.addAreaDesenho();
         this.setLocationRelativeTo(null);
     }
 
@@ -43,32 +39,24 @@ public class ViewPrincipal extends JFrame {
     public void criaMenus() {
         viewMenuPrincipal.adicionaMenu("Arquivo", new String[]{"Abrir", "Novo", "Salvar"});
 
-        this.criaJanelas();
+        this.initListener();
         this.setJMenuBar(viewMenuPrincipal);
     }
 
     /**
      * Cria as diferentes janelas do sistema.
      */
-    private void criaJanelas() {
-        ViewFrameJanelaNovo janelaNovo = new ViewFrameJanelaNovo();
-        desktop.adicionaJanela(janelaNovo);
-
-        viewMenuPrincipal.adicionaListener("Arquivo", "Abrir", new ViewListenersMenuJanelaAbrir());
-        viewMenuPrincipal.adicionaListener("Arquivo", "Novo", new ViewListenersMenuJanelaNovo(janelaNovo, new ViewListenerJanelaNovo()));
-        viewMenuPrincipal.adicionaListener("Arquivo", "Salvar", new ViewListenersMenuJanelaSalvar());
-    }
-
-    private void addAreaDesenho() {
-        this.getAreaDesktop().add(telaComBotoes);
+    private void initListener() {
+        viewMenuPrincipal.adicionaListener("Arquivo", "Abrir", 
+                new ViewListenersMenuJanelaAbrir());
+        viewMenuPrincipal.adicionaListener("Arquivo", "Novo", 
+                new ViewListenersMenuJanelaNovo());
+        viewMenuPrincipal.adicionaListener("Arquivo", "Salvar",
+                new ViewListenersMenuJanelaSalvar());
     }
 
     public JDesktopPane getAreaDesktop() {
         return this.areaDesktop;
-    }
-
-    public TelaComBotoes getAreaDesenho() {
-        return telaComBotoes;
     }
 
     /**

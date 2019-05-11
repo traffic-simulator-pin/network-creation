@@ -3,10 +3,13 @@ package br.udesc.ceavi.pin.modulo1.control;
 import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
 import br.udesc.ceavi.pin.modulo1.control.exception.EgdeAlreadyHasAssociationWithTypeException;
 import br.udesc.ceavi.pin.modulo1.control.exception.RemovingNodeWithDemandAssociationException;
+import br.udesc.ceavi.pin.modulo1.control.funtion.Funtion;
+import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSalvar;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.model.Type;
+import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaSalvar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,5 +194,23 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
 
     public File getLocalDeSalvamento() {
         return localDeSalvamento;
+    }
+
+    public void salvar() {
+        if (localDeSalvamento == null) {
+            new ViewListenersMenuJanelaSalvar().actionPerformed(null);
+        } else {
+            new FuntionSalvar();
+        }
+    }
+
+    public void reiniciar() {
+        listDemanda.clear();
+        listEgde.clear();
+        System.out.println("Reniciou");
+    }
+
+    public boolean haveElements() {
+        return !listDemanda.isEmpty() || !listEgde.isEmpty();
     }
 }

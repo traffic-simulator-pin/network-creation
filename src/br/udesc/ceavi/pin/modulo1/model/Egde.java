@@ -24,7 +24,7 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        this.tamanho = 0;
+        this.tamanho = HelpLine.getSizeLine(x1(), x2(), y1(),y2());
         initLinha();
         initAssociacao();
     }

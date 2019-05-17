@@ -202,7 +202,12 @@ public class ListenersTelaComBotoes {
         public void actionPerformed(ActionEvent e) {
             IFuntion funtion = new FuntionCreateType();
             ViewFrameEdge viewTabela = new ViewFrameEdge((FuntionCreateType) funtion);
+            ControlDesktop instance = ControlDesktop.getInstance();
             ViewFrameType viewType = new ViewFrameType((FuntionCreateType) funtion);
+            instance.adicionaJanela(viewTabela);
+            instance.adicionaJanela(viewType);
+            viewTabela.abreJanela();
+            viewType.abreJanela();
             setFuntionToView(funtion, btn);
         }
 

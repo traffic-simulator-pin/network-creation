@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLine;
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import static br.udesc.ceavi.pin.modulo1.model.Node.SIZE;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -24,7 +25,7 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        this.tamanho = HelpLine.getSizeLine(x1(), x2(), y1(),y2());
+        this.tamanho = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
         initLinha();
         initAssociacao();
     }
@@ -45,13 +46,14 @@ public class Egde {
     }
 
     private void initLinha() {
-        this.linha = new Line2D.Double(x1() - SIZE / 2, y1() - SIZE / 2, x2() - SIZE / 2, y2() - SIZE / 2);
+        this.linha = new Line2D.Double(x1(), y1(), x2(), y2());
         this.conficienteAngula = HelpLine.getConficienteAngula(linha);
         this.conficienteLiner = HelpLine.getConficienteLiner(conficienteAngula, linha);
     }
 
     public boolean havePointInLine(Point p) {
-        Rectangle emBusca = new Rectangle(p.x - Node.SIZE / 2, p.y - Node.SIZE / 2, Node.SIZE, Node.SIZE);
+        int size = (int) ((SIZE / HelpLocator.getZOOM()));
+        Rectangle emBusca = new Rectangle(p.x - size / 2, p.y - size / 2, size, size);
         return linha.intersects(emBusca);
     }
 

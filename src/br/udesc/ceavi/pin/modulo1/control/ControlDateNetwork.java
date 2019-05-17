@@ -3,7 +3,6 @@ package br.udesc.ceavi.pin.modulo1.control;
 import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
 import br.udesc.ceavi.pin.modulo1.control.exception.EgdeAlreadyHasAssociationWithTypeException;
 import br.udesc.ceavi.pin.modulo1.control.exception.RemovingNodeWithDemandAssociationException;
-import br.udesc.ceavi.pin.modulo1.control.funtion.Funtion;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSalvar;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
@@ -78,11 +77,12 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         for (Demanda newDemanda : lista) {
             addDemanda(newDemanda);
         }
-        System.err.println("ControlDateNetwork" + "nova demanda");
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
         listDemandasARemove.removeAll(listDemandasARemove);
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void tryRemoveEgde(List<Egde> listEgdeRemove) throws RemovingNodeWithDemandAssociationException {
@@ -99,12 +99,14 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
             throw new RemovingNodeWithDemandAssociationException(listException);
         } else {
             this.listEgde.removeAll(listEgdeRemove);
+            notificarAlteracaoNaEstruturaDeDados();
         }
     }
 
     public synchronized void forceRemoveEgde(List<Egde> lista, RemovingNodeWithDemandAssociationException ex) {
         removeDemanda(ex.getListDemanda());
         this.listEgde.removeAll(lista);
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void offerType(List<Egde> rua, int numLanes, boolean oneway,
@@ -115,6 +117,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
             }
         }
         atribuirType(rua, numLanes, oneway, speed, width, nome);
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     private synchronized void atribuirType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
@@ -127,6 +130,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
 
     public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
         atribuirType(rua, numLanes, oneway, speed, width, nome);
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     private synchronized Demanda nodeHaveLinkWithDemand(Node de, Node para) {

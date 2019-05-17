@@ -8,7 +8,6 @@ import br.udesc.ceavi.pin.modulo1.model.Egde;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +23,7 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
     private List<ObservadorTelaDesenho> listaDeObservador;
 
     public FuntionRemoverEgde() {
+        seletionEgde = new FuntionSelecionarEgde();
         System.out.println("FuntionRemoverEgde");
         this.listaDeObservador = new ArrayList<>();
         initMouse();
@@ -31,7 +31,7 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
 
     @Override
     public void render() {
-        if (egdeMousePassouPorCimaRemove != null) {
+        if (egdeMousePassouPorCimaRemove != null) {  //aqui pinta as bordas de vermelho
             listaDeObservador.forEach(obs
                     -> obs.addSpriteFuntion("EgdeView",
                             new float[]{egdeMousePassouPorCimaRemove.x1(), egdeMousePassouPorCimaRemove.y1(),
@@ -65,12 +65,19 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                Egde egde = seletionEgde.selecionar(e.getX(), e.getY());
+                Egde egde;
+                if (egdeMousePassouPorCimaRemove != null) {
+                    egde = egdeMousePassouPorCimaRemove;
+                    egdeMousePassouPorCimaRemove = null;
+                } else {
+                    egde = seletionEgde.selecionar(e.getX(), e.getY());
+                }
                 if (egde != null) {
                     try {
-                        ControlDateNetwork.getInstance().tryRemoveEgde(Arrays.asList(egde));
+                        seletionEgde.addSelecionado(egde);
+                        ControlDateNetwork.getInstance().tryRemoveEgde(seletionEgde.getSeletion());
+                        seletionEgde.getSeletion().clear();
                     } catch (RemovingNodeWithDemandAssociationException ex) {
-                        //Tratamento Visual Aqui
                         ex.printStackTrace();
                     }
                 }

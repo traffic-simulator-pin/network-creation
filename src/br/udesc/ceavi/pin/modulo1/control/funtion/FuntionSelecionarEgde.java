@@ -2,10 +2,14 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
+import br.udesc.ceavi.pin.modulo1.control.Observado;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,11 +18,45 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
+public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Observado<ObservadorTelaDesenho>, ILoop {
+
+    private List<ObservadorTelaDesenho> listaObs;
 
     public FuntionSelecionarEgde() {
+        listaObs = new ArrayList<>();
         System.out.println("FuntionSelecionarEgde");
         initMouse();
+    }
+
+    @Override
+    public void addObservador(ObservadorTelaDesenho oObs) {
+        this.listaObs.add(oObs);
+    }
+
+    public void removeObservador(ObservadorTelaDesenho oObs) {
+        this.listaObs.remove(oObs);
+    }
+
+    @Override
+    public void processInput() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void render() {
+        if (!getListaSelecionado().isEmpty()) {
+            listaObs.forEach(oObs -> {
+                for (Egde oEgde : getListaSelecionado()) {
+                    // System.out.println("chamou aqui e pintou");
+                    oObs.addSpriteFuntion("EgdeView", new float[]{oEgde.x1(), oEgde.y1(), oEgde.x2(), oEgde.y2()}, Color.blue);
+                }
+            });
+        }
     }
 
     @Override
@@ -31,7 +69,7 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> {
             if (egde.havePointInLine(
                     //Area criada apartir do ponto de clique
                     new Point((int) realLocation[0], (int) realLocation[1]))) {
-                
+
                 //Logica de adicionar quando não tem e remover quando tem
                 if (super.getListaSelecionado().contains(egde)) {
                     removeSelecionado(egde);

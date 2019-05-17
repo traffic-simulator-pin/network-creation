@@ -13,6 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,16 +203,18 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
 
     public void salvar() {
         if (localDeSalvamento == null) {
-            new ViewListenersMenuJanelaSalvar().actionPerformed(null);
+            int a = JOptionPane.showConfirmDialog(null, "Deseja Salvar?", "Salvar", JOptionPane.YES_NO_OPTION);
+            if (a == JOptionPane.YES_OPTION) {
+                new ViewListenersMenuJanelaSalvar().actionPerformed(null);
+            }
         } else {
             new FuntionSalvar();
         }
     }
 
-    public void reiniciar() {
-        listDemanda.clear();
-        listEgde.clear();
-        System.out.println("Reniciou");
+    public synchronized void reiniciar() {
+        System.out.println("oi");
+        instance = new ControlDateNetwork();
     }
 
     public boolean haveElements() {

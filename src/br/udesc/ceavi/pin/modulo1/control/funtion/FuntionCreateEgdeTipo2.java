@@ -6,6 +6,7 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
+import static br.udesc.ceavi.pin.modulo1.model.Node.SIZE;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
@@ -25,7 +26,6 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     private Node de;
     private Node para;
     private Rectangle2D ultimaArea;
-    private int precisionOfTool = 50;
 
     public FuntionCreateEgdeTipo2() {
         this.listaObservado = new ArrayList<>();
@@ -49,7 +49,8 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         if (de != null && de.collideWithMyArea(realLocation[0], realLocation[1])) {
             return;
         }
-        if (ultimaArea != null && ultimaArea.intersects(realLocation[0], realLocation[1], precisionOfTool, precisionOfTool)) {
+        float precisao = 50 ;
+        if (ultimaArea != null && ultimaArea.intersects(realLocation[0], realLocation[1], precisao, precisao)) {
             return;
         }
         newNodeInstance(realLocation);
@@ -158,11 +159,6 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         de = null;
         para = null;
         ultimaArea = null;
-    }
-
-    public void setPresision(int presision) {
-        this.precisionOfTool = presision;
-        clearNode();
     }
 
 }

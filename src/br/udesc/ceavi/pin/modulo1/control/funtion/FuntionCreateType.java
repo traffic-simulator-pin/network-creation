@@ -31,4 +31,8 @@ public class FuntionCreateType extends FuntionCreate<Type> {
         ControlDateNetwork.getInstance().forceSetType(rua, numLanes, oneway, speed, width, nome);
     }
 
+    public List<Egde> getSeletion() {
+        return seletion.getListaSelecionado();
+    }
+
 }

@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
-import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
@@ -14,7 +13,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -68,8 +66,8 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
 
     private void initListener() {
         List<JButton> listBtn = new ArrayList<>();
-        for (int i = 0; i < jpButao.getComponents().length; i++) {
-            listBtn.add((JButton) jpButao.getComponents()[i]);
+        for (Component component : jpButao.getComponents()) {
+            listBtn.add((JButton) component);
         }
         listeners = new ListenersTelaComBotoes(this, listBtn);
     }
@@ -104,12 +102,6 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
         addBTNJPanel("FuntionCreateDemanda", btnAddDemanda, 6, 0);
         addBTNJPanel("FuntionCreateType", btnSetTypeEgde, 7, 0);
         addBTNJPanel("FuntionTest", btnCriarAletoriamenteEgde, 8, 250);
-
-        Dimension d = new Dimension(25, 35);
-        btnMove.setSize(d);
-        btnMove.setPreferredSize(d);
-        btnMove.setMinimumSize(d);
-        btnMove.setMaximumSize(d);
 
         Container content = this.getContentPane();
         content.setLayout(new BorderLayout());

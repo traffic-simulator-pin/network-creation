@@ -72,18 +72,18 @@ public class ViewListenersDadosEdge extends ViewListenersFrame {
             }
             
             ControlDesktop d = ControlDesktop.getInstance();
-            ViewFrameType viewType = new ViewFrameType(modelo.getType());//instancia a view do frame
-
-            if(d.getJanela(viewType.getNome()) != null) {//verifica se já havia sido criada antes
-                viewType = (ViewFrameType)d.getJanela(viewType.getNome());
-            } else {
-                d.adicionaJanela(viewType);
-            }
-
-            viewType.abreJanela();//torna a janela visivel
-            viewType.preencheCampos();//preenche os campos caso haja algo no modelo
-
-//            new ViewListenerFrameType(viewType, modelo.getType());//poe listeners na tela
+//            ViewFrameType viewType = new ViewFrameType(modelo.getType());//instancia a view do frame
+//
+//            if(d.getJanela(viewType.getNome()) != null) {//verifica se já havia sido criada antes
+//                viewType = (ViewFrameType)d.getJanela(viewType.getNome());
+//            } else {
+//                d.adicionaJanela(viewType);
+//            }
+//
+//            viewType.abreJanela();//torna a janela visivel
+//            viewType.preencheCampos();//preenche os campos caso haja algo no modelo
+//
+////            new ViewListenerFrameType(viewType, modelo.getType());//poe listeners na tela
  
             view.fechaJanela();
 

@@ -129,4 +129,8 @@ public class Egde {
         return nome;
     }
 
+    public String getId() {
+        return ID;
+    }
+
 }

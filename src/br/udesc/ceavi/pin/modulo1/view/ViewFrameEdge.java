@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
-import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1PadraoConsulta;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;

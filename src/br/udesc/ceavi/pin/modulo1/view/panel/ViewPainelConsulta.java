@@ -1,15 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.view.panel;
 
-import br.udesc.ceavi.pin.modulo1.model.Egde;
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDadosEdge;
-import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersDadosEdge;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +23,6 @@ public class ViewPainelConsulta extends JScrollPane {
     private DefaultTableModel modelo;
     private List<String> campos;
     private List<Integer> tamanho;
-    private List<Egde> edge;
 
     /**
      * Cria um novo paínel de consulta
@@ -129,20 +121,6 @@ public class ViewPainelConsulta extends JScrollPane {
 
     public JTable getTabela() {
         return tabela;
-    }
-
-    public void setListaEdge(List<Egde> lista) {
-        edge = lista;
-    }
-
-    private Egde getEdge(String id) {
-//            for (Egde edg : edge) {
-////                if(edg.getID().equals(id)) {
-////                    return edg;
-////                }
-//            }
-
-        return null;
     }
 
 }

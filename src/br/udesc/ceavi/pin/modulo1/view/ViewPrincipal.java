@@ -17,11 +17,11 @@ public class ViewPrincipal extends JFrame {
     public static final String TITULOLO_TELA_PRINCIPAL = "PIN2";//nome da tela
     public static final Dimension TAMANHO_PADRAO = new Dimension(1024, 720);//tamanho tela
 
-    private ControlDesktop desktop; //  referencia ao desktop
+    private ControllerDesktop desktop; //  referencia ao desktop
     private JDesktopPane areaDesktop;// area de  trabalho
     private ViewBarraMenus viewMenuPrincipal;
 
-    public ViewPrincipal(ControlDesktop desktop) {
+    public ViewPrincipal(ControllerDesktop desktop) {
         this.desktop = desktop;
         this.setTitle(TITULOLO_TELA_PRINCIPAL);
         this.setSize(TAMANHO_PADRAO);

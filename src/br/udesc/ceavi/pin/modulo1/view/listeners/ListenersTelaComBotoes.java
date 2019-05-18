@@ -1,7 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.*;
-import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDemanda;
@@ -23,30 +23,11 @@ public class ListenersTelaComBotoes {
 
     public ListenersTelaComBotoes(TelaComBotoes view, List<JButton> listaButao) {
         this.view = view;
-        associateEventToButton(listaButao);
         initListener(listaButao);
     }
 
-    private void associateEventToButton(List<JButton> asList) {
-        asList.forEach((jButton)
-                -> jButton.addActionListener((e) -> {
-                    try {
-                        view.setAllJButtonAtivo();
-                        IFuntion funtion
-                                = (IFuntion) Class.forName("br.udesc.ceavi.pin.modulo1.control.funtion."
-                                        + jButton.getName()).newInstance();
-                        view.setMouseListener(funtion.getMouseManeger());
-                        view.setFuntion(funtion);
-                        funtion.addObservador(view.getObservadorTelaDesenho());
-                        jButton.setEnabled(false);
-                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-                        ex.printStackTrace();
-                    }
-                }));
-    }
-
     private void initListener(List<JButton> listaButao) {
-        JButton btn = null;
+        JButton btn;
 
         btn = listaButao.get(0);
         btn.addActionListener(new CreateEgde1Listener(btn));
@@ -87,7 +68,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion createEgde = new FuntionCreateEgdeTipo1();
-            setFuntionToView(createEgde, btn);
+            setFuntionToView(createEgde);
+            btn.setEnabled(false);
         }
 
     }
@@ -103,7 +85,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion createEgde2 = new FuntionCreateEgdeTipo2();
-            setFuntionToView(createEgde2, btn);
+            setFuntionToView(createEgde2);
+            btn.setEnabled(false);
         }
     }
 
@@ -118,7 +101,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion funtoin = new FuntionSelecionarEgde();
-            setFuntionToView(funtoin, btn);
+            setFuntionToView(funtoin);
+            btn.setEnabled(false);
         }
 
     }
@@ -134,7 +118,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion seletionNode = new FuntionSelecionarNode();
-            setFuntionToView(seletionNode, btn);
+            setFuntionToView(seletionNode);
+            btn.setEnabled(false);
         }
 
     }
@@ -150,7 +135,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion deleteEgde = new FuntionRemoverEgde();
-            setFuntionToView(deleteEgde, btn);
+            setFuntionToView(deleteEgde);
+            btn.setEnabled(false);
         }
 
     }
@@ -166,7 +152,8 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion funtion = new FuntionMoveTela();
-            setFuntionToView(funtion, btn);
+            setFuntionToView(funtion);
+            btn.setEnabled(false);
         }
 
     }
@@ -182,10 +169,10 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             ViewFrameDemanda telaDemanda = new ViewFrameDemanda();
-            ControlDesktop desktop = ControlDesktop.getInstance();
-            desktop.adicionaJanela(telaDemanda);
-            telaDemanda.abreJanela();
-            setFuntionToView(telaDemanda.getFuntion(), btn);
+            setFuntionToView(telaDemanda.getFuntion().getSeletion());
+            
+            ControllerDesktop desktop = desktop();
+            desktop.adicionaJanela(telaDemanda).abrirJanela();
         }
 
     }
@@ -201,16 +188,21 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion funtion = new FuntionCreateType();
-            ViewFrameEdge viewTabela = new ViewFrameEdge((FuntionCreateType) funtion);
-            ControlDesktop instance = ControlDesktop.getInstance();
-            ViewFrameType viewType = new ViewFrameType((FuntionCreateType) funtion);
-            instance.adicionaJanela(viewTabela);
-            instance.adicionaJanela(viewType);
-            viewTabela.abreJanela();
-            viewType.abreJanela();
-            setFuntionToView(funtion, btn);
+            setFuntionToView(((FuntionCreateType) funtion).getFuntion());
+
+            ControllerDesktop desktop = desktop();
+            ViewFrameEdge viewFrameEdge = new ViewFrameEdge((FuntionCreateType) funtion);
+            desktop.adicionaJanela(viewFrameEdge).abrirJanela();
+            desktop.adicionaJanela(
+                    new ViewFrameType((FuntionCreateType) funtion, viewFrameEdge)
+            ).abrirJanela();
+
         }
 
+    }
+
+    private static ControllerDesktop desktop() {
+        return ControllerDesktop.getInstance();
     }
 
     private class TesteListener implements ActionListener {
@@ -224,17 +216,17 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion teste = new FuntionTest();
-            setFuntionToView(teste, btn);
+            setFuntionToView(teste);
         }
 
     }
 
-    private void setFuntionToView(IFuntion funtin, JButton btn) {
+    private void setFuntionToView(IFuntion funtin) {
+        desktop().setVisibleFalseAll();
         view.setAllJButtonAtivo();
         view.setMouseListener(funtin.getMouseManeger());
         view.setFuntion(funtin);
         funtin.addObservador(view.getObservadorTelaDesenho());
-        btn.setEnabled(false);
     }
 
 }

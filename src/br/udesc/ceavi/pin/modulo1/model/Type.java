@@ -19,9 +19,8 @@ public class Type {
     private int numLanes;
     private boolean oneway;
     private float speed;
-    private float width;
 
-    public Type(List<Egde> listDeEgdeQuePertenco, int numLanes, boolean oneway, float speed, float width) {
+    public Type(List<Egde> listDeEgdeQuePertenco, int numLanes, boolean oneway, float speed) {
         this.ID = "" + idNaoUsuado;
         idNaoUsuado++;
         this.listDeEgdeQuePertenco = new ArrayList<>();
@@ -29,7 +28,6 @@ public class Type {
         this.numLanes = numLanes;
         this.oneway = oneway;
         this.speed = speed;
-        this.width = width;
     }
 
     public int getNumLanes() {
@@ -63,7 +61,6 @@ public class Type {
         hash = 83 * hash + this.numLanes;
         hash = 83 * hash + (this.oneway ? 1 : 0);
         hash = 83 * hash + Float.floatToIntBits(this.speed);
-        hash = 83 * hash + Float.floatToIntBits(this.width);
         return hash;
     }
 
@@ -86,9 +83,6 @@ public class Type {
             return false;
         }
         if (Float.floatToIntBits(this.speed) != Float.floatToIntBits(other.speed)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.width) != Float.floatToIntBits(other.width)) {
             return false;
         }
         return Objects.equals(this.ID, other.ID);

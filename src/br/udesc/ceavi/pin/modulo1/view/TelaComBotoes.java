@@ -53,14 +53,13 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
     private ControlDateNetwork dateNetwork;
 
     public TelaComBotoes(int largura, int altura) {
-        super("TelaComBotoes");
         initAreaDesenho(largura, altura);
         initComponents();
         initMyComponents();
         initListener();
         dateNetwork = ControlDateNetwork.getInstance();
         dateNetwork.addObservador(this);
-        abreJanela();
+        abrirJanela();
         initLoop();
     }
 
@@ -266,8 +265,10 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
     }
 
     @Override
-    public void abreJanela() {
+    public void abrirJanela() {
         setVisible(true);
+        this.toBack();
+        this.moveToBack();
     }
 
     @Override
@@ -277,7 +278,7 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
 
     @Override
     public void destruirInstanciaJanela() {
-        ControlDesktop.getInstance().removerInstanciaJanela(this);
+        ControllerDesktop.getInstance().removerInstanciaJanela(this);
         this.dispose();
     }
 }

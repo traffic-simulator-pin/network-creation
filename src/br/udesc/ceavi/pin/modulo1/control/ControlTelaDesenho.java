@@ -2,7 +2,7 @@ package br.udesc.ceavi.pin.modulo1.control;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.RegraDeTres;
-import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 
 /**
  *

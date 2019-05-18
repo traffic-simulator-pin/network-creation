@@ -3,8 +3,6 @@ package br.udesc.ceavi.pin.modulo1.view.listeners;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +28,7 @@ public class ViewListenersMenus implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             janela = janela.getClass().newInstance();
-            janela.abreJanela();
+            janela.abrirJanela();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

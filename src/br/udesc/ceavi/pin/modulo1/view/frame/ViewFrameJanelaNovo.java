@@ -2,7 +2,7 @@ package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
-import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.Container;
@@ -34,7 +34,7 @@ public class ViewFrameJanelaNovo extends JFrame {
         this.control = new ControlTelaDesenho();
         this.setTitle("Nova Network");
         this.setResizable(false);
-        Point posicaoDaView = ControlDesktop.getInstance().getViewPrincipal().getLocation();
+        Point posicaoDaView = desktop().getViewPrincipal().getLocation();
         this.setLocation(posicaoDaView);
         initComponets();
         setPosicionsComponets();
@@ -100,22 +100,24 @@ public class ViewFrameJanelaNovo extends JFrame {
         btnNovo.addActionListener((e) -> {
             try {
                 control.setParametroToTelaDesenho(tfLargura.getText(), tfAltura.getText());
-                ViewJanelaSistema janela = ControlDesktop.getInstance().getJanela(TelaComBotoes.class.getSimpleName());
-                if (janela != null) {
-                    janela.fechaJanela();
-                    janela.destruirInstanciaJanela();
+                if (desktop().hasViewPrincipa()) {
                     if (ControlDateNetwork.getInstance().haveElements()) {
                         ControlDateNetwork.getInstance().salvar();
                         ControlDateNetwork.getInstance().reiniciar();
                     }
                 }
-                ControlDesktop.getInstance().adicionaJanela(
-                        new TelaComBotoes(control.getwSizeTela(), control.gethSizeTela()));
-                this.dispose();
+                TelaComBotoes telaComBotoes = new TelaComBotoes(control.getwSizeTela(), control.gethSizeTela());
+                desktop().addViewPrincipa(telaComBotoes);
+                telaComBotoes.abrirJanela();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
+            this.dispose();
         });
         btnFechar.addActionListener((e) -> this.dispose());
+    }
+
+    private static ControllerDesktop desktop() {
+        return ControllerDesktop.getInstance();
     }
 }

@@ -3,7 +3,6 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
-import br.udesc.ceavi.pin.modulo1.control.exception.OsDoisNodeSuportadosNaDemandaJaSelecionadosException;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import java.awt.event.MouseEvent;
@@ -69,4 +68,9 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
 
         };
     }
+
+    public FuntionSelecionarNode getSeletion() {
+        return seletion;
+    }
+    
 }

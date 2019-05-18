@@ -10,7 +10,6 @@ import javax.swing.JFileChooser;
 public class ViewFrameJanelaSalvar extends ViewFrameModulo1Padrao {
     
     public ViewFrameJanelaSalvar() {
-        super("Salvar");
     }
     
      @Override

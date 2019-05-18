@@ -111,26 +111,26 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     }
 
     public synchronized void offerType(List<Egde> rua, int numLanes, boolean oneway,
-            float speed, float width, String nome) throws EgdeAlreadyHasAssociationWithTypeException {
+            float speed,  String nome) throws EgdeAlreadyHasAssociationWithTypeException {
         for (Egde egde : rua) {
             if (egde.getType() != null) {
                 throw new EgdeAlreadyHasAssociationWithTypeException();
             }
         }
-        atribuirType(rua, numLanes, oneway, speed, width, nome);
+        atribuirType(rua, numLanes, oneway, speed, nome);
         notificarAlteracaoNaEstruturaDeDados();
     }
 
-    private synchronized void atribuirType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
-        Type type = new Type(rua, numLanes, oneway, speed, width);
+    private synchronized void atribuirType(List<Egde> rua, int numLanes, boolean oneway, float speed, String nome) {
+        Type type = new Type(rua, numLanes, oneway, speed);
         rua.forEach((egde) -> {
             egde.setType(type, nome);
         });
         notificarAlteracaoNaEstruturaDeDados();
     }
 
-    public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, float width, String nome) {
-        atribuirType(rua, numLanes, oneway, speed, width, nome);
+    public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, String nome) {
+        atribuirType(rua, numLanes, oneway, speed, nome);
         notificarAlteracaoNaEstruturaDeDados();
     }
 
@@ -213,7 +213,6 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     }
 
     public synchronized void reiniciar() {
-        System.out.println("oi");
         instance = new ControlDateNetwork();
     }
 

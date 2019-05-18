@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
@@ -24,12 +24,11 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
     private GridBagLayout layout;
 
     private ViewPanelManutencao areaManutencao;
-    private boolean aberta;
 
-    public ViewFrameModulo1Padrao(String nome) {
-        super(nome);
+    public ViewFrameModulo1Padrao() {
         initComponents();
-        abreJanela();
+        this.toFront();
+        this.moveToFront();
     }
 
     private void initComponents() {
@@ -46,14 +45,6 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
         constraints.weightx = 1;
         this.setLayout(layout);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-    @Override
-    public void abreJanela() {
-        if (aberta) {
-            this.fechaJanela();
-        }
-        aberta = true;
         criaAreaManutencao();
         criaAreaAcoes();
         GridBagConstraints constraintsFill = (GridBagConstraints) constraints.clone();
@@ -61,6 +52,10 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
         constraintsFill.weighty = 1;
         this.add(areaManutencao, constraintsFill);
         this.add(acoesPanel, constraints);
+    }
+
+    @Override
+    public void abrirJanela() {
         this.setVisible(true);
     }
 
@@ -80,13 +75,12 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
 
     @Override
     public void fechaJanela() {
-        aberta = false;
         this.setVisible(false);
     }
 
     @Override
     public void destruirInstanciaJanela() {
-        ControlDesktop.getInstance().removerInstanciaJanela(this);
+        ControllerDesktop.getInstance().removerInstanciaJanela(this);
     }
 
 }

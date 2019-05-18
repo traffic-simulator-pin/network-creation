@@ -1,8 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
-import br.udesc.ceavi.pin.modulo1.model.Egde;
-import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
@@ -11,7 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
 /**
@@ -19,10 +16,10 @@ import javax.swing.JScrollPane;
  * @author Drew
  */
 public class ViewFrameDemandaTelaLateral extends ViewFrameModulo1PadraoConsulta {
-      private List<Demanda> nodos;
-    
+
+    private List<Demanda> nodos;
+
     public ViewFrameDemandaTelaLateral() {
-        super("Lista Demandas");
         this.setSize(new Dimension(226, 200));
         this.setLocation(775, 250);
         this.moveToFront();
@@ -30,16 +27,22 @@ public class ViewFrameDemandaTelaLateral extends ViewFrameModulo1PadraoConsulta 
 
     @Override
     protected JScrollPane criaAreaManutencao() {
-       
+
         ViewPainelConsulta painel = (ViewPainelConsulta) super.criaAreaManutencao();
         painel.setBorder(BorderFactory.createTitledBorder("Demanda"));
-        painel.adicionaCampo("ID"  , "ID", 50);
+        painel.adicionaCampo("ID", "ID", 50);
         painel.adicionaCampo("demanda", "Nome", 50);
-      
+
         return painel;
     }
 
-    
+    @Override
+    public void abrirJanela() {
+        super.abrirJanela();
+        toFront();
+        moveToFront();
+    }
+
     @Override
     protected void criaAreaAcoes() {
         this.acoesPanel = new ViewPanelAcoes();
@@ -47,16 +50,16 @@ public class ViewFrameDemandaTelaLateral extends ViewFrameModulo1PadraoConsulta 
 
     public void atualizaListaDemanda(List<Demanda> lista) {
         ViewPainelConsulta v = getPainelConsulta();
-        
-        if(lista == null) {
+
+        if (lista == null) {
             v.limpaValores();
             return;
         }
-        
+
         this.nodos = lista;
-        
+
         v.limpaValores();
-        for(Demanda edg : lista) {
+        for (Demanda edg : lista) {
             try {
                 v.setValores(edg);
             } catch (Exception ex) {
@@ -65,7 +68,7 @@ public class ViewFrameDemandaTelaLateral extends ViewFrameModulo1PadraoConsulta 
         }
 
     }
-    
+
     public List<Demanda> getDemandas() {
         return nodos;
     }

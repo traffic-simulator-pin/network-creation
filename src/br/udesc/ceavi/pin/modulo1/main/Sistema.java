@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.main;
 
-import br.udesc.ceavi.pin.modulo1.view.ControlDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Sistema implements Runnable {
 
     @Override
     public void run() {
-        ControlDesktop desktop = ControlDesktop.getInstance();
+        ControllerDesktop desktop = ControllerDesktop.getInstance();
         desktop.inicia();
     }
 

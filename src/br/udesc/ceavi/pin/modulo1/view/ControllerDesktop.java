@@ -9,30 +9,31 @@ import java.util.List;
  *
  * @author Drew
  */
-public class ControlDesktop {
+public class ControllerDesktop {
 
     //CAMPOS
-    private static ControlDesktop desktop; // Referência a instância.
+    private static ControllerDesktop desktop; // Referência a instância.
 
     /**
      * Busca a instância do Singleton.
      *
      * @return - A instância de Desktop existente.
      */
-    public static ControlDesktop getInstance() {
+    public static ControllerDesktop getInstance() {
         if (desktop == null) {
-            desktop = new ControlDesktop();
+            desktop = new ControllerDesktop();
         }
         return desktop;
     }
     private ViewPrincipal viewPrincipal; // Tela do Desktop.
 
     private List<ViewJanelaSistema> janelas; // Janelas do Sistema.
+    private TelaComBotoes areaDesenho;
 
     /**
      * Cria um novo desktop.
      */
-    private ControlDesktop() {
+    private ControllerDesktop() {
         viewPrincipal = new ViewPrincipal(this);
         janelas = new ArrayList<ViewJanelaSistema>();
     }
@@ -54,20 +55,36 @@ public class ControlDesktop {
      * @return Retorna a janela adicionada
      */
     public ViewJanelaSistema adicionaJanela(ViewJanelaSistema janela) {
-        viewPrincipal.getAreaDesktop().add(janela);
-        this.janelas.add(janela);
-        return janela;
+        ViewJanelaSistema janelaV = getJanela(janela.getClass().getSimpleName());
+        if (janelaV == null) {
+            viewPrincipal.getAreaDesktop().add(janela);
+            this.janelas.add(janela);
+            janelaV = janela;
+        }
+        return janelaV;
+    }
+
+    public void addViewPrincipa(TelaComBotoes areaDesenho) {
+        this.areaDesenho = areaDesenho;
+        viewPrincipal.getAreaDesktop().add(areaDesenho);
+    }
+
+    public void setVisibleFalseAll(){
+        janelas.forEach(j -> j.fechaJanela());
+    }
+    public boolean hasViewPrincipa() {
+        return areaDesenho != null;
     }
 
     /**
      * Busca uma janela no sistema.
      *
-     * @param nome - nome da janela.
+     * @param classe - nome da janela.
      * @return
      */
-    public ViewJanelaSistema getJanela(String nome) {
+    public ViewJanelaSistema getJanela(String classe) {
         for (ViewJanelaSistema janela : janelas) {
-            if (janela.getNome().equals(nome)) {
+            if (janela.getClass().getSimpleName().equals(classe)) {
                 return janela;
             }
         }
@@ -84,7 +101,7 @@ public class ControlDesktop {
 
     public boolean removerInstanciaJanela(ViewJanelaSistema destruir) {
         for (ViewJanelaSistema janela : janelas) {
-            if (janela.getClass().equals(destruir.getClass())) {
+            if (janela.getClass().getSimpleName().equals(destruir.getClass().getSimpleName())) {
                 janelas.remove(destruir);
                 return true;
             }

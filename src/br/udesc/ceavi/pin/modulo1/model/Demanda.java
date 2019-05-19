@@ -30,6 +30,12 @@ public class Demanda {
     public Node getB() {
         return B;
     }
+    
+    public int getDemanda(){
+    return demanda;
+    }
+            
+            
 
     public boolean visivel(int x, int y, int w, int h) {
         return A.collideWithMyArea(x, y) || B.collideWithMyArea(x, y);

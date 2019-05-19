@@ -17,10 +17,9 @@ public class ViewFrameEdge extends ViewFrameModulo1PadraoConsulta {
 
     private FuntionCreateType createType;
 
-    public ViewFrameEdge(FuntionCreateType createType) {
+    public ViewFrameEdge() {
         this.setSize(new Dimension(226, 200));
         this.setLocation(600, 10);
-        this.createType = createType;
     }
 
     @Override
@@ -56,6 +55,10 @@ public class ViewFrameEdge extends ViewFrameModulo1PadraoConsulta {
             }
         });
 
+    }
+
+    public void setCreateType(FuntionCreateType createType) {
+        this.createType = createType;
     }
 
 }

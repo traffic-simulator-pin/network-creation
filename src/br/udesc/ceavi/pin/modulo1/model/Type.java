@@ -30,6 +30,15 @@ public class Type {
         this.speed = speed;
     }
 
+    public Type(int numLanes, boolean oneway, float speed) {
+        this.ID = "" + idNaoUsuado;
+        idNaoUsuado++;
+        this.listDeEgdeQuePertenco = new ArrayList<>();
+        this.numLanes = numLanes;
+        this.oneway = oneway;
+        this.speed = speed;
+    }
+
     public int getNumLanes() {
         return numLanes;
     }
@@ -101,5 +110,9 @@ public class Type {
             listDeEgdeQuePertenco.add(e);
         }
         this.listDeEgdeQuePertenco.add(e);
+    }
+
+    public String getId() {
+        return ID;
     }
 }

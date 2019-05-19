@@ -4,7 +4,6 @@ import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

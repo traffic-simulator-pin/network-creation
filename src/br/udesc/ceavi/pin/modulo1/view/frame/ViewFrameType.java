@@ -4,11 +4,9 @@ import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
-import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 
 /**
  *
@@ -22,11 +20,12 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
     private JComboBox jcbFluxo;
     private ViewFrameEdge viewFrameEdge;
 
-    public ViewFrameType(FuntionCreateType funtionCreateType, ViewFrameEdge viewFrameEdge) {
-        this.funtionCreateType = funtionCreateType;
+    public ViewFrameType(ViewFrameEdge viewFrameEdge) {
+        this.funtionCreateType = new FuntionCreateType();
         this.setSize(new Dimension(255, 200));
         this.setLocation(300, 10);
         this.viewFrameEdge = viewFrameEdge;
+        viewFrameEdge.setCreateType(funtionCreateType);
     }
 
     @Override
@@ -66,4 +65,9 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
         viewFrameEdge.dispose();
         this.dispose();
     }
+
+    public FuntionCreateType getFuntionCreateType() {
+        return funtionCreateType;
+    }
+    
 }

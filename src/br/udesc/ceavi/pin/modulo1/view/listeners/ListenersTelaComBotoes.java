@@ -4,6 +4,7 @@ import br.udesc.ceavi.pin.modulo1.control.funtion.*;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDemanda;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameType;
 import java.awt.event.ActionEvent;
@@ -170,7 +171,7 @@ public class ListenersTelaComBotoes {
         public void actionPerformed(ActionEvent e) {
             ViewFrameDemanda telaDemanda = new ViewFrameDemanda();
             setFuntionToView(telaDemanda.getFuntion().getSeletion());
-            
+
             ControllerDesktop desktop = desktop();
             desktop.adicionaJanela(telaDemanda).abrirJanela();
         }
@@ -187,16 +188,18 @@ public class ListenersTelaComBotoes {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            IFuntion funtion = new FuntionCreateType();
-            setFuntionToView(((FuntionCreateType) funtion).getFuntion());
+            ViewFrameType janela = (ViewFrameType) desktop().getJanela(ViewFrameType.class.getSimpleName());
+            if (janela == null) {
+                ViewFrameEdge viewFrameEdge = new ViewFrameEdge();
+                ViewFrameType viewFrameType = new ViewFrameType(viewFrameEdge);
 
-            ControllerDesktop desktop = desktop();
-            ViewFrameEdge viewFrameEdge = new ViewFrameEdge((FuntionCreateType) funtion);
-            desktop.adicionaJanela(viewFrameEdge).abrirJanela();
-            desktop.adicionaJanela(
-                    new ViewFrameType((FuntionCreateType) funtion, viewFrameEdge)
-            ).abrirJanela();
+                desktop().adicionaJanela(viewFrameEdge).abrirJanela();
+                desktop().adicionaJanela(viewFrameType).abrirJanela();
 
+                setFuntionToView(viewFrameType.getFuntionCreateType().getFuntion());
+            } else {
+                setFuntionToView(((ViewFrameType) janela).getFuntionCreateType().getFuntion());
+            }
         }
 
     }

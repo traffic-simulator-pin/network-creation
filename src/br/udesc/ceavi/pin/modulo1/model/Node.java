@@ -96,4 +96,5 @@ public class Node {
     public boolean haveLinkEgde() {
         return !listDeEgdeQuePertenco.isEmpty();
     }
+    
 }

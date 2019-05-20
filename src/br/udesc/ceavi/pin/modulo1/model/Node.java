@@ -55,7 +55,7 @@ public class Node {
         if (this.y != other.getY()) {
             return false;
         }
-        return this.ID == other.getID();
+        return this.ID.equals(other.getID());
     }
 
     public float getX() {

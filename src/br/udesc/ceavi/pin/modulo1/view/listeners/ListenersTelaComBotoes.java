@@ -3,7 +3,7 @@ package br.udesc.ceavi.pin.modulo1.view.listeners;
 import br.udesc.ceavi.pin.modulo1.control.funtion.*;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
-import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDemanda;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameType;
 import java.awt.event.ActionEvent;

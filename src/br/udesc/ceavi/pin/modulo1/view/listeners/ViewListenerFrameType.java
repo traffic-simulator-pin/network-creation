@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameType;

@@ -1,7 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
-import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 import java.awt.Dimension;

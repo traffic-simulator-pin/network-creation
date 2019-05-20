@@ -41,7 +41,7 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     }
 
     @Override
-    public void force(List<Exception> listException) {
+    public void force(Exception listException) {
     }
 
     public void createNode(int x, int y) {

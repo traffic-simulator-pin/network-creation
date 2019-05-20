@@ -64,21 +64,25 @@ public class ControllerDesktop {
         return janelaV;
     }
 
-    public void addViewPrincipa(TelaComBotoes areaDesenho) {
-        this.areaDesenho = areaDesenho;
-        viewPrincipal.getAreaDesktop().add(areaDesenho);
+    public void addViewPrincipa(TelaComBotoes nArea) {
+        if (this.areaDesenho != null) {
+            areaDesenho.dispose();
+        }
+        this.areaDesenho = nArea;
+        viewPrincipal.getAreaDesktop().add(nArea);
     }
 
-    public void setVisibleFalseAll(){
+    public void setVisibleFalseAll() {
         janelas.forEach(j -> j.fechaJanela());
     }
+
     public boolean hasViewPrincipa() {
         return areaDesenho != null;
     }
 
     /**
-     * Busca uma janela no sistema.
-     *getJanela
+     * Busca uma janela no sistema. getJanela
+     *
      * @param classe - nome da janela.
      * @return
      */
@@ -108,7 +112,7 @@ public class ControllerDesktop {
         }
         return false;
     }
-    
+
     public List<ViewJanelaSistema> getJanelas() {
         return janelas;
     }

@@ -27,7 +27,7 @@ public class FuntionTest extends Funtion implements IFuntion {
     public FuntionTest() {
         System.out.println("FuntionTest");
         createRede();
-        imprimirEgde();
+//        imprimirEgde();
     }
 
     private void criarEgdeAletorios() {
@@ -70,9 +70,9 @@ public class FuntionTest extends Funtion implements IFuntion {
         Node nXV = new Node(1096.0f, -472.0f);
 
         Demanda A = new Demanda(nI, nX, 135);
-        Demanda B = new Demanda(nI, nXI, 150);
-        Demanda C = new Demanda(nII, nX, 50);
-        Demanda D = new Demanda(nI, nII, 10);
+        Demanda B = new Demanda(nV, nXI, 150);
+        Demanda C = new Demanda(nIX, nX, 50);
+        Demanda D = new Demanda(nVII, nII, 10);
         try {
             date.offerDemanda(Arrays.asList(A, B, C, D));
         } catch (DemandAlreadyExistException ex) {

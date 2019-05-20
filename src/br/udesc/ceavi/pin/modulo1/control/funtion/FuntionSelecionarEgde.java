@@ -7,7 +7,7 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.Color;
 import java.awt.Point;
@@ -118,19 +118,5 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
             return;
         }
         view.atualizaListaEdge(this.getSeletion());
-//        view.atualizaListaEdge(this.getSeletion());
-        
-        
-
-//        if(d.getJanela(view.getNome()) != null) {
-//            view = (ViewFrameEdge)d.getJanela(view.getNome());
-//        } else {
-//            d.adicionaJanela(view);
-//        }
-//
-//        if(this.getSeletion().size() > 0) {
-//            view.atualizaListaEdge(this.getSeletion());
-//            view.habilitaBotaoAlterarType();
-//        }
     }
 }

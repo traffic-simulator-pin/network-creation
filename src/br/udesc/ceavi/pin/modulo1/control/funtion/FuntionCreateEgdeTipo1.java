@@ -40,7 +40,7 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
     }
 
     @Override
-    public void force(List<Exception> listException) {
+    public void force(Exception listException) {
     }
 
     private boolean haveTwoPoint() {

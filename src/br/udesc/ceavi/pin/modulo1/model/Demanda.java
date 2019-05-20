@@ -41,15 +41,6 @@ public class Demanda {
         return A.collideWithMyArea(x, y) || B.collideWithMyArea(x, y);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.A);
-        hash = 71 * hash + Objects.hashCode(this.B);
-        hash = 71 * hash + this.demanda;
-        hash = 71 * hash + Objects.hashCode(this.ID);
-        return hash;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -63,9 +54,6 @@ public class Demanda {
             return false;
         }
         final Demanda other = (Demanda) obj;
-        if (this.demanda != other.demanda) {
-            return false;
-        }
         if (!Objects.equals(this.A, other.A)) {
             return false;
         }

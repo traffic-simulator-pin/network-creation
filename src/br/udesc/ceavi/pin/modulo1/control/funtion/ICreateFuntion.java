@@ -13,6 +13,6 @@ public interface ICreateFuntion<T>{
 
     public void offer() throws Exception;
 
-    public void force(List<Exception> listException);
+    public void force(Exception listException);
 
 }

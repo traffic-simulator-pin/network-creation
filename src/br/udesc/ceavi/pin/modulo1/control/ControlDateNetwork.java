@@ -82,26 +82,22 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     }
 
     public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
-        listDemandasARemove.removeAll(listDemandasARemove);
+        listDemanda.removeAll(listDemandasARemove);
         notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void tryRemoveEgde(List<Egde> listEgdeRemove) throws RemovingNodeWithDemandAssociationException {
-        List<Demanda> listException = new ArrayList<>();
+        List<Demanda> demandasRemover = new ArrayList<>();
         listEgdeRemove
                 .stream()
                 .map((egde) -> nodeHaveLinkWithDemand(egde.de(), egde.para()))
-                .filter((demanda) -> (demanda != null && !listException.contains(demanda)))
+                .filter((demanda) -> (demanda != null && !demandasRemover.contains(demanda)))
                 .forEachOrdered((demanda) -> {
-                    listException.add(demanda);
+                    demandasRemover.add(demanda);
                 });
-
-        if (!listException.isEmpty()) {
-            throw new RemovingNodeWithDemandAssociationException(listException);
-        } else {
-            this.listEgde.removeAll(listEgdeRemove);
-            notificarAlteracaoNaEstruturaDeDados();
-        }
+        removeDemanda(demandasRemover);
+        this.listEgde.removeAll(listEgdeRemove);
+        notificarAlteracaoNaEstruturaDeDados();
     }
 
     public synchronized void forceRemoveEgde(List<Egde> lista, RemovingNodeWithDemandAssociationException ex) {
@@ -111,7 +107,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     }
 
     public synchronized void offerType(List<Egde> rua, int numLanes, boolean oneway,
-            float speed,  String nome) throws EgdeAlreadyHasAssociationWithTypeException {
+            float speed, String nome) throws EgdeAlreadyHasAssociationWithTypeException {
         for (Egde egde : rua) {
             if (egde.getType() != null) {
                 throw new EgdeAlreadyHasAssociationWithTypeException();

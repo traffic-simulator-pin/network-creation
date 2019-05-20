@@ -19,8 +19,7 @@ public abstract class FuntionCreate<T> extends Funtion implements ICreateFuntion
     }
 
     @Override
-    public  void force(List<Exception> listException){
-        
+    public void force(Exception listException) {
     }
 
 }

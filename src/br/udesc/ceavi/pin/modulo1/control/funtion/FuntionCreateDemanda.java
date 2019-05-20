@@ -33,16 +33,17 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
     }
 
     @Override
-    public void force(List<Exception> listException) {
+    public void force(Exception listException) {
     }
 
-    public void newDemanda(int demanda) throws DemandAlreadyExistException {
-        lista.add(new Demanda(A, B, demanda));
+    public void newDemanda(Demanda demanda) throws DemandAlreadyExistException {
+        lista.add(demanda);
         offer();
         clearNode();
     }
 
     private void setNodeDemanda(Node nodeSelecionado) throws Exception {
+    
     }
 
     private void clearNode() {
@@ -72,5 +73,5 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> {
     public FuntionSelecionarNode getSeletion() {
         return seletion;
     }
-    
+
 }

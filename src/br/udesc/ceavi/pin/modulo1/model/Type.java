@@ -28,7 +28,7 @@ public class Type {
         this.oneway = false;
         this.speed = 0;
     }
-    
+
     public Type(List<Egde> listDeEgdeQuePertenco, int numLanes, boolean oneway, float speed) {
         this.ID = "" + idNaoUsuado;
         idNaoUsuado++;
@@ -111,8 +111,12 @@ public class Type {
         }
         this.listDeEgdeQuePertenco.add(e);
     }
-    
+
     public void setListDeEgdeQuePertenco(List<Egde> edgs) {
         this.listDeEgdeQuePertenco = edgs;
+    }
+
+    public String getId() {
+        return ID;
     }
 }

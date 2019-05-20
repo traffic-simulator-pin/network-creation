@@ -14,7 +14,7 @@ public class Egde {
     private final String ID;
     private final Node de;
     private final Node para;
-    private final float tamanho;
+    private final float width;
     private String nome;
     private Type type;
     private Line2D linha;
@@ -25,7 +25,7 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        this.tamanho = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
+        this.width = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
         initLinha();
         initAssociacao();
     }
@@ -40,7 +40,7 @@ public class Egde {
         Egde.idNaoUsado++;
         this.de = de;
         this.para = para;
-        this.tamanho = tamanho;
+        this.width = tamanho;
         initLinha();
         initAssociacao();
     }
@@ -59,7 +59,7 @@ public class Egde {
 
     @Override
     public String toString() {
-        return "id: " + ID + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + tamanho + "\n";
+        return "id: " + ID + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + width + "\n";
     }
 
     public float x1() {
@@ -131,6 +131,10 @@ public class Egde {
 
     public String getId() {
         return ID;
+    }
+
+    public float getWidth() {
+        return width;
     }
 
 }

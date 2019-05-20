@@ -209,10 +209,6 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
                         ((ILoop) funtion).render();
                     }
                     areaDesenho.repaint();
-                    ControllerDesktop c = ControllerDesktop.getInstance();
-                    for(ViewJanelaSistema v : c.getJanelas()) {
-                        System.out.println(v.getName());
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

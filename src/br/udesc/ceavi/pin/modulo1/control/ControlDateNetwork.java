@@ -45,10 +45,27 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     public synchronized void StartByFile(List<Egde> listEgde, List<Demanda> listDemanda) {
         this.listDemanda.clear();
         this.listEgde.clear();
-
         this.listDemanda.addAll(listDemanda);
         this.listEgde.addAll(listEgde);
+
+        normalizandoID();
+
         notificarAlteracaoNaEstruturaDeDados();
+    }
+
+    private void normalizandoID() throws NumberFormatException {
+        getAllDemanda().stream().filter((a) -> (Integer.parseInt(a.getId()) > Demanda.idNaoUsuado)).forEachOrdered((a) -> {
+            Demanda.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
+        });
+        getAllEgde().stream().filter((a) -> (Integer.parseInt(a.getId()) > Egde.idNaoUsuado)).forEachOrdered((a) -> {
+            Egde.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
+        });
+        getAllNode().stream().filter((a) -> (Integer.parseInt(a.getId()) > Node.idNaoUsuado)).forEachOrdered((a) -> {
+            Node.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
+        });
+        getAllType().stream().filter((a) -> (Integer.parseInt(a.getId()) > Type.idNaoUsuado)).forEachOrdered((a) -> {
+            Type.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
+        });
     }
 
     private void notificarAlteracaoNaEstruturaDeDados() {

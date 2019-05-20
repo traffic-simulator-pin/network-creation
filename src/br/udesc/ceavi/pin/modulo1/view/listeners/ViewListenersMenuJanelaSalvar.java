@@ -47,7 +47,7 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
                     caminho.append(nameDoArquivo.charAt(i));
                 }
 
-                caminho.insert(0, caminhoDoArquivo + "\\");
+                caminho.insert(0, caminhoDoArquivo + "//");
                 File file = new File(caminho.toString() + chooser.getFileFilter().getDescription());
                 ControlDateNetwork.getInstance().setLocalDeSalvamento(file);
                 new FuntionSalvar();

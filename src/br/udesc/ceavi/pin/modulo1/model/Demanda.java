@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class Demanda {
 
-    private static int idNaoUsado = 1;
+    public static int idNaoUsuado = 1;
     private final Node A, B;
     private final int demanda;
     private final String ID;
@@ -19,8 +19,15 @@ public class Demanda {
         this.A = A;
         this.B = B;
         this.demanda = demanda;
-        this.ID = "" + idNaoUsado;
-        idNaoUsado++;
+        this.ID = "" + idNaoUsuado;
+        idNaoUsuado++;
+    }
+
+    public Demanda(String id, Node A, Node B, int demanda) {
+        this.A = A;
+        this.B = B;
+        this.demanda = demanda;
+        this.ID = id;
     }
 
     public Node getA() {
@@ -30,17 +37,18 @@ public class Demanda {
     public Node getB() {
         return B;
     }
-    
-    public int getDemanda(){
-    return demanda;
+
+    public String getId() {
+        return ID;
     }
-            
-            
+
+    public int getDemanda() {
+        return demanda;
+    }
 
     public boolean visivel(int x, int y, int w, int h) {
         return A.collideWithMyArea(x, y) || B.collideWithMyArea(x, y);
     }
-
 
     @Override
     public boolean equals(Object obj) {

@@ -14,13 +14,19 @@ public class Node {
     private final float x;
     private final float y;
 
-    private static int idNaoUsuado = 1;
+    public static int idNaoUsuado = 1;
 
     private List<Egde> listDeEgdeQuePertenco = new ArrayList<>();
 
     public Node(float x, float y) {
         this.ID = "" + idNaoUsuado;
         idNaoUsuado++;
+        this.x = x;
+        this.y = y;
+    }
+
+    public Node(String id, float x, float y) {
+        this.ID = id;
         this.x = x;
         this.y = y;
     }
@@ -55,7 +61,7 @@ public class Node {
         if (this.y != other.getY()) {
             return false;
         }
-        return this.ID.equals(other.getID());
+        return this.ID.equals(other.getId());
     }
 
     public float getX() {
@@ -66,7 +72,7 @@ public class Node {
         return y;
     }
 
-    public String getID() {
+    public String getId() {
         return ID;
     }
 

@@ -9,7 +9,7 @@ import java.awt.geom.Line2D;
 
 public class Egde {
 
-    private static int idNaoUsado = 1;
+    public static int idNaoUsuado = 1;
 
     private final String ID;
     private final Node de;
@@ -21,8 +21,8 @@ public class Egde {
     private double conficienteAngula, conficienteLiner;
 
     public Egde(Node de, Node para) {
-        this.ID = "" + idNaoUsado;
-        Egde.idNaoUsado++;
+        this.ID = "" + idNaoUsuado;
+        Egde.idNaoUsuado++;
         this.de = de;
         this.para = para;
         this.width = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
@@ -30,19 +30,18 @@ public class Egde {
         initAssociacao();
     }
 
+    public Egde(String id, Node de, Node para, float width) {
+        this.ID = id;
+        this.de = de;
+        this.para = para;
+        this.width = width;
+        initLinha();
+        initAssociacao();
+    }
+
     public void initAssociacao() {
         de.associarNodeEgde(this);
         para.associarNodeEgde(this);
-    }
-
-    public Egde(Node de, Node para, float tamanho) {
-        this.ID = "" + idNaoUsado;
-        Egde.idNaoUsado++;
-        this.de = de;
-        this.para = para;
-        this.width = tamanho;
-        initLinha();
-        initAssociacao();
     }
 
     private void initLinha() {

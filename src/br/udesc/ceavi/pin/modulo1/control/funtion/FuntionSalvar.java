@@ -52,11 +52,11 @@ public class FuntionSalvar {
             Element malha = documentoXML.createElement("malha");
 
             Attr heightMalha = documentoXML.createAttribute("height");
-            heightMalha.setValue(String.valueOf(HelpLocator.getNetworkSize()[0]));
+            heightMalha.setValue(String.valueOf(HelpLocator.getNetworkSize()[1]));
             malha.setAttributeNode(heightMalha);
 
             Attr widthMalha = documentoXML.createAttribute("width");
-            widthMalha.setValue(String.valueOf(HelpLocator.getNetworkSize()[1]));
+            widthMalha.setValue(String.valueOf(HelpLocator.getNetworkSize()[0]));
             malha.setAttributeNode(widthMalha);
 
             data.appendChild(malha);
@@ -69,7 +69,7 @@ public class FuntionSalvar {
                 Element node = documentoXML.createElement("node");
 
                 Attr id = documentoXML.createAttribute("id");
-                id.setValue(nodeN.getID());
+                id.setValue(nodeN.getId());
                 node.setAttributeNode(id);
 
                 Attr x = documentoXML.createAttribute("x");
@@ -105,7 +105,7 @@ public class FuntionSalvar {
                 Attr speed = documentoXML.createAttribute("speed");
                 speed.setValue(String.valueOf(typeN.getSpeed()));
                 type.setAttributeNode(speed);
-                
+
                 types.appendChild(type);
             }
             data.appendChild(types);
@@ -121,16 +121,19 @@ public class FuntionSalvar {
                 edge.setAttributeNode(id);
 
                 Attr from = documentoXML.createAttribute("from");
-                from.setValue(edgeN.de().getID());
+                from.setValue(edgeN.de().getId());
                 edge.setAttributeNode(from);
 
                 Attr to = documentoXML.createAttribute("to");
-                to.setValue(edgeN.para().getID());
+                to.setValue(edgeN.para().getId());
                 edge.setAttributeNode(to);
 
-                Attr type = documentoXML.createAttribute("type");
-                type.setValue("01");
-                edge.setAttributeNode(type);
+                //verifica se há type setado
+                if (edgeN.getType() != null) {
+                    Attr type = documentoXML.createAttribute("type");
+                    type.setValue(String.valueOf(edgeN.getType().getId()));
+                    edge.setAttributeNode(type);
+                }
 
                 Attr length = documentoXML.createAttribute("length");
                 length.setValue(String.valueOf(edgeN.getWidth()));
@@ -152,7 +155,7 @@ public class FuntionSalvar {
                 for (Egde edgeAux : listaEdges) {
 
                     //verifica se o começo de um edge é igual ao começo de outro edge
-                    if (edgeN.de().getID() == edgeAux.de().getID() && edgeAux.para().getID() != edgeN.para().getID()) {
+                    if (edgeN.de().getId() == edgeAux.de().getId() && edgeAux.para().getId() != edgeN.para().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
@@ -166,7 +169,7 @@ public class FuntionSalvar {
                         conections.appendChild(conection);
 
                     } //verifica se um final de um edge é igual ao começo de outro
-                    else if (edgeN.para().getID() == edgeAux.de().getID()) {
+                    else if (edgeN.para().getId() == edgeAux.de().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
@@ -177,7 +180,7 @@ public class FuntionSalvar {
                         to.setValue(edgeAux.getId());
                         conection.setAttributeNode(to);
 
-                    } else if (edgeN.de().getID() == edgeAux.para().getID()) {
+                    } else if (edgeN.de().getId() == edgeAux.para().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
@@ -188,7 +191,7 @@ public class FuntionSalvar {
                         to.setValue(edgeN.getId());
                         conection.setAttributeNode(to);
                         conections.appendChild(conection);
-                    } else if (edgeN.para().getID() == edgeAux.para().getID() && edgeN.de().getID() != edgeAux.de().getID()) {
+                    } else if (edgeN.para().getId() == edgeAux.para().getId() && edgeN.de().getId() != edgeAux.de().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
@@ -211,24 +214,28 @@ public class FuntionSalvar {
             for (Demanda demandaN : listaDemandas) {
                 Element demanda = documentoXML.createElement("demanda");
 
-                        Attr nodeA = documentoXML.createAttribute("nodeA");
-                        nodeA.setValue(demandaN.getA().getID());
-                        demanda.setAttributeNode(nodeA);
-                        
-                        Attr nodeB = documentoXML.createAttribute("nodeB");
-                        nodeB.setValue(demandaN.getB().getID());
-                        demanda.setAttributeNode(nodeB);
-                        
-                        Attr valor = documentoXML.createAttribute("valor");
-                        valor.setValue(String.valueOf(demandaN.getDemanda()));
-                        demanda.setAttributeNode(valor);
-                        
-                        demandas.appendChild(demanda);
+                Attr nodeA = documentoXML.createAttribute("nodeA");
+                nodeA.setValue(demandaN.getA().getId());
+                demanda.setAttributeNode(nodeA);
+
+                Attr nodeB = documentoXML.createAttribute("nodeB");
+                nodeB.setValue(demandaN.getB().getId());
+                demanda.setAttributeNode(nodeB);
+
+                Attr valor = documentoXML.createAttribute("valor");
+                valor.setValue(String.valueOf(demandaN.getDemanda()));
+                demanda.setAttributeNode(valor);
+
+                Attr id = documentoXML.createAttribute("id");
+                id.setValue(String.valueOf(demandaN.getId()));
+                demanda.setAttributeNode(id);
+
+                demandas.appendChild(demanda);
 
             }
-            
+
             data.appendChild(demandas);
-            
+
             documentoXML.appendChild(data);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

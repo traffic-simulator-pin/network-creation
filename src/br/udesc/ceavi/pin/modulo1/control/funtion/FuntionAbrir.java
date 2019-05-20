@@ -54,7 +54,8 @@ public class FuntionAbrir {
             for (int i = 0; i < listaNodesXML.getLength(); i++) {
                 org.w3c.dom.Node node = listaNodesXML.item(i);
                 Element noNodes = (Element) node;
-                Node no = new Node(Float.parseFloat(noNodes.getAttribute("x")),
+                Node no = new Node(noNodes.getAttribute("id"),
+                        Float.parseFloat(noNodes.getAttribute("x")),
                         Float.parseFloat(noNodes.getAttribute("y")));
                 listaNodes.add(no);
             }
@@ -67,13 +68,14 @@ public class FuntionAbrir {
 
                 Element noType = (Element) type;
 
-                Type t = new Type(null, Integer.parseInt(noType.getAttribute("numLanes")),
+                Type t = new Type(noType.getAttribute("id"),
+                        Integer.parseInt(noType.getAttribute("numLanes")),
                         Boolean.getBoolean(noType.getAttribute("oneway")),
                         Float.parseFloat(noType.getAttribute("speed")));
                 listaTypes.add(t);
             }
 
-            NodeList listaDemandasXML = documentoXML.getElementsByTagName("demandas");
+            NodeList listaDemandasXML = documentoXML.getElementsByTagName("demanda");
 
             for (int i = 0; i < listaDemandasXML.getLength(); i++) {
                 org.w3c.dom.Node demanda = listaDemandasXML.item(i);
@@ -82,19 +84,22 @@ public class FuntionAbrir {
                 int inodeA = -1;
                 int inodeB = -1;
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getID() == noDemanda.getAttribute("nodeA")) {
+                    if (listaNodes.get(j).getId().equals(noDemanda.getAttribute("nodeA"))) {
                         inodeA = j;
                     }
-                    if (listaNodes.get(j).getID() == noDemanda.getAttribute("nodeB")) {
+                    if (listaNodes.get(j).getId().equals(noDemanda.getAttribute("nodeB"))) {
                         inodeB = j;
                     }
 
                 }
 
-                Demanda d = new Demanda(listaNodes.get(inodeA),
-                        listaNodes.get(inodeB),
-                        Integer.parseInt(noDemanda.getAttribute("valor")));
-                listaDemanda.add(d);
+                if (inodeA >= 0 && inodeB >= 0) {
+                    Demanda d = new Demanda(noDemanda.getAttribute("id"),
+                            listaNodes.get(inodeA),
+                            listaNodes.get(inodeB),
+                            Integer.parseInt(noDemanda.getAttribute("valor")));
+                    listaDemanda.add(d);
+                }
                 inodeA = -1;
                 inodeB = -1;
             }
@@ -110,16 +115,17 @@ public class FuntionAbrir {
                 int noPara = -1;
 
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getID().equals(noEdge.getAttribute("from"))) {
+                    if (listaNodes.get(j).getId().equals(noEdge.getAttribute("from"))) {
                         noDe = j;
                     }
-                    if (listaNodes.get(j).getID().equals(noEdge.getAttribute("to"))) {
+                    if (listaNodes.get(j).getId().equals(noEdge.getAttribute("to"))) {
                         noPara = j;
                     }
 
                 }
 
-                Egde e = new Egde(listaNodes.get(noDe),
+                Egde e = new Egde(noEdge.getAttribute("id"),
+                        listaNodes.get(noDe),
                         listaNodes.get(noPara),
                         Float.parseFloat(noEdge.getAttribute("length")));
 
@@ -130,9 +136,15 @@ public class FuntionAbrir {
                     }
                 }
 
-                e.setType(listaTypes.get(iType), noEdge.getAttribute("name"));
+                if (iType >= 0) {
+                    e.setType(listaTypes.get(iType), noEdge.getAttribute("name"));
+                } else {
+                    e.setType(null, noEdge.getAttribute("name"));
+
+                }
 
                 listaEdges.add(e);
+
                 noDe = -1;
                 noPara = -1;
                 iType = -1;

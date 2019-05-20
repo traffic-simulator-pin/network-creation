@@ -91,11 +91,11 @@ public class ViewFrameDemanda extends ViewFrameModulo1Padrao {
     public void atualizaTelaDemanda() {
 
         if (this.getNodoOrigem() != null) {
-            tfOrigem.setText(this.getNodoOrigem().getID() + "");
+            tfOrigem.setText(this.getNodoOrigem().getId() + "");
         }
 
-        if (this.getNodoDestino() != null && getNodoOrigem().getID() != getNodoDestino().getID()) {
-            tfDestino.setText(this.getNodoDestino().getID() + "");
+        if (this.getNodoDestino() != null && getNodoOrigem().getId() != getNodoDestino().getId()) {
+            tfDestino.setText(this.getNodoDestino().getId() + "");
         }
 
         this.repaint();

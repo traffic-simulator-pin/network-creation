@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Type {
 
-    private static int idNaoUsuado = 1;
+    public static int idNaoUsuado = 1;
 
     private final String ID;
     private List<Egde> listDeEgdeQuePertenco;
@@ -34,6 +34,14 @@ public class Type {
         idNaoUsuado++;
         this.listDeEgdeQuePertenco = new ArrayList<>();
         this.listDeEgdeQuePertenco.addAll(listDeEgdeQuePertenco);
+        this.numLanes = numLanes;
+        this.oneway = oneway;
+        this.speed = speed;
+    }
+
+    public Type(String id,int numLanes, boolean oneway, float speed) {
+        this.ID = id;
+        this.listDeEgdeQuePertenco = new ArrayList<>();
         this.numLanes = numLanes;
         this.oneway = oneway;
         this.speed = speed;

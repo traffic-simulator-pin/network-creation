@@ -43,9 +43,8 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
 
         novo.adicionaCampo("nomeEdge", "Nome dos edge");
         novo.adicionaCampo("nfaixas", "Número Faixas");
-        novo.adicionaCampo("maoUnica", "Mão única");
         novo.adicionaCampo("velocidade", "Velocidade");
-        jcbFluxo = new JComboBox(new String[]{"Fluxo Unicio", "Fluxo Duplo"});
+        jcbFluxo = new JComboBox(new String[]{"Mão Unicia", "Mão Dupla"});
         novo.adicionaComponente("", "", jcbFluxo);
         return novo;
     }
@@ -75,51 +74,47 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
         viewFrameEdge.dispose();
         this.dispose();
     }
-    
-    
-     private class ViewActionListenerSalvar implements ActionListener {
-         
+
+    private class ViewActionListenerSalvar implements ActionListener {
+
         private Type modelo;
-        
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             ControllerDesktop d = ControllerDesktop.getInstance();
             ViewFrameEdge viewEdg = null;
-            
-            for(ViewJanelaSistema v : d.getJanelas()) {
-                if(v instanceof ViewFrameEdge) {
-                    viewEdg = (ViewFrameEdge)v;
+
+            for (ViewJanelaSistema v : d.getJanelas()) {
+                if (v instanceof ViewFrameEdge) {
+                    viewEdg = (ViewFrameEdge) v;
                     break;
                 }
-            
-            }
-            
-//            ViewFrameModulo1Padrao janela = (ViewFrameModulo1Padrao)this;
-            JComponent[] campo1 = getAreaManutencao().getCampo("nfaixas");
-            JComponent[] campo2 = getAreaManutencao().getCampo("maoUnica");
-            JComponent[] campo3 = getAreaManutencao().getCampo("velocidade");
-            JComponent[] campo4 = getAreaManutencao().getCampo("comprimento");
-            JComponent[] campo5 = getAreaManutencao().getCampo("nomeEdge");
 
-            if(modelo == null) {
+            }
+
+            JComponent[] tfNumFaixas = getAreaManutencao().getCampo("nfaixas");
+            JComponent[] tfVelocidade = getAreaManutencao().getCampo("velocidade");
+            JComponent[] tfNomeEgde = getAreaManutencao().getCampo("nomeEdge");
+
+            if (modelo == null) {
                 modelo = new Type();
             }
-            modelo.setNumLanes(Integer.parseInt(((JTextField) campo1[1]).getText() +""));
-            
-            if(((JTextField) campo2[1]).getText().equals("true")) {
+            modelo.setNumLanes(Integer.parseInt(((JTextField) tfNumFaixas[1]).getText() + ""));
+
+            if (jcbFluxo.getSelectedIndex() == 1) {
                 modelo.setOneway(true);
             } else {
                 modelo.setOneway(false);
             }
-            modelo.setSpeed(Float.parseFloat(((JTextField) campo3[1]).getText()));
             
+            modelo.setSpeed(Float.parseFloat(((JTextField) tfVelocidade[1]).getText()));
+
             List<Egde> edges = viewEdg.getEgds();
-            
-            for(Egde ed : edges) {
-                ed.setType(modelo, ((JTextField) campo5[1]).getText());
+
+            for (Egde ed : edges) {
+                ed.setType(modelo, ((JTextField) tfNomeEgde[1]).getText());
             }
-            
+
             modelo.setListDeEgdeQuePertenco(edges);
             viewEdg.atualizaListaEdge(edges);
         }

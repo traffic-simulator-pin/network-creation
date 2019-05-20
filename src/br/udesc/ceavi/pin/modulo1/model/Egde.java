@@ -51,7 +51,7 @@ public class Egde {
     }
 
     public boolean havePointInLine(Point p) {
-        int size = (int) ((SIZE / HelpLocator.getZOOM()));
+        int size = (int) ((8 / HelpLocator.getZOOM()));
         Rectangle emBusca = new Rectangle(p.x - size / 2, p.y - size / 2, size, size);
         return linha.intersects(emBusca);
     }

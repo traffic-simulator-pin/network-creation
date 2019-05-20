@@ -76,13 +76,18 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         this.listEgde.add(egde);
     }
 
-    private synchronized void addDemanda(Demanda newDemanda) throws DemandAlreadyExistException {
-        if (!listDemanda.contains(newDemanda)) {
-            this.listDemanda.add(newDemanda);
-            notificarAlteracaoNaEstruturaDeDados();
-        } else {
-            throw new DemandAlreadyExistException(newDemanda);
+    private synchronized void addDemanda(Demanda newDemanda) {
+        boolean alterado = false;
+        for (Demanda demanda : listDemanda) {
+            if (demanda.equals(newDemanda)) {
+                demanda = newDemanda;
+                alterado = true;
+            }
         }
+        if (alterado) {
+            this.listDemanda.add(newDemanda);
+        }
+        notificarAlteracaoNaEstruturaDeDados();
 
     }
 

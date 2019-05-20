@@ -44,7 +44,7 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
         novo.adicionaCampo("nomeEdge", "Nome dos edge");
         novo.adicionaCampo("nfaixas", "Número Faixas");
         novo.adicionaCampo("velocidade", "Velocidade");
-        jcbFluxo = new JComboBox(new String[]{"Mão Unicia", "Mão Dupla"});
+        jcbFluxo = new JComboBox(new String[]{"Mão Unica", "Mão Dupla"});
         novo.adicionaComponente("", "", jcbFluxo);
         return novo;
     }
@@ -69,10 +69,17 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
     }
 
     private void distruirInstancia() {
-        ControllerDesktop.getInstance().removerInstanciaJanela(this);
-        ControllerDesktop.getInstance().removerInstanciaJanela(viewFrameEdge);
+        desktop().removerInstanciaJanela(this);
+        desktop().removerInstanciaJanela(viewFrameEdge);
+        desktop().getViewPrincipal();
+        
         viewFrameEdge.dispose();
+        
         this.dispose();
+    }
+
+    private static ControllerDesktop desktop() {
+        return ControllerDesktop.getInstance();
     }
 
     private class ViewActionListenerSalvar implements ActionListener {
@@ -81,7 +88,7 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ControllerDesktop d = ControllerDesktop.getInstance();
+            ControllerDesktop d = desktop();
             ViewFrameEdge viewEdg = null;
 
             for (ViewJanelaSistema v : d.getJanelas()) {

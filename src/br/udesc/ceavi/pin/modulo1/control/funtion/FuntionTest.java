@@ -73,11 +73,7 @@ public class FuntionTest extends Funtion implements IFuntion {
         Demanda B = new Demanda(nV, nXI, 150);
         Demanda C = new Demanda(nIX, nX, 50);
         Demanda D = new Demanda(nVII, nII, 10);
-        try {
-            date.offerDemanda(Arrays.asList(A, B, C, D));
-        } catch (DemandAlreadyExistException ex) {
-            Logger.getLogger(FuntionTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
 
         Egde I = new Egde(nI, nII);
         Egde II = new Egde(nII, nIII);
@@ -134,5 +130,10 @@ public class FuntionTest extends Funtion implements IFuntion {
         type4.forEach(t -> t.setType(TIV, ""));
 
         date.offerEgde(lista);
+   try {
+            date.offerDemanda(Arrays.asList(A, B, C, D));
+        } catch (DemandAlreadyExistException ex) {
+            Logger.getLogger(FuntionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

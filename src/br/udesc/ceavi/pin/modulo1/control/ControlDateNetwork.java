@@ -104,7 +104,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
     }
 
     public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
-        listDemanda.removeAll(listDemandasARemove);
+//        listDemanda.removeAll(listDemandasARemove);
         notificarAlteracaoNaEstruturaDeDados();
     }
 

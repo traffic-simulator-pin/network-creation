@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
@@ -34,14 +34,11 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
 
     @Override
     public void offer() {
-        ControlDateNetwork.getInstance().offerEgde(lista);
+        ControllerDateNetwork.getInstance().offerEgde(lista);
         lista.clear();
         clearNode();
     }
 
-    @Override
-    public void force(Exception listException) {
-    }
 
     private boolean haveTwoPoint() {
         return de != null && para != null;
@@ -79,7 +76,7 @@ public class FuntionCreateEgdeTipo1 extends FuntionCreate<Egde> implements ILoop
 
     private Node checkExistingNode(float x, float y) {
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
-        for (Node node : ControlDateNetwork.getInstance().getAllNode()) {
+        for (Node node : ControllerDateNetwork.getInstance().getAllNode()) {
             if (node.collideWithMyArea(realLocation[0], realLocation[1])) {
                 return node;
             }

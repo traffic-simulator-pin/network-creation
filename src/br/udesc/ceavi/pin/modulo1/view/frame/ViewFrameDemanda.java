@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateDemanda;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Node;
@@ -115,20 +114,9 @@ public class ViewFrameDemanda extends ViewFrameModulo1Padrao {
 
             if (getNodoOrigem() != null && getNodoDestino() != null) {
                 model = new Demanda(getNodoOrigem(), getNodoDestino(), demanda);
-                try {
-                    controller.newDemanda(model);
-                    limparCampos();
-                } catch (DemandAlreadyExistException ex) {
-                    int a = JOptionPane.showConfirmDialog(null,
-                            "A Demanada Criada Já Existe!"
-                            + "\nDeseja Substituir?", "Demanda já Existe",
-                            JOptionPane.YES_NO_OPTION);
-                    if (a == JOptionPane.YES_NO_OPTION) {
-                        controller.force(ex);
-                        limparCampos();
-                    }
+                controller.newDemanda(model);
+                limparCampos();
 
-                }
             }
         }
 

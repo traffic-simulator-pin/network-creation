@@ -81,7 +81,7 @@ public class ViewListenerFrameType extends ViewListenersFrame {
             List<Egde> edges = viewEdg.getEgds();
             
             for(Egde ed : edges) {
-                ed.setType(modelo, ((JTextField) campo5[1]).getText());
+                ed.setType(modelo);
             }
             
             modelo.setListDeEgdeQuePertenco(edges);

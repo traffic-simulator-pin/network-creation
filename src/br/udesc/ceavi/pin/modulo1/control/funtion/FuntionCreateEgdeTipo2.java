@@ -1,12 +1,11 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
-import static br.udesc.ceavi.pin.modulo1.model.Node.SIZE;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
@@ -35,14 +34,11 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
 
     @Override
     public void offer() {
-        ControlDateNetwork.getInstance().offerEgde(lista);
+        ControllerDateNetwork.getInstance().offerEgde(lista);
         lista.clear();
         clearNode();
     }
 
-    @Override
-    public void force(Exception listException) {
-    }
 
     public void createNode(int x, int y) {
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);

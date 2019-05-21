@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
-import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class FuntionTest extends Funtion implements IFuntion {
 
-    private ControlDateNetwork date = ControlDateNetwork.getInstance();
+    private ControllerDateNetwork date = ControllerDateNetwork.getInstance();
     private List<Egde> lista = new ArrayList<>();
 
     public FuntionTest() {
@@ -73,7 +72,6 @@ public class FuntionTest extends Funtion implements IFuntion {
         Demanda B = new Demanda(nV, nXI, 150);
         Demanda C = new Demanda(nIX, nX, 50);
         Demanda D = new Demanda(nVII, nII, 10);
-     
 
         Egde I = new Egde(nI, nII);
         Egde II = new Egde(nII, nIII);
@@ -117,23 +115,19 @@ public class FuntionTest extends Funtion implements IFuntion {
         List<Egde> type3 = Arrays.asList(VIII, IX, XII, XIII, XIV);
         List<Egde> type4 = Arrays.asList(XV, XVI, XVII);
 
-        Type TI = new Type(type1, 2, true, 90);
-        type1.forEach(t -> t.setType(TI, ""));
+        Type TI = new Type(type1, 2, true, 90, 4);
+        type1.forEach(t -> t.setType(TI));
 
-        Type TII = new Type(type2, 1, true, 50);
-        type2.forEach(t -> t.setType(TII, ""));
+        Type TII = new Type(type2, 1, true, 50, 3);
+        type2.forEach(t -> t.setType(TII));
 
-        Type TIII = new Type(type3, 1, true, 40);
-        type3.forEach(t -> t.setType(TIII, ""));
+        Type TIII = new Type(type3, 1, true, 40, 5);
+        type3.forEach(t -> t.setType(TIII));
 
-        Type TIV = new Type(type4, 3, true, 120);
-        type4.forEach(t -> t.setType(TIV, ""));
+        Type TIV = new Type(type4, 3, true, 120, 1);
+        type4.forEach(t -> t.setType(TIV));
 
         date.offerEgde(lista);
-   try {
-            date.offerDemanda(Arrays.asList(A, B, C, D));
-        } catch (DemandAlreadyExistException ex) {
-            Logger.getLogger(FuntionTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        date.offerDemanda(Arrays.asList(A, B, C, D));
     }
 }

@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSalvar;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ControlDateNetwork.getInstance().getLocalDeSalvamento() == null) {
+        if (ControllerDateNetwork.getInstance().getLocalDeSalvamento() == null) {
             JFileChooser chooser = new JFileChooser();
             chooser.setCurrentDirectory(new File("/Documents"));
             chooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -49,7 +49,7 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
 
                 caminho.insert(0, caminhoDoArquivo + "//");
                 File file = new File(caminho.toString() + chooser.getFileFilter().getDescription());
-                ControlDateNetwork.getInstance().setLocalDeSalvamento(file);
+                ControllerDateNetwork.getInstance().setLocalDeSalvamento(file);
                 new FuntionSalvar();
             }
         } else {

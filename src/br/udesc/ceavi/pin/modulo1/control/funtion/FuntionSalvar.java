@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Node;
@@ -37,10 +37,11 @@ public class FuntionSalvar {
 
         try {
 
-            List<Node> listaNodes = ControlDateNetwork.getInstance().getAllNode();
-            List<Type> listaTypes = ControlDateNetwork.getInstance().getAllType();
-            List<Egde> listaEdges = ControlDateNetwork.getInstance().getAllEgde();
-            List<Demanda> listaDemandas = ControlDateNetwork.getInstance().getAllDemanda();
+            List<Node> listaNodes = ControllerDateNetwork.getInstance().getAllNode();
+            List<Type> listaTypes = ControllerDateNetwork.getInstance().getAllType();
+            List<Egde> listaEdges = ControllerDateNetwork.getInstance().getAllEgde();
+            List<Demanda> listaDemandas = ControllerDateNetwork.getInstance().getAllDemanda();
+            System.out.println(listaDemandas.size());
 
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -69,7 +70,7 @@ public class FuntionSalvar {
                 Element node = documentoXML.createElement("node");
 
                 Attr id = documentoXML.createAttribute("id");
-                id.setValue(nodeN.getId());
+                id.setValue("" + nodeN.getId());
                 node.setAttributeNode(id);
 
                 Attr x = documentoXML.createAttribute("x");
@@ -91,7 +92,7 @@ public class FuntionSalvar {
                 Element type = documentoXML.createElement("type");
 
                 Attr id = documentoXML.createAttribute("id");
-                id.setValue(typeN.getId());
+                id.setValue("" + typeN.getId());
                 type.setAttributeNode(id);
 
                 Attr numLanes = documentoXML.createAttribute("numLanes");
@@ -117,15 +118,15 @@ public class FuntionSalvar {
                 Element edge = documentoXML.createElement("edge");
 
                 Attr id = documentoXML.createAttribute("id");
-                id.setValue(edgeN.getId());
+                id.setValue("" + edgeN.getId());
                 edge.setAttributeNode(id);
 
                 Attr from = documentoXML.createAttribute("from");
-                from.setValue(edgeN.de().getId());
+                from.setValue("" + edgeN.de().getId());
                 edge.setAttributeNode(from);
 
                 Attr to = documentoXML.createAttribute("to");
-                to.setValue(edgeN.para().getId());
+                to.setValue("" + edgeN.para().getId());
                 edge.setAttributeNode(to);
 
                 //verifica se há type setado
@@ -159,11 +160,11 @@ public class FuntionSalvar {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
-                        from.setValue(edgeN.getId());
+                        from.setValue("" + edgeN.getId());
                         conection.setAttributeNode(from);
 
                         Attr to = documentoXML.createAttribute("to");
-                        to.setValue(edgeAux.getId());
+                        to.setValue("" + edgeAux.getId());
                         conection.setAttributeNode(to);
 
                         conections.appendChild(conection);
@@ -173,33 +174,33 @@ public class FuntionSalvar {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
-                        from.setValue(edgeN.getId());
+                        from.setValue("" + edgeN.getId());
                         conection.setAttributeNode(from);
 
                         Attr to = documentoXML.createAttribute("to");
-                        to.setValue(edgeAux.getId());
+                        to.setValue("" + edgeAux.getId());
                         conection.setAttributeNode(to);
 
                     } else if (edgeN.de().getId() == edgeAux.para().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
-                        from.setValue(edgeAux.getId());
+                        from.setValue("" + edgeAux.getId());
                         conection.setAttributeNode(from);
 
                         Attr to = documentoXML.createAttribute("to");
-                        to.setValue(edgeN.getId());
+                        to.setValue("" + edgeN.getId());
                         conection.setAttributeNode(to);
                         conections.appendChild(conection);
                     } else if (edgeN.para().getId() == edgeAux.para().getId() && edgeN.de().getId() != edgeAux.de().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
                         Attr from = documentoXML.createAttribute("from");
-                        from.setValue(edgeAux.getId());
+                        from.setValue("" + edgeAux.getId());
                         conection.setAttributeNode(from);
 
                         Attr to = documentoXML.createAttribute("to");
-                        to.setValue(edgeN.getId());
+                        to.setValue("" + edgeN.getId());
                         conection.setAttributeNode(to);
                         conections.appendChild(conection);
                     }
@@ -215,11 +216,11 @@ public class FuntionSalvar {
                 Element demanda = documentoXML.createElement("demanda");
 
                 Attr nodeA = documentoXML.createAttribute("nodeA");
-                nodeA.setValue(demandaN.getA().getId());
+                nodeA.setValue("" + demandaN.getA().getId());
                 demanda.setAttributeNode(nodeA);
 
                 Attr nodeB = documentoXML.createAttribute("nodeB");
-                nodeB.setValue(demandaN.getB().getId());
+                nodeB.setValue("" + demandaN.getB().getId());
                 demanda.setAttributeNode(nodeB);
 
                 Attr valor = documentoXML.createAttribute("valor");
@@ -243,7 +244,7 @@ public class FuntionSalvar {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource documentoFonte = new DOMSource(documentoXML);
 
-            StreamResult documentoFinal = new StreamResult(ControlDateNetwork.getInstance().getLocalDeSalvamento());
+            StreamResult documentoFinal = new StreamResult(ControllerDateNetwork.getInstance().getLocalDeSalvamento());
 
             transformer.transform(documentoFonte, documentoFinal);
 

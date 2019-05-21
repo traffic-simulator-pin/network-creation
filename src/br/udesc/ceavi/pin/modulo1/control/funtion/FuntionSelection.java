@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import java.util.ArrayList;
 import java.util.List;
 

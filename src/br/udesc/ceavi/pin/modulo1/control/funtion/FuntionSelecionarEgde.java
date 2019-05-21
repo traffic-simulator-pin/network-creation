@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
@@ -63,11 +63,11 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
     }
 
     @Override
-    public Egde selecionar(int x, int y) {
+    public void selecionarAddList(int x, int y) {
         //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         //Varendo a lista de Egde
-        for (Egde egde : ControlDateNetwork.getInstance().getAllEgde()) {
+        for (Egde egde : ControllerDateNetwork.getInstance().getAllEgde()) {
             //Verificando se o egde tem a area a baixo
             if (egde.havePointInLine(
                     //Area criada apartir do ponto de clique
@@ -76,11 +76,21 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
                 //Logica de adicionar quando não tem e remover quando tem
                 if (super.getListaSelecionado().contains(egde)) {
                     removeSelecionado(egde);
-                    return null;
                 } else {
                     addSelecionado(egde);
-                    return egde;
                 }
+            }
+        }
+    }
+
+    @Override
+    public Egde selecionar(int x, int y) {
+        float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
+        //Varendo a lista de Egde
+        for (Egde egde : ControllerDateNetwork.getInstance().getAllEgde()) {
+            //Verificando se o egde tem a area a baixo
+            if (egde.havePointInLine(new Point((int) realLocation[0], (int) realLocation[1]))) {
+                return egde;
             }
         }
         return null;
@@ -96,25 +106,25 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
         mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                selecionar(e.getPoint().x, e.getPoint().y);
+                selecionarAddList(e.getPoint().x, e.getPoint().y);
                 atualizarTela();
             }
 
         };
     }
-    
+
     private void atualizarTela() {
-        ControllerDesktop d     = ControllerDesktop.getInstance();
-        ViewFrameEdge view   = null;
-        
-        for(ViewJanelaSistema j : d.getJanelas()) {
-            if(j.getClass() == ViewFrameEdge.class) {
-                view = (ViewFrameEdge)j;
+        ControllerDesktop d = ControllerDesktop.getInstance();
+        ViewFrameEdge view = null;
+
+        for (ViewJanelaSistema j : d.getJanelas()) {
+            if (j.getClass() == ViewFrameEdge.class) {
+                view = (ViewFrameEdge) j;
                 break;
             }
         }
-        
-        if(view == null) {
+
+        if (view == null) {
             return;
         }
         view.atualizaListaEdge(this.getSeletion());

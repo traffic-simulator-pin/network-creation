@@ -2,39 +2,49 @@ package br.udesc.ceavi.pin.modulo1.model;
 
 import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import static br.udesc.ceavi.pin.modulo1.model.Node.SIZE;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 
 public class Egde {
 
-    public static int idNaoUsuado = 1;
+    private static long idNaoUsuado = 1;
+    private final long id;
 
-    private final String ID;
     private final Node de;
     private final Node para;
+
     private final float width;
-    private String nome;
+    private final String nome;
     private Type type;
     private Line2D linha;
     private double conficienteAngula, conficienteLiner;
 
     public Egde(Node de, Node para) {
-        this.ID = "" + idNaoUsuado;
+        this.id = idNaoUsuado;
         Egde.idNaoUsuado++;
+        
         this.de = de;
         this.para = para;
+        
         this.width = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
+        this.nome = de.getId() + "-" + para.getId();
+        
         initLinha();
         initAssociacao();
     }
 
-    public Egde(String id, Node de, Node para, float width) {
-        this.ID = id;
+    public Egde(long id, Node de, Node para, float width, String nome) {
+        this.id = id;
+        if (idNaoUsuado <= id) {
+            idNaoUsuado = (id + 1);
+        }
+
         this.de = de;
         this.para = para;
         this.width = width;
+        this.nome = nome;
+
         initLinha();
         initAssociacao();
     }
@@ -58,7 +68,7 @@ public class Egde {
 
     @Override
     public String toString() {
-        return "id: " + ID + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + width + "\n";
+        return "id: " + id + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + width + "\n";
     }
 
     public float x1() {
@@ -115,9 +125,8 @@ public class Egde {
         return other.getLinha().equals(this.getLinha());
     }
 
-    public void setType(Type type, String nome) {
+    public void setType(Type type) {
         this.type = type;
-        this.nome = nome;
     }
 
     public Type getType() {
@@ -128,8 +137,8 @@ public class Egde {
         return nome;
     }
 
-    public String getId() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
     public float getWidth() {

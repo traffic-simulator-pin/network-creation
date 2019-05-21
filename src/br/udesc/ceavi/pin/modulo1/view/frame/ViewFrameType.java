@@ -4,9 +4,7 @@ import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenerFrameType;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -72,9 +70,9 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
         desktop().removerInstanciaJanela(this);
         desktop().removerInstanciaJanela(viewFrameEdge);
         desktop().getViewPrincipal();
-        
+
         viewFrameEdge.dispose();
-        
+
         this.dispose();
     }
 
@@ -113,13 +111,13 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
             } else {
                 modelo.setOneway(false);
             }
-            
+
             modelo.setSpeed(Float.parseFloat(((JTextField) tfVelocidade[1]).getText()));
 
             List<Egde> edges = viewEdg.getEgds();
 
             for (Egde ed : edges) {
-                ed.setType(modelo, ((JTextField) tfNomeEgde[1]).getText());
+                ed.setType(modelo);
             }
 
             modelo.setListDeEgdeQuePertenco(edges);

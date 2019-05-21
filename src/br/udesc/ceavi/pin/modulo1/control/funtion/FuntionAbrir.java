@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
@@ -54,9 +54,11 @@ public class FuntionAbrir {
             for (int i = 0; i < listaNodesXML.getLength(); i++) {
                 org.w3c.dom.Node node = listaNodesXML.item(i);
                 Element noNodes = (Element) node;
-                Node no = new Node(noNodes.getAttribute("id"),
+                Node no = new Node(
+                        Integer.parseInt(noNodes.getAttribute("id")),
                         Float.parseFloat(noNodes.getAttribute("x")),
-                        Float.parseFloat(noNodes.getAttribute("y")));
+                        Float.parseFloat(noNodes.getAttribute("y"))
+                );
                 listaNodes.add(no);
             }
 
@@ -68,10 +70,13 @@ public class FuntionAbrir {
 
                 Element noType = (Element) type;
 
-                Type t = new Type(noType.getAttribute("id"),
+                Type t = new Type(
+                        Integer.parseInt(noType.getAttribute("id")),
                         Integer.parseInt(noType.getAttribute("numLanes")),
                         Boolean.getBoolean(noType.getAttribute("oneway")),
-                        Float.parseFloat(noType.getAttribute("speed")));
+                        Float.parseFloat(noType.getAttribute("speed")),
+                        Integer.parseInt(noType.getAttribute("capacit"))
+                );
                 listaTypes.add(t);
             }
 
@@ -84,20 +89,22 @@ public class FuntionAbrir {
                 int inodeA = -1;
                 int inodeB = -1;
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getId().equals(noDemanda.getAttribute("nodeA"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("nodeA"))) {
                         inodeA = j;
                     }
-                    if (listaNodes.get(j).getId().equals(noDemanda.getAttribute("nodeB"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("nodeB"))) {
                         inodeB = j;
                     }
 
                 }
 
                 if (inodeA >= 0 && inodeB >= 0) {
-                    Demanda d = new Demanda(noDemanda.getAttribute("id"),
+                    Demanda d = new Demanda(
+                            Integer.parseInt(noDemanda.getAttribute("id")),
                             listaNodes.get(inodeA),
                             listaNodes.get(inodeB),
-                            Integer.parseInt(noDemanda.getAttribute("valor")));
+                            Integer.parseInt(noDemanda.getAttribute("valor"))
+                    );
                     listaDemanda.add(d);
                 }
                 inodeA = -1;
@@ -115,32 +122,32 @@ public class FuntionAbrir {
                 int noPara = -1;
 
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getId().equals(noEdge.getAttribute("from"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("from"))) {
                         noDe = j;
                     }
-                    if (listaNodes.get(j).getId().equals(noEdge.getAttribute("to"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("to"))) {
                         noPara = j;
                     }
 
                 }
 
-                Egde e = new Egde(noEdge.getAttribute("id"),
+                Egde e = new Egde(
+                        Integer.parseInt(noEdge.getAttribute("id")),
                         listaNodes.get(noDe),
                         listaNodes.get(noPara),
-                        Float.parseFloat(noEdge.getAttribute("length")));
+                        Float.parseFloat(noEdge.getAttribute("length")),
+                        noEdge.getAttribute("nome")
+                );
 
                 int iType = -1;
                 for (int j = 0; j < listaTypes.size(); j++) {
-                    if (listaTypes.get(j).getId().equals(noEdge.getAttribute("type"))) {
+                    if (listaTypes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("type"))) {
                         iType = j;
                     }
                 }
 
                 if (iType >= 0) {
-                    e.setType(listaTypes.get(iType), noEdge.getAttribute("name"));
-                } else {
-                    e.setType(null, noEdge.getAttribute("name"));
-
+                    e.setType(listaTypes.get(iType));
                 }
 
                 listaEdges.add(e);
@@ -189,8 +196,8 @@ public class FuntionAbrir {
         }
     }
 
-    private static ControlDateNetwork dataBase() {
-        return ControlDateNetwork.getInstance();
+    private static ControllerDateNetwork dataBase() {
+        return ControllerDateNetwork.getInstance();
     }
 
     private static ControllerDesktop desktop() {

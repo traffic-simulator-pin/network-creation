@@ -1,13 +1,11 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
-import br.udesc.ceavi.pin.modulo1.control.exception.RemovingNodeWithDemandAssociationException;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,13 +67,9 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
             public void mouseClicked(MouseEvent e) {
                 Egde egde = seletionEgde.selecionar(e.getX(), e.getY());
                 if (egde != null) {
-                    try {
-                        ControlDateNetwork.getInstance().tryRemoveEgde(Arrays.asList(egde));
-                        egdeMousePassouPorCimaRemove = null;
-                        seletionEgde.getSeletion().clear();
-                    } catch (RemovingNodeWithDemandAssociationException ex) {
-                        ex.printStackTrace();
-                    }
+                    ControllerDateNetwork.getInstance().tryRemoveEgde(Arrays.asList(egde));
+                    egdeMousePassouPorCimaRemove = null;
+                    seletionEgde.getSeletion().clear();
                 }
             }
 

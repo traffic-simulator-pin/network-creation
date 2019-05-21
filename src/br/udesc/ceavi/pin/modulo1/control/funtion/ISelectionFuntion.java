@@ -8,7 +8,9 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public interface ISelectionFuntion<T>{
+public interface ISelectionFuntion<T> {
+
+    public void selecionarAddList(int x, int y);
 
     public T selecionar(int x, int y);
 

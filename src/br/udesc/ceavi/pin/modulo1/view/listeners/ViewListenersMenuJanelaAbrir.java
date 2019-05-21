@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionAbrir;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -21,7 +21,7 @@ public class ViewListenersMenuJanelaAbrir extends ViewListenersMenus {
         int returnVal = fileChooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            ControlDateNetwork.getInstance().setLocalDeSalvamento(file);
+            ControllerDateNetwork.getInstance().setLocalDeSalvamento(file);
             new FuntionAbrir();
         } else {
             System.out.println("File access cancelled by user.");

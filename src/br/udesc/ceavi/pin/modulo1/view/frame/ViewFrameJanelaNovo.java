@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
@@ -102,9 +102,9 @@ public class ViewFrameJanelaNovo extends JFrame {
             try {
                 control.setParametroToTelaDesenho(tfLargura.getText(), tfAltura.getText());
                 if (desktop().hasViewPrincipa()) {
-                    if (ControlDateNetwork.getInstance().haveElements()) {
-                        ControlDateNetwork.getInstance().salvar();
-                        ControlDateNetwork.getInstance().reiniciar();
+                    if (ControllerDateNetwork.getInstance().haveElements()) {
+                        ControllerDateNetwork.getInstance().salvar();
+                        ControllerDateNetwork.getInstance().reiniciar();
                     }
                 }
                 TelaComBotoes telaComBotoes = new TelaComBotoes(control.getwSizeTela(), control.gethSizeTela());

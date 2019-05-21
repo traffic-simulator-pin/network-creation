@@ -1,5 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +14,5 @@ import java.util.List;
 public abstract class FuntionCreate<T> extends Funtion implements ICreateFuntion<T> {
 
     protected List<T> lista = new ArrayList<>();
-
-    @Override
-    public void offer() throws Exception {
-    }
-
-    @Override
-    public void force(Exception listException) {
-    }
-
+    protected ControllerDateNetwork date = ControllerDateNetwork.getInstance();
 }

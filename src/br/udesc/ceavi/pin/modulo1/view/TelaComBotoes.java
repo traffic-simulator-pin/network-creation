@@ -1,6 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
@@ -50,14 +50,14 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
     private AreaDesenho areaDesenho;
 
     private IFuntion funtion;
-    private ControlDateNetwork dateNetwork;
+    private ControllerDateNetwork dateNetwork;
 
     public TelaComBotoes(int largura, int altura) {
         initAreaDesenho(largura, altura);
         initComponents();
         initMyComponents();
         initListener();
-        dateNetwork = ControlDateNetwork.getInstance();
+        dateNetwork = ControllerDateNetwork.getInstance();
         dateNetwork.addObservador(this);
         abrirJanela();
         initLoop();

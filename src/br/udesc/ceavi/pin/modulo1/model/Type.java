@@ -1,6 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,39 +14,50 @@ import java.util.Objects;
  */
 public class Type {
 
-    public static int idNaoUsuado = 1;
+    private static long idNaoUsuado = 1;
+    private final long id;
 
-    private final String ID;
     private List<Egde> listDeEgdeQuePertenco;
     private int numLanes;
     private boolean oneway;
     private float speed;
+    private int capacit;
 
     public Type() {
-        this.ID = "" + idNaoUsuado;
+        this.id = idNaoUsuado;
         idNaoUsuado++;
         this.listDeEgdeQuePertenco = new ArrayList<>();
         this.numLanes = 0;
         this.oneway = false;
         this.speed = 0;
+        this.capacit = 0;
     }
 
-    public Type(List<Egde> listDeEgdeQuePertenco, int numLanes, boolean oneway, float speed) {
-        this.ID = "" + idNaoUsuado;
+    public Type(long id, int numLanes, boolean oneway, float speed, int capacit) {
+        this.id = id;
+        if (idNaoUsuado <= id) {
+            idNaoUsuado = (id + 1);
+        }
+
+        this.listDeEgdeQuePertenco = new ArrayList<>();
+
+        this.numLanes = numLanes;
+        this.oneway = oneway;
+        this.speed = speed;
+        this.capacit = capacit;
+    }
+
+    public Type(List<Egde> lista, int numLanes, boolean oneway, float speed, int capacit) {
+        this.id = idNaoUsuado;
         idNaoUsuado++;
-        this.listDeEgdeQuePertenco = new ArrayList<>();
-        this.listDeEgdeQuePertenco.addAll(listDeEgdeQuePertenco);
-        this.numLanes = numLanes;
-        this.oneway = oneway;
-        this.speed = speed;
-    }
 
-    public Type(String id,int numLanes, boolean oneway, float speed) {
-        this.ID = id;
         this.listDeEgdeQuePertenco = new ArrayList<>();
+        this.listDeEgdeQuePertenco.addAll(lista);
+
         this.numLanes = numLanes;
         this.oneway = oneway;
         this.speed = speed;
+        this.capacit = capacit;
     }
 
     public int getNumLanes() {
@@ -74,7 +87,7 @@ public class Type {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.ID);
+        hash = 83 * hash + Objects.hashCode(this.id);
         hash = 83 * hash + this.numLanes;
         hash = 83 * hash + (this.oneway ? 1 : 0);
         hash = 83 * hash + Float.floatToIntBits(this.speed);
@@ -102,11 +115,15 @@ public class Type {
         if (Float.floatToIntBits(this.speed) != Float.floatToIntBits(other.speed)) {
             return false;
         }
-        return Objects.equals(this.ID, other.ID);
+        return Objects.equals(this.id, other.id);
     }
 
     public void quebrarAssociarTypeEgde(Egde e) {
         this.listDeEgdeQuePertenco.remove(e);
+    }
+
+    public List<Egde> getListDeEgdeQuePertenco() {
+        return Collections.unmodifiableList(listDeEgdeQuePertenco);
     }
 
     public boolean haveLinkEgde() {
@@ -124,7 +141,12 @@ public class Type {
         this.listDeEgdeQuePertenco = edgs;
     }
 
-    public String getId() {
-        return ID;
+    public long getId() {
+        return id;
     }
+
+    public float getCapacit() {
+        return capacit;
+    }
+
 }

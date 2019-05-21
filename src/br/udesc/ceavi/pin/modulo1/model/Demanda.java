@@ -10,24 +10,32 @@ import java.util.Objects;
  */
 public class Demanda {
 
-    public static int idNaoUsuado = 1;
+    private static long idNaoUsuado = 1;
+    private final long id;
+
     private final Node A, B;
     private final int demanda;
-    private final String ID;
 
     public Demanda(Node A, Node B, int demanda) {
+        this.id = idNaoUsuado;
+        idNaoUsuado++;
+
         this.A = A;
         this.B = B;
+
         this.demanda = demanda;
-        this.ID = "" + idNaoUsuado;
-        idNaoUsuado++;
     }
 
-    public Demanda(String id, Node A, Node B, int demanda) {
+    public Demanda(long id, Node A, Node B, int demanda) {
+        this.id = id;
+        if (idNaoUsuado <= id) {
+            idNaoUsuado = (id + 1);
+        }
+
         this.A = A;
         this.B = B;
+
         this.demanda = demanda;
-        this.ID = id;
     }
 
     public Node getA() {
@@ -38,8 +46,8 @@ public class Demanda {
         return B;
     }
 
-    public String getId() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
     public int getDemanda() {

@@ -10,30 +10,27 @@ public class Node {
 
     public static final int SIZE = 8;
 
-    private final String ID;
+    private static long idNaoUsuado = 1;
+    private final long id;
+
     private final float x;
     private final float y;
-
-    public static int idNaoUsuado = 1;
 
     private List<Egde> listDeEgdeQuePertenco = new ArrayList<>();
 
     public Node(float x, float y) {
-        this.ID = "" + idNaoUsuado;
+        this.id = idNaoUsuado;
         idNaoUsuado++;
         this.x = x;
         this.y = y;
     }
 
-    public Node(String id, float x, float y) {
-        this.ID = id;
-        this.x = x;
-        this.y = y;
-    }
+    public Node(long id, float x, float y) {
+        this.id = id;
+        if (idNaoUsuado <= id) {
+            idNaoUsuado = (id + 1);
+        }
 
-    public Node(float x, float y, int sizeNodo) {
-        this.ID = "" + idNaoUsuado;
-        idNaoUsuado++;
         this.x = x;
         this.y = y;
     }
@@ -61,7 +58,7 @@ public class Node {
         if (this.y != other.getY()) {
             return false;
         }
-        return this.ID.equals(other.getId());
+        return this.id == other.getId();
     }
 
     public float getX() {
@@ -72,8 +69,8 @@ public class Node {
         return y;
     }
 
-    public String getId() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
     public boolean collideWithMyArea(float x2, float y2) {

@@ -1,8 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
-import br.udesc.ceavi.pin.modulo1.control.exception.DemandAlreadyExistException;
-import br.udesc.ceavi.pin.modulo1.control.exception.EgdeAlreadyHasAssociationWithTypeException;
-import br.udesc.ceavi.pin.modulo1.control.exception.RemovingNodeWithDemandAssociationException;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSalvar;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
@@ -21,94 +18,74 @@ import javax.swing.JOptionPane;
  * @since 24/04/2019
  *
  */
-public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
-
-    private static ControlDateNetwork instance;
-
-    public static synchronized ControlDateNetwork getInstance() {
+public class ControllerDateNetwork implements Observado<ObservadorDateNetwork> {
+    
+    private static ControllerDateNetwork instance;
+    
+    public static synchronized ControllerDateNetwork getInstance() {
         if (instance == null) {
-            instance = new ControlDateNetwork();
+            instance = new ControllerDateNetwork();
         }
         return instance;
     }
-
+    
     private final List<Egde> listEgde;
     private final List<Demanda> listDemanda;
     private List<ObservadorDateNetwork> listaObservador = new ArrayList<>();
     private File localDeSalvamento;
-
-    private ControlDateNetwork() {
+    
+    private ControllerDateNetwork() {
         this.listEgde = new ArrayList<>();
         this.listDemanda = new ArrayList<>();
     }
-
+    
     public synchronized void StartByFile(List<Egde> listEgde, List<Demanda> listDemanda) {
         this.listDemanda.clear();
         this.listEgde.clear();
         this.listDemanda.addAll(listDemanda);
         this.listEgde.addAll(listEgde);
-
-        normalizandoID();
-
+        
         notificarAlteracaoNaEstruturaDeDados();
     }
-
-    private void normalizandoID() throws NumberFormatException {
-        getAllDemanda().stream().filter((a) -> (Integer.parseInt(a.getId()) > Demanda.idNaoUsuado)).forEachOrdered((a) -> {
-            Demanda.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
-        });
-        getAllEgde().stream().filter((a) -> (Integer.parseInt(a.getId()) > Egde.idNaoUsuado)).forEachOrdered((a) -> {
-            Egde.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
-        });
-        getAllNode().stream().filter((a) -> (Integer.parseInt(a.getId()) > Node.idNaoUsuado)).forEachOrdered((a) -> {
-            Node.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
-        });
-        getAllType().stream().filter((a) -> (Integer.parseInt(a.getId()) > Type.idNaoUsuado)).forEachOrdered((a) -> {
-            Type.idNaoUsuado = Integer.parseInt(a.getId()) + 50;
-        });
-    }
-
+    
     private void notificarAlteracaoNaEstruturaDeDados() {
         listaObservador.forEach(obs -> obs.notifyAlteracao());
     }
-
-    private synchronized void addEgde(Egde egde) {
-        this.listEgde.add(egde);
+    
+    public synchronized void offerEgde(List<Egde> lista) {
+        this.listEgde.addAll(lista);
+        notificarAlteracaoNaEstruturaDeDados();
     }
-
-    private synchronized void addDemanda(Demanda newDemanda) {
-        boolean alterado = false;
-        for (Demanda demanda : listDemanda) {
-            if (demanda.equals(newDemanda)) {
-                demanda = newDemanda;
-                alterado = true;
+    
+    public synchronized void offerDemanda(List<Demanda> lista) {
+        for (Demanda newDemanda : lista) {
+            boolean alterado = false;
+            for (Demanda demanda : listDemanda) {
+                if (demanda.equals(newDemanda)) {
+                    demanda = newDemanda;
+                    alterado = true;
+                }
+            }
+            if (!alterado) {
+                this.listDemanda.add(newDemanda);
             }
         }
-        if (alterado) {
-            this.listDemanda.add(newDemanda);
-        }
-        notificarAlteracaoNaEstruturaDeDados();
-
-    }
-
-    public synchronized void offerEgde(List<Egde> lista) {
-        lista.forEach(egdeADD -> addEgde(egdeADD));
         notificarAlteracaoNaEstruturaDeDados();
     }
-
-    public synchronized void offerDemanda(List<Demanda> lista) throws DemandAlreadyExistException {
-        for (Demanda newDemanda : lista) {
-            addDemanda(newDemanda);
-        }
+    
+    public synchronized void offerType(List<Type> listType) {
+        listType.forEach(type -> {
+            type.getListDeEgdeQuePertenco().forEach(egde -> egde.setType(type));
+        });
         notificarAlteracaoNaEstruturaDeDados();
     }
-
+    
     public synchronized void removeDemanda(List<Demanda> listDemandasARemove) {
-//        listDemanda.removeAll(listDemandasARemove);
+        listDemanda.removeAll(listDemandasARemove);
         notificarAlteracaoNaEstruturaDeDados();
     }
-
-    public synchronized void tryRemoveEgde(List<Egde> listEgdeRemove) throws RemovingNodeWithDemandAssociationException {
+    
+    public synchronized void tryRemoveEgde(List<Egde> listEgdeRemove) {
         List<Demanda> demandasRemover = new ArrayList<>();
         listEgdeRemove
                 .stream()
@@ -121,37 +98,11 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         this.listEgde.removeAll(listEgdeRemove);
         notificarAlteracaoNaEstruturaDeDados();
     }
-
-    public synchronized void forceRemoveEgde(List<Egde> lista, RemovingNodeWithDemandAssociationException ex) {
-        removeDemanda(ex.getListDemanda());
-        this.listEgde.removeAll(lista);
-        notificarAlteracaoNaEstruturaDeDados();
+    
+    public synchronized void removeType(List<Egde> listaRemover) {
+        listaRemover.forEach(egde -> egde.setType(null));
     }
-
-    public synchronized void offerType(List<Egde> rua, int numLanes, boolean oneway,
-            float speed, String nome) throws EgdeAlreadyHasAssociationWithTypeException {
-        for (Egde egde : rua) {
-            if (egde.getType() != null) {
-                throw new EgdeAlreadyHasAssociationWithTypeException();
-            }
-        }
-        atribuirType(rua, numLanes, oneway, speed, nome);
-        notificarAlteracaoNaEstruturaDeDados();
-    }
-
-    private synchronized void atribuirType(List<Egde> rua, int numLanes, boolean oneway, float speed, String nome) {
-        Type type = new Type(rua, numLanes, oneway, speed);
-        rua.forEach((egde) -> {
-            egde.setType(type, nome);
-        });
-        notificarAlteracaoNaEstruturaDeDados();
-    }
-
-    public synchronized void forceSetType(List<Egde> rua, int numLanes, boolean oneway, float speed, String nome) {
-        atribuirType(rua, numLanes, oneway, speed, nome);
-        notificarAlteracaoNaEstruturaDeDados();
-    }
-
+    
     private synchronized Demanda nodeHaveLinkWithDemand(Node de, Node para) {
         for (Demanda demanda : listDemanda) {
             if (demanda.getA().equals(de) || demanda.getA().equals(para)
@@ -161,19 +112,11 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         }
         return null;
     }
-
-    public synchronized void removeTypeAndName(List<Egde> listaRemover) {
-        listaRemover.forEach(egde -> egde.setType(null, ""));
-    }
-
-    public synchronized void removeTypeOnly(List<Egde> listaRemover) {
-        listaRemover.forEach(egde -> egde.setType(null, egde.getNome()));
-    }
-
+    
     public synchronized List<Egde> getAllEgde() {
         return listEgde.stream().collect(Collectors.toList());
     }
-
+    
     public synchronized List<Node> getAllNode() {
         List<Node> lista = new ArrayList<>();
         listEgde.forEach(t -> {
@@ -186,7 +129,7 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         });
         return lista;
     }
-
+    
     public synchronized List<Type> getAllType() {
         List<Type> lista = new ArrayList<>();
         listEgde.forEach(egde -> {
@@ -196,29 +139,29 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
         });
         return lista;
     }
-
+    
     public synchronized List<Demanda> getAllDemanda() {
         return listDemanda.stream().collect(Collectors.toList());
     }
-
+    
     @Override
     public void addObservador(ObservadorDateNetwork obs) {
         this.listaObservador.add(obs);
     }
-
+    
     @Override
     public void removeObservador(ObservadorDateNetwork obs) {
         this.listaObservador.remove(obs);
     }
-
+    
     public void setLocalDeSalvamento(File localDeSalvamento) {
         this.localDeSalvamento = localDeSalvamento;
     }
-
+    
     public File getLocalDeSalvamento() {
         return localDeSalvamento;
     }
-
+    
     public void salvar() {
         if (localDeSalvamento == null) {
             int a = JOptionPane.showConfirmDialog(null, "Deseja Salvar?", "Salvar", JOptionPane.YES_NO_OPTION);
@@ -229,11 +172,11 @@ public class ControlDateNetwork implements Observado<ObservadorDateNetwork> {
             new FuntionSalvar();
         }
     }
-
+    
     public synchronized void reiniciar() {
-        instance = new ControlDateNetwork();
+        instance = new ControllerDateNetwork();
     }
-
+    
     public boolean haveElements() {
         return !listDemanda.isEmpty() || !listEgde.isEmpty();
     }

@@ -1,11 +1,10 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControlDateNetwork;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
@@ -62,28 +61,40 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> implements Obs
     }
 
     @Override
-    public Node selecionar(int x, int y) {
+    public void selecionarAddList(int x, int y) {
         //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] localizacaReal = HelpLocator.getNetworkRealLocation(x, y);
         //Varendo a lista de Node
-        for (Node node : ControlDateNetwork.getInstance().getAllNode()) {
+        for (Node node : ControllerDateNetwork.getInstance().getAllNode()) {
             //Verificando se o node tem a area a baixo
             if (node.collideWithMyArea(localizacaReal[0], localizacaReal[1])) {
 
                 //Logica de adicionar quando não tem e remover quando tem
                 if (super.getListaSelecionado().contains(node)) {
                     removeSelecionado(node);
-                    return null;
                 } else {
                     addSelecionado(node);
-                    return node;
                 }
+            }
+        }
+    }
+
+    @Override
+    public Node selecionar(int x, int y) {
+        //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
+        float[] localizacaReal = HelpLocator.getNetworkRealLocation(x, y);
+        //Varendo a lista de Node
+        for (Node node : ControllerDateNetwork.getInstance().getAllNode()) {
+            //Verificando se o node tem a area a baixo
+            if (node.collideWithMyArea(localizacaReal[0], localizacaReal[1])) {
+                return node;
             }
         }
         return null;
     }
 
     @Override
+
     public List<Node> getListaSelecionado() {
         return super.getListaSelecionado(); //To change body of generated methods, choose Tools | Templates.
     }
@@ -97,30 +108,29 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> implements Obs
             }
         };
     }
-    
-    
+
     private void atualizaTelaDemanda(Node node) {
         ControllerDesktop d = ControllerDesktop.getInstance();
         ViewFrameDemanda viewDemanda = null;
-        
-        for(ViewJanelaSistema v : d.getJanelas()) {
-            if(v instanceof ViewFrameDemanda) {
-                viewDemanda = (ViewFrameDemanda)v;
+
+        for (ViewJanelaSistema v : d.getJanelas()) {
+            if (v instanceof ViewFrameDemanda) {
+                viewDemanda = (ViewFrameDemanda) v;
                 break;
             }
         }
-        
-        if(viewDemanda == null || !viewDemanda.isVisible()) {
+
+        if (viewDemanda == null || !viewDemanda.isVisible()) {
             return;
         }
-        
+
         Node nodoOrigem = viewDemanda.getNodoOrigem();
-        if(nodoOrigem == null) {
+        if (nodoOrigem == null) {
             viewDemanda.setNodoOrigem(node);
         } else {
             viewDemanda.setNodoDestino(node);
         }
-        
+
         viewDemanda.atualizaTelaDemanda();
     }
 }

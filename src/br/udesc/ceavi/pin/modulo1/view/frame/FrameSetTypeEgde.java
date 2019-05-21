@@ -9,7 +9,6 @@ import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -45,13 +44,13 @@ public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
     protected ViewPanelManutencao criaAreaManutencao() {
         ViewPanelManutencao novo = super.criaAreaManutencao();
         
-        JTextField nome = novo.adicionaCampo("nomeEdge", "Nome dos edge");
+        JTextField nome = novo.adicionaCampo("nomeEdge", "Nome dos Edge");
         nome.setEditable(false);
         novo.adicionaCampo("nfaixas", "Número Faixas");
         novo.adicionaCampo("velocidade", "Velocidade");
-        novo.adicionaCampo("velocidade", "Capacidade");
+        novo.adicionaCampo("capacidade", "Capacidade");
         jcbFluxo = new JComboBox(new String[]{"Mão Unica", "Mão Dupla"});
-        novo.adicionaComponente("", "", jcbFluxo);
+        novo.adicionaComponente("", "Fluxo", jcbFluxo);
         return novo;
     }
     

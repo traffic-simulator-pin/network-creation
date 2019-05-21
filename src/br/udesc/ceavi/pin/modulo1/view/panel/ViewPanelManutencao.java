@@ -65,14 +65,15 @@ public class ViewPanelManutencao extends JPanel {
         lConstraints.fill = GridBagConstraints.HORIZONTAL;
         lConstraints.gridx = 0;
         lConstraints.insets = new Insets(2, 10, 2, 4);
+        this.add(label, lConstraints);
+        
         GridBagConstraints cConstraints = new GridBagConstraints();
         cConstraints.fill = GridBagConstraints.HORIZONTAL;
         cConstraints.gridx = 1;
-        cConstraints.weightx = 0.5;
+        cConstraints.weightx = 0.5f;
         cConstraints.insets = new Insets(2, 1, 2, 10);
-
-        this.add(label, lConstraints);
         this.add(campo, cConstraints);
+
         campos.add(new JComponent[]{label, campo});
         return campo;
     }
@@ -86,22 +87,21 @@ public class ViewPanelManutencao extends JPanel {
     public void adicionaComponente(String nome, String titulo, JComponent componente) {
         JLabel label = new JLabel(titulo);
         label.setName(nome);
-        //label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         label.setPreferredSize(new Dimension(100, 20));
 
         GridBagConstraints lConstraints = new GridBagConstraints();
         lConstraints.fill = GridBagConstraints.HORIZONTAL;
         lConstraints.gridx = 0;
-        lConstraints.weightx = 0.1f;
-        lConstraints.insets = new Insets(2, 1, 2, 4);
+        lConstraints.insets = new Insets(2, 10, 2, 4);
+        this.add(label, lConstraints);
+
         GridBagConstraints cConstraints = new GridBagConstraints();
         cConstraints.fill = GridBagConstraints.HORIZONTAL;
         cConstraints.gridx = 1;
-        cConstraints.weightx = 0.9f;
-        cConstraints.insets = new Insets(2, 1, 2, 4);
-
-        this.add(label, lConstraints);
+        cConstraints.weightx = 0.5f;
+        cConstraints.insets = new Insets(2, 1, 2, 10);
         this.add(componente, cConstraints);
+
         campos.add(new JComponent[]{label, componente});
     }
 

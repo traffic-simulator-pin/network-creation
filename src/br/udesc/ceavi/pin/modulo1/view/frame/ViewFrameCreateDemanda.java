@@ -1,12 +1,15 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateDemanda;
+import br.udesc.ceavi.pin.modulo1.exception.NaoHaCaminhoParaADemandaException;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -35,7 +38,7 @@ public class ViewFrameCreateDemanda extends ViewFrameModulo1Padrao {
         this.moveToFront();
         this.toFront();
         this.setVisible(false);
-        this.setMySide(350, 200);
+        this.setMySide(275, 200);
     }
 
     @Override
@@ -107,19 +110,18 @@ public class ViewFrameCreateDemanda extends ViewFrameModulo1Padrao {
         public void actionPerformed(ActionEvent e) {
             int demanda = 0;
             if (controller.getA() != null && controller.getB() != null) {
-                controller.newDemanda(new Demanda(controller.getA(), controller.getB(), demanda));
-            } else {
-                return;
-            }
-
-            if (!jtfDemanda.getText().equals("")) {
                 try {
-                    demanda = Integer.parseInt(jtfDemanda.getText() + "");
+                    demanda = Integer.parseInt(jtfDemanda.getText());
                     if (demanda < -1) {
                         throw new Exception();
                     }
-                } catch (Exception e1) {
+                    controller.newDemanda(new Demanda(controller.getA(), controller.getB(), demanda));
+                } catch (NaoHaCaminhoParaADemandaException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Informe Valores Validos");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Informe Valores Validos(Demanda > 0)");
                 }
             }
             limparCampos();

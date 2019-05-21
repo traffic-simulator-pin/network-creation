@@ -4,13 +4,13 @@ import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
+import br.udesc.ceavi.pin.modulo1.exception.NaoHaCaminhoParaADemandaException;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameCreateDemanda;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
+import javax.rmi.CORBA.Util;
 
 /**
  *
@@ -45,10 +45,12 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
         ControllerDateNetwork.getInstance().offerDemanda(lista);
     }
 
-    public void newDemanda(Demanda demanda) {
-        lista.add(demanda);
-        offer();
-        clearNode();
+    public void newDemanda(Demanda demanda) throws NaoHaCaminhoParaADemandaException {
+        if (verificarExistenciaCaminho(A, B)) {
+            lista.add(demanda);
+            offer();
+            clearNode();
+        }
     }
 
     public void clearNode() {
@@ -134,6 +136,12 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
 
     @Override
     public void processInput() {
+    }
+
+    private boolean verificarExistenciaCaminho(Node A, Node B) {
+        //A Busca de ve partir de A e verificar se tem uma caminho até B
+        
+        return true;
     }
 
 }

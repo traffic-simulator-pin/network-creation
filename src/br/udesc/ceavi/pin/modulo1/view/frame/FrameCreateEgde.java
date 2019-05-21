@@ -43,7 +43,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
         this.toFront();
         this.setVisible(false);
         setResizable(false);
-        setMySide(390, 80);
+        setMySide(390, 85);
         intiComponent();
     }
 

@@ -138,9 +138,9 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
     public void processInput() {
     }
 
-    private boolean verificarExistenciaCaminho(Node A, Node B) {
+    private boolean verificarExistenciaCaminho(Node A, Node B) throws NaoHaCaminhoParaADemandaException {
         //A Busca de ve partir de A e verificar se tem uma caminho até B
-        
+
         return true;
     }
 

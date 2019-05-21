@@ -2,13 +2,13 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  *
@@ -20,7 +20,7 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
 
     private FuntionSelecionarEgde seletionEgde;
     private Egde egdeMousePassouPorCimaRemove;
-    private List<ObservadorTelaDesenho> listaDeObservador;
+    private List<ObservadorRender> listaDeObservador;
 
     public FuntionRemoverEgde() {
         seletionEgde = new FuntionSelecionarEgde();
@@ -50,12 +50,12 @@ public class FuntionRemoverEgde extends Funtion implements ILoop {
     }
 
     @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
+    public void addObservador(ObservadorRender obs) {
         this.listaDeObservador.add(obs);
     }
 
     @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
+    public void removeObservador(ObservadorRender obs) {
         this.listaDeObservador.remove(obs);
     }
 

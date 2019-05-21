@@ -3,16 +3,16 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDemanda;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameAdicionarDemanda;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  *
@@ -20,9 +20,9 @@ import java.util.List;
  * @since 24/04/2019
  *
  */
-public class FuntionSelecionarNode extends FuntionSelection<Node> implements Observado<ObservadorTelaDesenho>, ILoop {
+public class FuntionSelecionarNode extends FuntionSelection<Node> implements Observado<ObservadorRender>, ILoop {
 
-    private List<ObservadorTelaDesenho> listaObs;
+    private List<ObservadorRender> listaObs;
 
     public FuntionSelecionarNode() {
         listaObs = new ArrayList<>();
@@ -31,12 +31,12 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> implements Obs
     }
 
     @Override
-    public void addObservador(ObservadorTelaDesenho oObs) {
+    public void addObservador(ObservadorRender oObs) {
         this.listaObs.add(oObs);
     }
 
     @Override
-    public void removeObservador(ObservadorTelaDesenho oObs) {
+    public void removeObservador(ObservadorRender oObs) {
         this.listaObs.remove(oObs);
     }
 
@@ -110,33 +110,8 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> implements Obs
                 }else{
                     addSelecionado(selecionado);
                 }
-                atualizaTelaDemanda(selecionado);
             }
         };
     }
-
-    private void atualizaTelaDemanda(Node node) {
-        ControllerDesktop d = ControllerDesktop.getInstance();
-        ViewFrameDemanda viewDemanda = null;
-
-        for (ViewJanelaSistema v : d.getJanelas()) {
-            if (v instanceof ViewFrameDemanda) {
-                viewDemanda = (ViewFrameDemanda) v;
-                break;
-            }
-        }
-
-        if (viewDemanda == null || !viewDemanda.isVisible()) {
-            return;
-        }
-
-        Node nodoOrigem = viewDemanda.getNodoOrigem();
-        if (nodoOrigem == null) {
-            viewDemanda.setNodoOrigem(node);
-        } else {
-            viewDemanda.setNodoDestino(node);
-        }
-
-        viewDemanda.atualizaTelaDemanda();
-    }
+ 
 }

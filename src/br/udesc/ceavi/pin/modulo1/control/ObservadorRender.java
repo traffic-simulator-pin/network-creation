@@ -8,7 +8,7 @@ import java.awt.Color;
  * @since 05/04/2019
  *
  */
-public interface ObservadorTelaDesenho {
+public interface ObservadorRender {
 
     public void addSpriteDateNetwork(String nome, float[] position, Color cor);
 

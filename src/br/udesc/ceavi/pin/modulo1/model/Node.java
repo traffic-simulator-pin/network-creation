@@ -52,12 +52,6 @@ public class Node {
             return false;
         }
         final Node other = (Node) obj;
-        if (this.x != other.getX()) {
-            return false;
-        }
-        if (this.y != other.getY()) {
-            return false;
-        }
         return this.id == other.getId();
     }
 

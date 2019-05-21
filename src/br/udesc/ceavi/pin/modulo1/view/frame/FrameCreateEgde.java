@@ -21,14 +21,14 @@ import javax.swing.JComboBox;
  *
  */
 public class FrameCreateEgde extends ViewFrameModulo1Padrao {
-    
+
     private DefaultType defatu;
     private JComboBox cbType;
     private final ICreateFuntion<Egde> controller;
     private final TelaComBotoes areaDesenho;
     private JButton btnCreateTypePersonalizado;
     private List<Type> listaType = new ArrayList<>();
-    
+
     public FrameCreateEgde(FuntionCreateEgdeTipo1 createEgde, TelaComBotoes areaDesenho) {
         this.setLocation(300, 10);
         this.moveToFront();
@@ -41,7 +41,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
         setMySide(390, 80);
         intiComponent();
     }
-    
+
     public FrameCreateEgde(FuntionCreateEgdeTipo2 createEgde, TelaComBotoes areaDesenho) {
         this.setLocation(300, 10);
         this.moveToFront();
@@ -54,23 +54,23 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
         setMySide(390, 80);
         intiComponent();
     }
-    
+
     @Override
     public void destruirInstanciaJanela() {
         super.destruirInstanciaJanela();
         areaDesenho.setFuntion(null);
     }
-    
+
     @Override
     public void fechaJanela() {
         super.fechaJanela();
     }
-    
+
     @Override
     public void abrirJanela() {
         super.abrirJanela();
     }
-    
+
     private void intiComponent() {
         cbType = new JComboBox();
         for (int i = 0; i < DefaultType.values().length; i++) {
@@ -83,7 +83,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
         this.add(btnCreateTypePersonalizado, BorderLayout.SOUTH);
         initListener();
     }
-    
+
     private void setModeloCombox() {
         cbType.removeAllItems();
         for (int i = 0; i < listaType.size(); i++) {
@@ -98,7 +98,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
         cbType.repaint();
         this.repaint();
     }
-    
+
     public void initListener() {
         btnCreateTypePersonalizado.addActionListener((e) -> {
             FrameCreateDefaultType frameCreateDefaultType = new FrameCreateDefaultType(this);
@@ -106,11 +106,11 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
             frameCreateDefaultType.abrirJanela();
         });
     }
-    
+
     public Type getTypeSelecionado() {
         return listaType.get(cbType.getSelectedIndex());
     }
-    
+
     public void setTypePersonalizado(Type modelo) {
         listaType.add(modelo);
         setModeloCombox();

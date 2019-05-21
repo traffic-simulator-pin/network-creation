@@ -13,7 +13,7 @@ public interface IControlDesenho {
 
     public void criarNodo(Point mousePosition);
 
-    public void addObservador(ObservadorTelaDesenho obs);
+    public void addObservador(ObservadorRender obs);
 
     public void selecionarEgde(Point mousePosition);
 

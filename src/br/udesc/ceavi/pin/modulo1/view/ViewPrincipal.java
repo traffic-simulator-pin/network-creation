@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameJanelaNovo;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaAbrir;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaNovo;
 import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenuJanelaSalvar;

@@ -1,7 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  *
@@ -22,10 +22,10 @@ public abstract class Funtion implements IFuntion {
     public  void initMouse(){}
 
     @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
+    public void addObservador(ObservadorRender obs) {
     }
 
     @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
+    public void removeObservador(ObservadorRender obs) {
     }
 }

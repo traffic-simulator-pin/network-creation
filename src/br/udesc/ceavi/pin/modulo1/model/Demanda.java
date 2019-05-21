@@ -14,7 +14,7 @@ public class Demanda {
     private final long id;
 
     private final Node A, B;
-    private final int demanda;
+    private  int demanda;
 
     public Demanda(Node A, Node B, int demanda) {
         this.id = idNaoUsuado;
@@ -79,4 +79,8 @@ public class Demanda {
         return true;
     }
 
+    public void setDemanda(int demanda) {
+        this.demanda = demanda;
+    }
+    
 }

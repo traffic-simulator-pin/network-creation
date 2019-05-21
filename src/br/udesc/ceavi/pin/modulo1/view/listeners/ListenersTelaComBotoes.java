@@ -1,12 +1,11 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.*;
-import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameCreateEgde;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameDemanda;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameAdicionarDemanda;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -168,10 +167,8 @@ public class ListenersTelaComBotoes {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ViewFrameDemanda telaDemanda = new ViewFrameDemanda();
-            setFuntionToView(
-                    telaDemanda.getFuntion().getSeletion(),
-                    btn);
+            ViewFrameAdicionarDemanda telaDemanda = new ViewFrameAdicionarDemanda(view);
+            setFuntionToView(telaDemanda.getFuntion(), btn);
 
             ControllerDesktop desktop = desktop();
             desktop.adicionaJanela(telaDemanda).abrirJanela();
@@ -199,7 +196,7 @@ public class ListenersTelaComBotoes {
             ViewFrameEdge viewFrameEdge = new ViewFrameEdge((FuntionCreateType) funtion);
             desktop.adicionaJanela(viewFrameEdge).abrirJanela();
 
-            FrameSetTypeEgde v = new FrameSetTypeEgde((FuntionCreateType) funtion, viewFrameEdge);
+            FrameSetTypeEgde v = new FrameSetTypeEgde((FuntionCreateType) funtion, viewFrameEdge, view);
             desktop.adicionaJanela(v).abrirJanela();
         }
 

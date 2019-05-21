@@ -2,7 +2,6 @@ package br.udesc.ceavi.pin.modulo1.control.funtion;
 
 import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
@@ -12,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  * Esta Ferramenta Cria Egde Com O Arrastar do Mouse
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop {
 
-    private List<ObservadorTelaDesenho> listaObservado;
+    private List<ObservadorRender> listaObservado;
     private Node de;
     private Node para;
     private Rectangle2D ultimaArea;
@@ -100,12 +100,12 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     }
 
     @Override
-    public void addObservador(ObservadorTelaDesenho obs) {
+    public void addObservador(ObservadorRender obs) {
         this.listaObservado.add(obs);
     }
 
     @Override
-    public void removeObservador(ObservadorTelaDesenho obs) {
+    public void removeObservador(ObservadorRender obs) {
         this.listaObservado.remove(obs);
     }
 

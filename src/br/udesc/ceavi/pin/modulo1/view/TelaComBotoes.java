@@ -16,7 +16,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ILoop;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
@@ -24,6 +23,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  *
@@ -168,8 +168,8 @@ public class TelaComBotoes extends ViewJanelaSistema implements ObservadorDateNe
         this.funtion = funtion;
     }
 
-    public ObservadorTelaDesenho getObservadorTelaDesenho() {
-        return (ObservadorTelaDesenho) areaDesenho;
+    public ObservadorRender getObservadorTelaDesenho() {
+        return (ObservadorRender) areaDesenho;
     }
 
     private void initLoop() {

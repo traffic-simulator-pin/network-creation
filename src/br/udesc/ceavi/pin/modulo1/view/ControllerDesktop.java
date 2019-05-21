@@ -73,7 +73,9 @@ public class ControllerDesktop {
     }
 
     public synchronized void fecharJanelas() {
-        janelas.forEach((janela) -> {
+        List<ViewJanelaSistema> list = new ArrayList<>();
+        list.addAll(janelas);
+        list.forEach((janela) -> {
             janela.fechaJanela();
         });
     }

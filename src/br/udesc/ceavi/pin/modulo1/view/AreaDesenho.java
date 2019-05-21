@@ -6,11 +6,11 @@ import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.event.MouseMotionListener;
 import java.util.EventListener;
 import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
+import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 
 /**
  *
@@ -18,7 +18,7 @@ import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
  * @since 04/04/2019
  *
  */
-public class AreaDesenho extends JComponent implements ObservadorTelaDesenho {
+public class AreaDesenho extends JComponent implements ObservadorRender {
 
     private final List<ISprite> listaSpriteDate;
     private final List<ISprite> listaSpriteContruction;

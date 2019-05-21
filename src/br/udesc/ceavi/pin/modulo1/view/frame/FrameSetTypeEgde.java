@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
+import br.udesc.ceavi.pin.modulo1.control.funtion.ICreateFuntion;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
@@ -19,15 +20,15 @@ import javax.swing.JTextField;
  *
  * @author Drew
  */
-public class ViewFrameType extends ViewFrameModulo1Padrao {
+public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
 
-    private FuntionCreateType funtionCreateType;
+    private ICreateFuntion funtionCreateType;
     private JButton btnSalvar;
     private JButton btnFechar;
     private JComboBox jcbFluxo;
     private ViewFrameEdge viewFrameEdge;
 
-    public ViewFrameType(FuntionCreateType funtionCreateType, ViewFrameEdge viewFrameEdge) {
+    public FrameSetTypeEgde(FuntionCreateType funtionCreateType, ViewFrameEdge viewFrameEdge) {
         this.funtionCreateType = funtionCreateType;
         this.setSize(new Dimension(255, 200));
         this.setLocation(300, 10);
@@ -42,6 +43,7 @@ public class ViewFrameType extends ViewFrameModulo1Padrao {
         novo.adicionaCampo("nomeEdge", "Nome dos edge");
         novo.adicionaCampo("nfaixas", "Número Faixas");
         novo.adicionaCampo("velocidade", "Velocidade");
+        novo.adicionaCampo("velocidade", "Capacidade");
         jcbFluxo = new JComboBox(new String[]{"Mão Unica", "Mão Dupla"});
         novo.adicionaComponente("", "", jcbFluxo);
         return novo;

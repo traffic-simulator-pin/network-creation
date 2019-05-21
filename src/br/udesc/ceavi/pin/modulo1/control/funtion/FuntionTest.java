@@ -113,7 +113,7 @@ public class FuntionTest extends Funtion implements IFuntion {
         List<Egde> type1 = Arrays.asList(I, III, IV, V, VII);
         List<Egde> type2 = Arrays.asList(II, VI, X, XI);
         List<Egde> type3 = Arrays.asList(VIII, IX, XII, XIII, XIV);
-        List<Egde> type4 = Arrays.asList(XV, XVI, XVII);
+        List<Egde> type4 = Arrays.asList(XV, XVI, XVII, XVIII);
 
         Type TI = new Type(type1, 2, true, 90, 4);
         type1.forEach(t -> t.setType(TI));

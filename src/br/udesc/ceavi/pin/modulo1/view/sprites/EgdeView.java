@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
-import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -45,7 +44,7 @@ public class EgdeView extends Sprite {
 
     private void drawPoliginoGenerico(float largura, Graphics g, Color cor1,
             float x1R, float y1R, float x2R, float y2R) {
-        float size = HelpLine.getMag(x1R, x2R, y1R, y2R);
+        float size = getMag(x1R, x2R, y1R, y2R);
         float zoom = largura;
         float xNormalizado = (x2R - x1R) / size * zoom;
         float yNormalizado = (y2R - y1R) / size * zoom;
@@ -90,4 +89,7 @@ public class EgdeView extends Sprite {
         return "EgdeView{" + "x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + '}';
     }
 
+    private float getMag(float x1, float x2, float y1, float y2) {
+        return (float) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+    }
 }

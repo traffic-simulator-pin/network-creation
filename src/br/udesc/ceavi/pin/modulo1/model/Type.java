@@ -1,7 +1,6 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +20,7 @@ public class Type {
     private int numLanes;
     private boolean oneway;
     private float speed;
-    private int capacit;
+    private int capacity;
 
     public Type() {
         this.id = idNaoUsuado;
@@ -30,10 +29,10 @@ public class Type {
         this.numLanes = 0;
         this.oneway = false;
         this.speed = 0;
-        this.capacit = 0;
+        this.capacity = 0;
     }
 
-    public Type(long id, int numLanes, boolean oneway, float speed, int capacit) {
+    public Type(long id, int numLanes, boolean oneway, float speed, int capacity) {
         this.id = id;
         if (idNaoUsuado <= id) {
             idNaoUsuado = (id + 1);
@@ -44,10 +43,10 @@ public class Type {
         this.numLanes = numLanes;
         this.oneway = oneway;
         this.speed = speed;
-        this.capacit = capacit;
+        this.capacity = capacity;
     }
 
-    public Type(List<Egde> lista, int numLanes, boolean oneway, float speed, int capacit) {
+    public Type(List<Egde> lista, int numLanes, boolean oneway, float speed, int capacity) {
         this.id = idNaoUsuado;
         idNaoUsuado++;
 
@@ -57,7 +56,7 @@ public class Type {
         this.numLanes = numLanes;
         this.oneway = oneway;
         this.speed = speed;
-        this.capacit = capacit;
+        this.capacity = capacity;
     }
 
     public int getNumLanes() {
@@ -82,6 +81,10 @@ public class Type {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override
@@ -145,8 +148,8 @@ public class Type {
         return id;
     }
 
-    public float getCapacit() {
-        return capacit;
+    public int getCapacity() {
+        return capacity;
     }
 
 }

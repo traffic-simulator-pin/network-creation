@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.model;
 
-import br.udesc.ceavi.pin.modulo1.help.HelpLine;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -18,20 +17,23 @@ public class Egde {
     private final String nome;
     private Type type;
     private Line2D linha;
-    private double conficienteAngula, conficienteLiner;
 
     public Egde(Node de, Node para) {
         this.id = idNaoUsuado;
         Egde.idNaoUsuado++;
-        
+
         this.de = de;
         this.para = para;
-        
-        this.width = HelpLine.getSizeLine(x1(), x2(), y1(), y2());
+
+        this.width = getSizeLine(x1(), x2(), y1(), y2());
         this.nome = de.getId() + "-" + para.getId();
-        
+
         initLinha();
         initAssociacao();
+    }
+
+    private float getSizeLine(float x1, float x2, float y1, float y2) {
+        return (float) Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
     }
 
     public Egde(long id, Node de, Node para, float width, String nome) {
@@ -56,8 +58,6 @@ public class Egde {
 
     private void initLinha() {
         this.linha = new Line2D.Double(x1(), y1(), x2(), y2());
-        this.conficienteAngula = HelpLine.getConficienteAngula(linha);
-        this.conficienteLiner = HelpLine.getConficienteLiner(conficienteAngula, linha);
     }
 
     public boolean havePointInLine(Point p) {
@@ -68,8 +68,10 @@ public class Egde {
 
     @Override
     public String toString() {
-        return "id: " + id + " {" + "\n        De:" + de + ",\n        Para:" + para + "\n    } + tamanho: " + width + "\n";
+        return "Egde{" + "id=" + id + ", de=" + de.getId() + ", para=" + para.getId() + ", width=" + width + ", nome=" + nome + ", type=" + type.getId() + '}';
     }
+
+   
 
     public float x1() {
         return de.getX();
@@ -99,13 +101,6 @@ public class Egde {
         return linha;
     }
 
-    public double getConficienteAngula() {
-        return conficienteAngula;
-    }
-
-    public double getConficienteLiner() {
-        return conficienteLiner;
-    }
 
     @Override
     public boolean equals(Object obj) {

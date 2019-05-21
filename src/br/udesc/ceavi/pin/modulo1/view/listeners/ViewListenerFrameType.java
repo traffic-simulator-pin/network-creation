@@ -6,7 +6,7 @@ import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameType;
+import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;

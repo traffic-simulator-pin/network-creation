@@ -81,6 +81,14 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
     @Override
     public void destruirInstanciaJanela() {
         ControllerDesktop.getInstance().removerInstanciaJanela(this);
+        this.dispose();
     }
 
+    protected void setMySide(int width, int height) {
+        Dimension d = new Dimension(width, height);
+        this.setSize(d);
+        this.setPreferredSize(d);
+        this.setMinimumSize(d);
+        this.setMaximumSize(d);
+    }
 }

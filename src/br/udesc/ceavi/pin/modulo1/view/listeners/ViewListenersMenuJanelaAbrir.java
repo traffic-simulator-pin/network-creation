@@ -17,7 +17,12 @@ public class ViewListenersMenuJanelaAbrir extends ViewListenersMenus {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
-      
+        fileChooser.removeChoosableFileFilter(fileChooser.getFileFilter());
+
+        FileFilter fileFilterXML = new FileNameExtensionFilter(".xml", "xml");
+        FileFilter fileFilterNETXML = new FileNameExtensionFilter(".net.xml", "net.xml");
+        fileChooser.addChoosableFileFilter(fileFilterXML);
+        fileChooser.addChoosableFileFilter(fileFilterNETXML);
         int returnVal = fileChooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();

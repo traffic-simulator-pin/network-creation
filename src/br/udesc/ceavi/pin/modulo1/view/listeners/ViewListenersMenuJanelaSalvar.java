@@ -2,11 +2,8 @@ package br.udesc.ceavi.pin.modulo1.view.listeners;
 
 import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionSalvar;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,8 +26,8 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
             chooser.setDialogType(JFileChooser.SAVE_DIALOG);
             chooser.removeChoosableFileFilter(chooser.getFileFilter());
 
-            FileFilter fileFilterXML = new FileNameExtensionFilter(".xml", ".xml");
-            FileFilter fileFilterTXT = new FileNameExtensionFilter(".net.xml", ".net.xml");
+            FileFilter fileFilterXML = new FileNameExtensionFilter("xml", "xml");
+            FileFilter fileFilterTXT = new FileNameExtensionFilter("net.xml", "net.xml");
             chooser.addChoosableFileFilter(fileFilterXML);
             chooser.addChoosableFileFilter(fileFilterTXT);
 
@@ -48,7 +45,7 @@ public class ViewListenersMenuJanelaSalvar extends ViewListenersMenus {
                 }
 
                 caminho.insert(0, caminhoDoArquivo + "//");
-                File file = new File(caminho.toString() + chooser.getFileFilter().getDescription());
+                File file = new File(caminho.toString() + "." + chooser.getFileFilter().getDescription());
                 ControllerDateNetwork.getInstance().setLocalDeSalvamento(file);
                 new FuntionSalvar();
             }

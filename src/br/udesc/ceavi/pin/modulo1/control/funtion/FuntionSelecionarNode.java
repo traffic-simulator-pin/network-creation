@@ -104,7 +104,13 @@ public class FuntionSelecionarNode extends FuntionSelection<Node> implements Obs
         mouse = new MouseManeger() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                atualizaTelaDemanda(selecionar(e.getPoint().x, e.getPoint().y));
+                Node selecionado = selecionar(e.getPoint().x, e.getPoint().y);
+                if (getListaSelecionado().contains(selecionado)) {
+                    removeSelecionado(selecionado);
+                }else{
+                    addSelecionado(selecionado);
+                }
+                atualizaTelaDemanda(selecionado);
             }
         };
     }

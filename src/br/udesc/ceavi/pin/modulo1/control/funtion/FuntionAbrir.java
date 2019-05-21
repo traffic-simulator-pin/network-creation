@@ -75,7 +75,7 @@ public class FuntionAbrir {
                         Integer.parseInt(noType.getAttribute("numLanes")),
                         Boolean.getBoolean(noType.getAttribute("oneway")),
                         Float.parseFloat(noType.getAttribute("speed")),
-                        Integer.parseInt(noType.getAttribute("capacit"))
+                        Integer.parseInt(noType.getAttribute("capacity"))
                 );
                 listaTypes.add(t);
             }
@@ -122,10 +122,10 @@ public class FuntionAbrir {
                 int noPara = -1;
 
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("from"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("source"))) {
                         noDe = j;
                     }
-                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("to"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("target"))) {
                         noPara = j;
                     }
 

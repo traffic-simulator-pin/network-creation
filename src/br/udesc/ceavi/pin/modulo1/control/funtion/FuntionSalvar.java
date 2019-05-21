@@ -106,6 +106,10 @@ public class FuntionSalvar {
                 Attr speed = documentoXML.createAttribute("speed");
                 speed.setValue(String.valueOf(typeN.getSpeed()));
                 type.setAttributeNode(speed);
+               
+                Attr capacity = documentoXML.createAttribute("capacity");
+                capacity.setValue(String.valueOf(typeN.getCapacity()));
+                type.setAttributeNode(capacity);
 
                 types.appendChild(type);
             }
@@ -121,13 +125,13 @@ public class FuntionSalvar {
                 id.setValue("" + edgeN.getId());
                 edge.setAttributeNode(id);
 
-                Attr from = documentoXML.createAttribute("from");
-                from.setValue("" + edgeN.de().getId());
-                edge.setAttributeNode(from);
+                Attr source = documentoXML.createAttribute("source");
+                source.setValue("" + edgeN.de().getId());
+                edge.setAttributeNode(source);
 
-                Attr to = documentoXML.createAttribute("to");
-                to.setValue("" + edgeN.para().getId());
-                edge.setAttributeNode(to);
+                Attr target = documentoXML.createAttribute("target");
+                target.setValue("" + edgeN.para().getId());
+                edge.setAttributeNode(target);
 
                 //verifica se há type setado
                 if (edgeN.getType() != null) {
@@ -159,13 +163,13 @@ public class FuntionSalvar {
                     if (edgeN.de().getId() == edgeAux.de().getId() && edgeAux.para().getId() != edgeN.para().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
-                        Attr from = documentoXML.createAttribute("from");
-                        from.setValue("" + edgeN.getId());
-                        conection.setAttributeNode(from);
+                        Attr source = documentoXML.createAttribute("source");
+                        source.setValue("" + edgeN.getId());
+                        conection.setAttributeNode(source);
 
-                        Attr to = documentoXML.createAttribute("to");
-                        to.setValue("" + edgeAux.getId());
-                        conection.setAttributeNode(to);
+                        Attr target = documentoXML.createAttribute("target");
+                        target.setValue("" + edgeAux.getId());
+                        conection.setAttributeNode(target);
 
                         conections.appendChild(conection);
 
@@ -173,35 +177,35 @@ public class FuntionSalvar {
                     else if (edgeN.para().getId() == edgeAux.de().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
-                        Attr from = documentoXML.createAttribute("from");
-                        from.setValue("" + edgeN.getId());
-                        conection.setAttributeNode(from);
+                        Attr source = documentoXML.createAttribute("source");
+                        source.setValue("" + edgeN.getId());
+                        conection.setAttributeNode(source);
 
-                        Attr to = documentoXML.createAttribute("to");
-                        to.setValue("" + edgeAux.getId());
-                        conection.setAttributeNode(to);
+                        Attr target = documentoXML.createAttribute("target");
+                        target.setValue("" + edgeAux.getId());
+                        conection.setAttributeNode(target);
 
                     } else if (edgeN.de().getId() == edgeAux.para().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
-                        Attr from = documentoXML.createAttribute("from");
-                        from.setValue("" + edgeAux.getId());
-                        conection.setAttributeNode(from);
+                        Attr source = documentoXML.createAttribute("source");
+                        source.setValue("" + edgeAux.getId());
+                        conection.setAttributeNode(source);
 
-                        Attr to = documentoXML.createAttribute("to");
-                        to.setValue("" + edgeN.getId());
-                        conection.setAttributeNode(to);
+                        Attr target = documentoXML.createAttribute("target");
+                        target.setValue("" + edgeN.getId());
+                        conection.setAttributeNode(target);
                         conections.appendChild(conection);
                     } else if (edgeN.para().getId() == edgeAux.para().getId() && edgeN.de().getId() != edgeAux.de().getId()) {
                         Element conection = documentoXML.createElement("conection");
 
-                        Attr from = documentoXML.createAttribute("from");
-                        from.setValue("" + edgeAux.getId());
-                        conection.setAttributeNode(from);
+                        Attr source = documentoXML.createAttribute("source");
+                        source.setValue("" + edgeAux.getId());
+                        conection.setAttributeNode(source);
 
-                        Attr to = documentoXML.createAttribute("to");
-                        to.setValue("" + edgeN.getId());
-                        conection.setAttributeNode(to);
+                        Attr target = documentoXML.createAttribute("target");
+                        target.setValue("" + edgeN.getId());
+                        conection.setAttributeNode(target);
                         conections.appendChild(conection);
                     }
                 }

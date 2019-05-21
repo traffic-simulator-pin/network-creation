@@ -72,8 +72,10 @@ public class ControllerDesktop {
         viewPrincipal.getAreaDesktop().add(nArea);
     }
 
-    public void setVisibleFalseAll() {
-        janelas.forEach(j -> j.fechaJanela());
+    public synchronized void fecharJanelas() {
+        janelas.forEach((janela) -> {
+            janela.fechaJanela();
+        });
     }
 
     public boolean hasViewPrincipa() {

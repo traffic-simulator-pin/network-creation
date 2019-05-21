@@ -6,6 +6,7 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorTelaDesenho;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Node;
+import br.udesc.ceavi.pin.modulo1.view.frame.FrameCreateEgde;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
@@ -25,6 +26,7 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     private Node de;
     private Node para;
     private Rectangle2D ultimaArea;
+    private FrameCreateEgde createFrameFrame;
 
     public FuntionCreateEgdeTipo2() {
         this.listaObservado = new ArrayList<>();
@@ -39,13 +41,12 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         clearNode();
     }
 
-
     public void createNode(int x, int y) {
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         if (de != null && de.collideWithMyArea(realLocation[0], realLocation[1])) {
             return;
         }
-        float precisao = 50 ;
+        float precisao = 50;
         if (ultimaArea != null && ultimaArea.intersects(realLocation[0], realLocation[1], precisao, precisao)) {
             return;
         }
@@ -141,7 +142,9 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
     @Override
     public void update() {
         if (haveTwoNode()) {
-            lista.add(new Egde(de, para));
+            Egde egde = new Egde(de, para);
+            egde.setType(createFrameFrame.getTypeSelecionado());
+            lista.add(egde);
             de = para;
             para = null;
         }
@@ -155,6 +158,10 @@ public class FuntionCreateEgdeTipo2 extends FuntionCreate<Egde> implements ILoop
         de = null;
         para = null;
         ultimaArea = null;
+    }
+
+    public void setCreate(FrameCreateEgde aThis) {
+        this.createFrameFrame = aThis;
     }
 
 }

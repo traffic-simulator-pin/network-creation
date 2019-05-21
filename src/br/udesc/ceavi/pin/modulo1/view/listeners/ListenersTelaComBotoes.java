@@ -4,8 +4,8 @@ import br.udesc.ceavi.pin.modulo1.control.funtion.*;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameCreateEgde;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameAdicionarDemanda;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameCreateDemanda;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -167,7 +167,7 @@ public class ListenersTelaComBotoes {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ViewFrameAdicionarDemanda telaDemanda = new ViewFrameAdicionarDemanda(view);
+            ViewFrameCreateDemanda telaDemanda = new ViewFrameCreateDemanda(view);
             setFuntionToView(telaDemanda.getFuntion(), btn);
 
             ControllerDesktop desktop = desktop();
@@ -188,12 +188,10 @@ public class ListenersTelaComBotoes {
         @Override
         public void actionPerformed(ActionEvent e) {
             IFuntion funtion = new FuntionCreateType();
-            setFuntionToView(
-                    ((FuntionCreateType) funtion).getFuntion(),
-                    btn);
+            setFuntionToView(funtion, btn);
 
             ControllerDesktop desktop = desktop();
-            ViewFrameEdge viewFrameEdge = new ViewFrameEdge((FuntionCreateType) funtion);
+            ViewFrameTabelaEdge viewFrameEdge = new ViewFrameTabelaEdge((FuntionCreateType) funtion);
             desktop.adicionaJanela(viewFrameEdge).abrirJanela();
 
             FrameSetTypeEgde v = new FrameSetTypeEgde((FuntionCreateType) funtion, viewFrameEdge, view);

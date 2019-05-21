@@ -84,11 +84,4 @@ public class ViewFrameModulo1Padrao extends ViewJanelaSistema {
         this.dispose();
     }
 
-    protected void setMySide(int width, int height) {
-        Dimension d = new Dimension(width, height);
-        this.setSize(d);
-        this.setPreferredSize(d);
-        this.setMinimumSize(d);
-        this.setMaximumSize(d);
-    }
 }

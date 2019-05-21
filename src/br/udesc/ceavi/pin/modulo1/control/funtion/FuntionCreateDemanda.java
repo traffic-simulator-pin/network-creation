@@ -6,12 +6,11 @@ import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 import br.udesc.ceavi.pin.modulo1.model.Demanda;
 import br.udesc.ceavi.pin.modulo1.model.Node;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameAdicionarDemanda;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameCreateDemanda;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *
@@ -23,24 +22,22 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
 
     private final FuntionSelecionarNode seletion;
     private Node A, B;
-    private ViewFrameAdicionarDemanda view;
-    private final List<ObservadorRender> observers;
+    private ViewFrameCreateDemanda view;
 
     public FuntionCreateDemanda() {
         System.out.println("FuntionCreateDemanda");
         seletion = new FuntionSelecionarNode();
-        observers = new ArrayList<>();
         initMouse();
     }
 
     @Override
     public void removeObservador(ObservadorRender obs) {
-        this.observers.remove(obs);
+        seletion.removeObservador(obs);
     }
 
     @Override
     public void addObservador(ObservadorRender obs) {
-        this.observers.add(obs);
+        seletion.addObservador(obs);
     }
 
     @Override
@@ -107,7 +104,7 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
         return super.getMouseManeger();
     }
 
-    public void setView(ViewFrameAdicionarDemanda view) {
+    public void setView(ViewFrameCreateDemanda view) {
         this.view = view;
     }
 
@@ -121,18 +118,18 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
 
     @Override
     public void render() {
-        observers.forEach(obs -> {
-            if (A != null) {
-                obs.addSpriteFuntion("NodeView", new float[]{A.getX(), A.getY()}, Color.green);
-            }
-            if (B != null) {
-                obs.addSpriteFuntion("NodeView", new float[]{B.getX(), B.getY()}, Color.green);
-            }
-        });
+        seletion.render();
     }
 
     @Override
     public void update() {
+        seletion.clearSelecion();
+        if (A != null) {
+            seletion.addSelecionado(A);
+        }
+        if (B != null) {
+            seletion.addSelecionado(B);
+        }
     }
 
     @Override

@@ -2,10 +2,8 @@ package br.udesc.ceavi.pin.modulo1.view.frame;
 
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
-import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
-import java.awt.Dimension;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,14 +13,14 @@ import javax.swing.JScrollPane;
  *
  * @author Drew
  */
-public class ViewFrameEdge extends ViewFrameModulo1PadraoConsulta {
+public class ViewFrameTabelaEdge extends ViewFrameModulo1PadraoConsulta {
 
     private FuntionCreateType createType;
     private List<Egde> egds;
     
     
-    public ViewFrameEdge(FuntionCreateType createType) {
-        this.setSize(new Dimension(226, 200));
+    public ViewFrameTabelaEdge(FuntionCreateType createType) {
+        setMySide(226, 200);
         this.setLocation(600, 10);
         this.createType = createType;
         this.setName("edge");
@@ -58,7 +56,7 @@ public class ViewFrameEdge extends ViewFrameModulo1PadraoConsulta {
             try {
                 v.setValores(edg);
             } catch (Exception ex) {
-                Logger.getLogger(ViewFrameEdge.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ViewFrameTabelaEdge.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -79,7 +77,7 @@ public class ViewFrameEdge extends ViewFrameModulo1PadraoConsulta {
             try {
                 v.setValores(edg);
             } catch (Exception ex) {
-                Logger.getLogger(ViewFrameEdge.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ViewFrameTabelaEdge.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

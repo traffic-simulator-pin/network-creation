@@ -30,29 +30,28 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
     private List<Type> listaType = new ArrayList<>();
 
     public FrameCreateEgde(FuntionCreateEgdeTipo1 createEgde, TelaComBotoes areaDesenho) {
+        this.controller = createEgde;
+        ((FuntionCreateEgdeTipo1) controller).setCreate(this);
+        this.areaDesenho = areaDesenho;
+        configuracoes();
+    }
+
+    private void configuracoes() {
+        this.setTitle("Escolha O Type Para Os Seus Egde");
         this.setLocation(300, 10);
         this.moveToFront();
         this.toFront();
         this.setVisible(false);
-        this.controller = createEgde;
-        ((FuntionCreateEgdeTipo1) controller).setCreate(this);
-        this.areaDesenho = areaDesenho;
         setResizable(false);
         setMySide(390, 80);
         intiComponent();
     }
 
     public FrameCreateEgde(FuntionCreateEgdeTipo2 createEgde, TelaComBotoes areaDesenho) {
-        this.setLocation(300, 10);
-        this.moveToFront();
-        this.toFront();
-        this.setVisible(false);
         this.controller = createEgde;
         ((FuntionCreateEgdeTipo2) controller).setCreate(this);
         this.areaDesenho = areaDesenho;
-        setResizable(false);
-        setMySide(390, 80);
-        intiComponent();
+        configuracoes();
     }
 
     @Override

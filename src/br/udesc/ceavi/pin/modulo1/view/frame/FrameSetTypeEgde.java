@@ -29,16 +29,16 @@ public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
     private JButton btnSalvar;
     private JButton btnFechar;
     private JComboBox jcbFluxo;
-    private ViewFrameEdge viewFrameEdge;
+    private ViewFrameTabelaEdge viewFrameEdge;
     private final TelaComBotoes telaComBotoes;
     
-    public FrameSetTypeEgde(FuntionCreateType funtionCreateType, ViewFrameEdge viewFrameEdge, TelaComBotoes telaComBotoes) {
+    public FrameSetTypeEgde(FuntionCreateType funtionCreateType, ViewFrameTabelaEdge viewFrameEdge, TelaComBotoes telaComBotoes) {
         this.funtionCreateType = funtionCreateType;
-        this.setSize(new Dimension(255, 200));
+        setMySide(255, 200);
         this.setLocation(300, 10);
         this.viewFrameEdge = viewFrameEdge;
-        this.setName("type");
         this.telaComBotoes = telaComBotoes;
+        this.setTitle("Definição De Type Egde");
     }
     
     @Override
@@ -95,11 +95,11 @@ public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
         @Override
         public void actionPerformed(ActionEvent e) {
             ControllerDesktop d = desktop();
-            ViewFrameEdge viewEdg = null;
+            ViewFrameTabelaEdge viewEdg = null;
             
             for (ViewJanelaSistema v : d.getJanelas()) {
-                if (v instanceof ViewFrameEdge) {
-                    viewEdg = (ViewFrameEdge) v;
+                if (v instanceof ViewFrameTabelaEdge) {
+                    viewEdg = (ViewFrameTabelaEdge) v;
                     break;
                 }
                 

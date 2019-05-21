@@ -3,7 +3,7 @@ package br.udesc.ceavi.pin.modulo1.view.listeners;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
@@ -48,11 +48,11 @@ public class ViewListenerFrameType extends ViewListenersFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             ControllerDesktop d = ControllerDesktop.getInstance();
-            ViewFrameEdge viewEdg = null;
+            ViewFrameTabelaEdge viewEdg = null;
             
             for(ViewJanelaSistema v : d.getJanelas()) {
-                if(v instanceof ViewFrameEdge) {
-                    viewEdg = (ViewFrameEdge)v;
+                if(v instanceof ViewFrameTabelaEdge) {
+                    viewEdg = (ViewFrameTabelaEdge)v;
                     break;
                 }
             

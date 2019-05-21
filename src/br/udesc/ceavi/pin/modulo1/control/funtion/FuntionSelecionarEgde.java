@@ -6,7 +6,7 @@ import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameEdge;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.Color;
 import java.awt.Point;
@@ -63,6 +63,7 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
 
     @Override
     public void selecionarAddList(int x, int y) {
+        System.out.println("00");
         //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         //Varendo a lista de Egde
@@ -106,19 +107,8 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
             @Override
             public void mouseClicked(MouseEvent e) {
                 selecionarAddList(e.getPoint().x, e.getPoint().y);
-                atualizarTela();
             }
         };
     }
 
-    private void atualizarTela() {
-        ControllerDesktop d = ControllerDesktop.getInstance();
-
-        for (ViewJanelaSistema j : d.getJanelas()) {
-            if (j.getClass() == ViewFrameEdge.class) {
-                ((ViewFrameEdge) j).atualizaListaEdge(this.getSeletion());
-                break;
-            }
-        }
-    }
 }

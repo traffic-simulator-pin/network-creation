@@ -29,6 +29,7 @@ public class FrameCreateDefaultType extends ViewFrameModulo1Padrao {
         this.setSize(new Dimension(255, 200));
         this.setLocation(300, 10);
         this.view = view;
+        this.setTitle("Type Personalizado");
     }
     
     @Override

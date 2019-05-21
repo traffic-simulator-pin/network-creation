@@ -7,7 +7,7 @@ import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameAdicionarDemanda;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameCreateDemanda;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;

@@ -5,8 +5,7 @@ import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
+import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -20,6 +19,8 @@ import java.util.List;
 public class FuntionCreateType extends FuntionCreate<Type> implements ILoop, Observado<ObservadorRender> {
 
     private FuntionSelecionarEgde seletion;
+    private FrameSetTypeEgde view;
+    private ViewFrameTabelaEdge tabela;
 
     public FuntionCreateType() {
         System.out.println("FuntionCreateType");
@@ -49,6 +50,8 @@ public class FuntionCreateType extends FuntionCreate<Type> implements ILoop, Obs
     @Override
     public void offer() {
         date.offerType(lista);
+        lista.clear();
+        atualizarTela();
     }
 
     @Override
@@ -63,14 +66,8 @@ public class FuntionCreateType extends FuntionCreate<Type> implements ILoop, Obs
     }
 
     private void atualizarTela() {
-        ControllerDesktop d = ControllerDesktop.getInstance();
-
-        for (ViewJanelaSistema j : d.getJanelas()) {
-            if (j.getClass() == ViewFrameTabelaEdge.class) {
-                ((ViewFrameTabelaEdge) j).atualizaListaEdge(this.getSeletion());
-                break;
-            }
-        }
+        view.atualizaListaEdge(this.getSeletion());
+        tabela.atualizaListaEdge(this.getSeletion());
     }
 
     @Override
@@ -84,5 +81,17 @@ public class FuntionCreateType extends FuntionCreate<Type> implements ILoop, Obs
 
     @Override
     public void processInput() {
+    }
+
+    public void setView(FrameSetTypeEgde view) {
+        this.view = view;
+    }
+
+    public void setTabela(ViewFrameTabelaEdge tabela) {
+        this.tabela = tabela;
+    }
+
+    public void createNewType(Type modelo) {
+        lista.add(modelo);
     }
 }

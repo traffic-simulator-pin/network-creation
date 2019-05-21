@@ -43,8 +43,8 @@ public class ViewPainelConsulta extends JScrollPane {
     /**
      * Adiciona um campo padrão com o nome especificado na consulta.
      *
-     * @param titulo
-     * @param nome - nome do campo.
+     * @param titulo nome da coluna
+     * @param nome - nome do atributo.
      * @param tamanho - tamanho do campo, -1 para calcular automaticamente.
      */
     public void adicionaCampo(String titulo, String nome, int tamanho) {

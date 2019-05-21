@@ -63,7 +63,6 @@ public class FuntionSelecionarEgde extends FuntionSelection<Egde> implements Obs
 
     @Override
     public void selecionarAddList(int x, int y) {
-        System.out.println("00");
         //Transformando o Ponto da tela de desenho em um ponto da estrutura de dados.
         float[] realLocation = HelpLocator.getNetworkRealLocation(x, y);
         //Varendo a lista de Egde

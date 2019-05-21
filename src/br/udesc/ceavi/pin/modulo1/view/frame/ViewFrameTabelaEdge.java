@@ -23,6 +23,7 @@ public class ViewFrameTabelaEdge extends ViewFrameModulo1PadraoConsulta {
         setMySide(226, 200);
         this.setLocation(600, 10);
         this.createType = createType;
+        createType.setTabela(this);
         this.setName("edge");
     }
 
@@ -32,6 +33,7 @@ public class ViewFrameTabelaEdge extends ViewFrameModulo1PadraoConsulta {
         ViewPainelConsulta painel = (ViewPainelConsulta) super.criaAreaManutencao();
         painel.adicionaCampo("ID", "Id", 50);
         painel.adicionaCampo("Nome", "Nome", 50);
+        painel.adicionaCampo("Width", "Width", 50);
 
         return painel;
     }

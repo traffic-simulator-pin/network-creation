@@ -96,6 +96,12 @@ public class ControllerDateNetwork implements Observado<ObservadorDateNetwork> {
                     demandasRemover.add(demanda);
                 });
         removeDemanda(demandasRemover);
+
+	listEgdeRemove.forEach(egde -> {
+		egde.de().quebrarAssociarNodeEgde(egde);
+		egde.para().quebrarAssociarNodeEgde(egde);
+	});
+
         this.listEgde.removeAll(listEgdeRemove);
         notificarAlteracaoNaEstruturaDeDados();
     }

@@ -1,5 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
+import java.awt.event.MouseEvent;
+import java.util.List;
+
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
@@ -7,8 +10,6 @@ import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
-import java.awt.event.MouseEvent;
-import java.util.List;
 
 /**
  *

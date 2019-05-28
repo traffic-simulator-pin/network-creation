@@ -1,8 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
 import java.util.List;
+
 import javax.swing.DefaultDesktopManager;
-import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 
 /**
@@ -10,8 +10,10 @@ import javax.swing.JInternalFrame;
  * @author Drew
  */
 public class ManagerDesktop extends DefaultDesktopManager {
+	
+	private static final long serialVersionUID = -8224427593367195334L;
 
-    @Override
+	@Override
     public void activateFrame(JInternalFrame f) {
         super.activateFrame(f);
         

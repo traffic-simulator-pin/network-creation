@@ -1,26 +1,28 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
-import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
-import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
-import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
-import br.udesc.ceavi.pin.modulo1.model.Demanda;
-import br.udesc.ceavi.pin.modulo1.model.Node;
-import br.udesc.ceavi.pin.modulo1.model.Type;
-import br.udesc.ceavi.pin.modulo1.model.Egde;
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import br.udesc.ceavi.pin.modulo1.control.ControlTelaDesenho;
+import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
+import br.udesc.ceavi.pin.modulo1.model.Conection;
+import br.udesc.ceavi.pin.modulo1.model.Egde;
+import br.udesc.ceavi.pin.modulo1.model.Node;
+import br.udesc.ceavi.pin.modulo1.model.Type;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
+import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 
 /**
  *
@@ -41,7 +43,7 @@ public class FuntionAbrir {
         try {
             List<Node> listaNodes = new ArrayList<>();
             List<Type> listaTypes = new ArrayList<>();
-            List<Demanda> listaDemanda = new ArrayList<>();
+            List<Conection> listaDemanda = new ArrayList<>();
             List<Egde> listaEdges = new ArrayList<>();
 
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -70,40 +72,39 @@ public class FuntionAbrir {
 
                 Element noType = (Element) type;
 
-                Type t = new Type(
-                        Integer.parseInt(noType.getAttribute("id")),
+                String oneWay = noType.getAttribute("oneway");
+				Type t = new Type(noType.getAttribute("id"),
                         Integer.parseInt(noType.getAttribute("numLanes")),
-                        Boolean.getBoolean(noType.getAttribute("oneway")),
+                        oneWay.equals("true")?true:false,
                         Float.parseFloat(noType.getAttribute("speed")),
                         Integer.parseInt(noType.getAttribute("capacity"))
                 );
                 listaTypes.add(t);
             }
 
-            NodeList listaDemandasXML = documentoXML.getElementsByTagName("demanda");
+            NodeList listaConectionsXML = documentoXML.getElementsByTagName("conection");
 
-            for (int i = 0; i < listaDemandasXML.getLength(); i++) {
-                org.w3c.dom.Node demanda = listaDemandasXML.item(i);
+            for (int i = 0; i < listaConectionsXML.getLength(); i++) {
+                org.w3c.dom.Node conection = listaConectionsXML.item(i);
 
-                Element noDemanda = (Element) demanda;
+                Element noDemanda = (Element) conection;
                 int inodeA = -1;
                 int inodeB = -1;
                 for (int j = 0; j < listaNodes.size(); j++) {
-                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("nodeA"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("source"))) {
                         inodeA = j;
                     }
-                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("nodeB"))) {
+                    if (listaNodes.get(j).getId() == Integer.parseInt(noDemanda.getAttribute("target"))) {
                         inodeB = j;
                     }
 
                 }
 
                 if (inodeA >= 0 && inodeB >= 0) {
-                    Demanda d = new Demanda(
-                            Integer.parseInt(noDemanda.getAttribute("id")),
+                    Conection d = new Conection(
                             listaNodes.get(inodeA),
                             listaNodes.get(inodeB),
-                            Integer.parseInt(noDemanda.getAttribute("valor"))
+                            Integer.parseInt(noDemanda.getAttribute("flow"))
                     );
                     listaDemanda.add(d);
                 }
@@ -136,12 +137,14 @@ public class FuntionAbrir {
                         listaNodes.get(noDe),
                         listaNodes.get(noPara),
                         Float.parseFloat(noEdge.getAttribute("length")),
-                        noEdge.getAttribute("nome")
+                        noEdge.getAttribute("name"),
+                        Float.parseFloat(noEdge.getAttribute("constantA")),
+                        Float.parseFloat(noEdge.getAttribute("constantB"))                        
                 );
 
                 int iType = -1;
                 for (int j = 0; j < listaTypes.size(); j++) {
-                    if (listaTypes.get(j).getId() == Integer.parseInt(noEdge.getAttribute("type"))) {
+                    if (listaTypes.get(j).getId().equals(noEdge.getAttribute("type"))) {
                         iType = j;
                     }
                 }

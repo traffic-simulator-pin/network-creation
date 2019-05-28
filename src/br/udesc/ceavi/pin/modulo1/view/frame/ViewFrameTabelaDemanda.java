@@ -1,13 +1,15 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.model.Demanda;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+
+import br.udesc.ceavi.pin.modulo1.model.Conection;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 
 /**
  *
@@ -15,7 +17,7 @@ import javax.swing.JScrollPane;
  */
 public class ViewFrameTabelaDemanda extends ViewFrameModulo1PadraoConsulta {
 
-    private List<Demanda> nodos;
+    private List<Conection> nodos;
 
     public ViewFrameTabelaDemanda() {
         setMySide(226, 200);
@@ -46,7 +48,7 @@ public class ViewFrameTabelaDemanda extends ViewFrameModulo1PadraoConsulta {
         this.acoesPanel = new ViewPanelAcoes();
     }
 
-    public void atualizaListaDemanda(List<Demanda> lista) {
+    public void atualizaListaDemanda(List<Conection> lista) {
         ViewPainelConsulta v = getPainelConsulta();
 
         if (lista == null) {
@@ -57,7 +59,7 @@ public class ViewFrameTabelaDemanda extends ViewFrameModulo1PadraoConsulta {
         this.nodos = lista;
 
         v.limpaValores();
-        for (Demanda edg : lista) {
+        for (Conection edg : lista) {
             try {
                 v.setValores(edg);
             } catch (Exception ex) {
@@ -67,7 +69,7 @@ public class ViewFrameTabelaDemanda extends ViewFrameModulo1PadraoConsulta {
 
     }
 
-    public List<Demanda> getDemandas() {
+    public List<Conection> getDemandas() {
         return nodos;
     }
 }

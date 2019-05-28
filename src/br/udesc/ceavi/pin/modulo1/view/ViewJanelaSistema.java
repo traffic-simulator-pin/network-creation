@@ -1,8 +1,10 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 import java.awt.Dimension;
+
 import javax.swing.JInternalFrame;
+
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 
 /**
  *
@@ -10,7 +12,11 @@ import javax.swing.JInternalFrame;
  */
 public abstract class ViewJanelaSistema extends JInternalFrame {
 
-    protected ViewPanelAcoes acoesPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9202978203462520950L;
+	protected ViewPanelAcoes acoesPanel;
 
     public abstract void abrirJanela();
 

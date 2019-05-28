@@ -1,16 +1,15 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
+import java.awt.event.MouseEvent;
+import java.util.List;
+
 import br.udesc.ceavi.pin.modulo1.control.ControllerDateNetwork;
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.control.Observado;
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
-import br.udesc.ceavi.pin.modulo1.exception.NaoHaCaminhoParaADemandaException;
-import br.udesc.ceavi.pin.modulo1.model.Demanda;
+import br.udesc.ceavi.pin.modulo1.model.Conection;
 import br.udesc.ceavi.pin.modulo1.model.Node;
 import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameCreateDemanda;
-import java.awt.event.MouseEvent;
-import java.util.List;
-import javax.rmi.CORBA.Util;
 
 /**
  *
@@ -18,7 +17,7 @@ import javax.rmi.CORBA.Util;
  * @since 24/04/2019
  *
  */
-public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Observado<ObservadorRender>, ILoop {
+public class FuntionCreateDemanda extends FuntionCreate<Conection> implements Observado<ObservadorRender>, ILoop {
 
     private final FuntionSelecionarNode seletion;
     private Node A, B;
@@ -42,15 +41,13 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
 
     @Override
     public void offer() {
-        ControllerDateNetwork.getInstance().offerDemanda(lista);
+        ControllerDateNetwork.getInstance().offerDemanda(lista,true);
     }
 
-    public void newDemanda(Demanda demanda) throws NaoHaCaminhoParaADemandaException {
-        if (verificarExistenciaCaminho(A, B)) {
+    public void newDemanda(Conection demanda)  {
             lista.add(demanda);
             offer();
             clearNode();
-        }
     }
 
     public void clearNode() {
@@ -77,15 +74,15 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
             B = aux;
         }
 
+        view.atualizaTelaDemanda();
         if (A != null && B != null) {
-            List<Demanda> allDemanda = date.getAllDemanda();
+            List<Conection> allDemanda = date.getAllDemanda();
             allDemanda.forEach(demanda -> {
-                if (demanda.getA().getId() == A.getId() && demanda.getB().getId() == B.getId()) {
-                    view.setDemandaText(demanda.getDemanda());
+                if (demanda.getSource().getId() == A.getId() && demanda.getTarget().getId() == B.getId()) {
+                    view.setDemandaText(demanda.getFlow());
                 }
             });
         }
-        view.atualizaTelaDemanda();
     }
 
     @Override
@@ -136,12 +133,6 @@ public class FuntionCreateDemanda extends FuntionCreate<Demanda> implements Obse
 
     @Override
     public void processInput() {
-    }
-
-    private boolean verificarExistenciaCaminho(Node A, Node B) throws NaoHaCaminhoParaADemandaException {
-        //A Busca de ve partir de A e verificar se tem uma caminho até B
-
-        return true;
     }
 
 }

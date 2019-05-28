@@ -1,8 +1,9 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
-import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 
 /**
  *

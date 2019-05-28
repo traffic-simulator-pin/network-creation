@@ -1,18 +1,17 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateDemanda;
-import br.udesc.ceavi.pin.modulo1.exception.NaoHaCaminhoParaADemandaException;
-import br.udesc.ceavi.pin.modulo1.model.Demanda;
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateDemanda;
+import br.udesc.ceavi.pin.modulo1.model.Conection;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
+import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 
 /**
  *
@@ -115,9 +114,7 @@ public class ViewFrameCreateDemanda extends ViewFrameModulo1Padrao {
                     if (demanda < -1) {
                         throw new Exception();
                     }
-                    controller.newDemanda(new Demanda(controller.getA(), controller.getB(), demanda));
-                } catch (NaoHaCaminhoParaADemandaException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    controller.newDemanda(new Conection(controller.getA(), controller.getB(), demanda));
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Informe Valores Validos");
                 } catch (Exception ex) {

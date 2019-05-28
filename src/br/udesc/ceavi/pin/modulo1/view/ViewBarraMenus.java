@@ -1,19 +1,25 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
-import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenus;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import br.udesc.ceavi.pin.modulo1.view.listeners.ViewListenersMenus;
 
 /**
  *
  * @author Drew
  */
 class ViewBarraMenus extends JMenuBar {
-    // CAMPOS
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3268215150324937540L;
+	// CAMPOS
 	private List<JMenu> menus;
 	
 	/**

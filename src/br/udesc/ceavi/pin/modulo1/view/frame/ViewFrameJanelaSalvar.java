@@ -1,7 +1,8 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 import javax.swing.JFileChooser;
+
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 
 /**
  *

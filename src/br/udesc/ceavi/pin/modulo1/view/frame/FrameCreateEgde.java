@@ -1,5 +1,12 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateEgdeTipo1;
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateEgdeTipo2;
 import br.udesc.ceavi.pin.modulo1.control.funtion.ICreateFuntion;
@@ -8,11 +15,6 @@ import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -22,8 +24,8 @@ import javax.swing.JComboBox;
  */
 public class FrameCreateEgde extends ViewFrameModulo1Padrao {
 
-    private DefaultType defatu;
-    private JComboBox cbType;
+	private static final long serialVersionUID = 81777440265538155L;
+	private JComboBox<String> cbType;
     private final ICreateFuntion<Egde> controller;
     private final TelaComBotoes areaDesenho;
     private JButton btnCreateTypePersonalizado;
@@ -71,7 +73,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
     }
 
     private void intiComponent() {
-        cbType = new JComboBox();
+        cbType = new JComboBox<>();
         for (int i = 0; i < DefaultType.values().length; i++) {
             listaType.add(DefaultType.values()[i].getType());
         }
@@ -89,7 +91,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
             Type type = listaType.get(i);
             cbType.addItem(
                     ("Faixas: " + type.getNumLanes()
-                    + ",MÃ£o Dupla: " + (type.isOneway() ? "Sim" : "NÃ£o")
+                    + (type.isOneway() ? "Mão Dupla" : "Mão Unica")
                     + ",Capacidade: " + type.getCapacity()
                     + ",Velocidade: " + type.getSpeed())
             );
@@ -107,6 +109,7 @@ public class FrameCreateEgde extends ViewFrameModulo1Padrao {
     }
 
     public Type getTypeSelecionado() {
+    	System.out.println("Estilo Selecionado: " + listaType.get(cbType.getSelectedIndex()).toString());
         return listaType.get(cbType.getSelectedIndex());
     }
 

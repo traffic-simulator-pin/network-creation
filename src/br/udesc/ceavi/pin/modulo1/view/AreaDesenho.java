@@ -1,16 +1,18 @@
 package br.udesc.ceavi.pin.modulo1.view;
 
-import java.awt.Graphics;
-import javax.swing.JComponent;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
-import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.EventListener;
-import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
+import java.util.List;
+
+import javax.swing.JComponent;
+
 import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
+import br.udesc.ceavi.pin.modulo1.view.sprites.ISprite;
 
 /**
  *
@@ -20,7 +22,11 @@ import br.udesc.ceavi.pin.modulo1.control.ObservadorRender;
  */
 public class AreaDesenho extends JComponent implements ObservadorRender {
 
-    private final List<ISprite> listaSpriteDate;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1956702247277346089L;
+	private final List<ISprite> listaSpriteDate;
     private final List<ISprite> listaSpriteContruction;
 
     public AreaDesenho() {

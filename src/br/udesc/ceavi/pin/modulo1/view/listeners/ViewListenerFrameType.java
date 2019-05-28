@@ -1,18 +1,19 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.model.Egde;
-import br.udesc.ceavi.pin.modulo1.model.Type;
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
-import br.udesc.ceavi.pin.modulo1.view.frame.FrameSetTypeEgde;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+
+import br.udesc.ceavi.pin.modulo1.model.Egde;
+import br.udesc.ceavi.pin.modulo1.model.Type;
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
+import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameTabelaEdge;
 
 /**
  *
@@ -62,8 +63,6 @@ public class ViewListenerFrameType extends ViewListenersFrame {
             JComponent[] campo1 = janela.getAreaManutencao().getCampo("nfaixas");
             JComponent[] campo2 = janela.getAreaManutencao().getCampo("maoUnica");
             JComponent[] campo3 = janela.getAreaManutencao().getCampo("velocidade");
-            JComponent[] campo4 = janela.getAreaManutencao().getCampo("comprimento");
-            JComponent[] campo5 = janela.getAreaManutencao().getCampo("nomeEdge");
 
             if(modelo == null) {
                 modelo = new Type();
@@ -76,7 +75,6 @@ public class ViewListenerFrameType extends ViewListenersFrame {
                 modelo.setOneway(false);
             }
             modelo.setSpeed(Float.parseFloat(((JTextField) campo3[1]).getText()));
-//            modelo.setWidh(Float.parseFloat(((JTextField) campo4[1]).getText()));
             
             List<Egde> edges = viewEdg.getEgds();
             

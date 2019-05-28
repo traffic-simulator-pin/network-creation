@@ -1,19 +1,20 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import br.udesc.ceavi.pin.modulo1.control.funtion.FuntionCreateType;
-import br.udesc.ceavi.pin.modulo1.control.funtion.ICreateFuntion;
 import br.udesc.ceavi.pin.modulo1.model.Egde;
 import br.udesc.ceavi.pin.modulo1.model.Type;
 import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
 import br.udesc.ceavi.pin.modulo1.view.TelaComBotoes;
 import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -40,7 +41,7 @@ public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
         this.setLocation(300, 10);
         this.tabela = viewFrameEdge;
         this.telaComBotoes = telaComBotoes;
-        this.setTitle("DefiniÃ§Ã£o De Type Egde");
+        this.setTitle("Definição De Type Egde");
     }
 
     @Override
@@ -51,10 +52,10 @@ public class FrameSetTypeEgde extends ViewFrameModulo1Padrao {
         tfNome.setEditable(false);
         tfLength = novo.adicionaCampo("length", "Length");
         tfLength.setEditable(false);
-        tfNumFaixa = novo.adicionaCampo("nfaixas", "NÃºmero Faixas");
+        tfNumFaixa = novo.adicionaCampo("nfaixas", "Numero Faixas");
         tfVelocidade = novo.adicionaCampo("velocidade", "Velocidade");
         tfCapacidade = novo.adicionaCampo("capacidade", "Capacidade");
-        jcbFluxo = new JComboBox(new String[]{"MÃ£o Unica", "MÃ£o Dupla"});
+        jcbFluxo = new JComboBox(new String[]{"Mão Unica", "Mão Dupla"});
         novo.adicionaComponente("", "Fluxo", jcbFluxo);
         return novo;
     }

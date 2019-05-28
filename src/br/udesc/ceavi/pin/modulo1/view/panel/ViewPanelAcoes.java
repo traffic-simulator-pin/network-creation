@@ -1,6 +1,7 @@
 package br.udesc.ceavi.pin.modulo1.view.panel;
 
 import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 

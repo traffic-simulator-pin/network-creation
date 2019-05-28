@@ -1,8 +1,9 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 
 /**
  *

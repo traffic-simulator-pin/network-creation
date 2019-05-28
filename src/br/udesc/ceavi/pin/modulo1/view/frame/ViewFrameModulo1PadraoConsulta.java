@@ -1,16 +1,17 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
 import javax.swing.JScrollPane;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPainelConsulta;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
 
 /**
  *

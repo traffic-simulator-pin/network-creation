@@ -1,6 +1,5 @@
 package br.udesc.ceavi.pin.modulo1.control;
 
-import br.udesc.ceavi.pin.modulo1.control.funtion.IFuntion;
 import java.awt.Point;
 
 /**

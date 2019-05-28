@@ -1,11 +1,12 @@
 package br.udesc.ceavi.pin.modulo1.view.sprites;
 
-import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+
+import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 
 /**
  *

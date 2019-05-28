@@ -1,9 +1,10 @@
 package br.udesc.ceavi.pin.modulo1.control.funtion;
 
+import java.awt.event.MouseEvent;
+
 import br.udesc.ceavi.pin.modulo1.control.MouseManeger;
 import br.udesc.ceavi.pin.modulo1.help.HelpLocator;
 import br.udesc.ceavi.pin.modulo1.util.UtilNumeros;
-import java.awt.event.MouseEvent;
 
 /**
  *

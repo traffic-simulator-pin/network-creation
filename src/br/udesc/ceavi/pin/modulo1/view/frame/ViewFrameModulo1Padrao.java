@@ -1,13 +1,14 @@
 package br.udesc.ceavi.pin.modulo1.view.frame;
 
-import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
-import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
+import br.udesc.ceavi.pin.modulo1.view.ControllerDesktop;
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelAcoes;
+import br.udesc.ceavi.pin.modulo1.view.panel.ViewPanelManutencao;
 
 /**
  *

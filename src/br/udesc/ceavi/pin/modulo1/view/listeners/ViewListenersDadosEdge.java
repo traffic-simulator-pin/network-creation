@@ -1,12 +1,11 @@
 package br.udesc.ceavi.pin.modulo1.view.listeners;
 
-import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
-import br.udesc.ceavi.pin.modulo1.view.frame.ViewFrameModulo1Padrao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
+
+import br.udesc.ceavi.pin.modulo1.view.ViewJanelaSistema;
 
 /**
  *
@@ -41,9 +40,6 @@ public class ViewListenersDadosEdge extends ViewListenersFrame {
     private class ViewActionListenerSalvar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ViewFrameModulo1Padrao janela = (ViewFrameModulo1Padrao)view;
-            JComponent[] campo = janela.getAreaManutencao().getCampo("nome");
-            String txt = ((JTextField) campo[1]).getText();
             view.fechaJanela();
         }
     }
